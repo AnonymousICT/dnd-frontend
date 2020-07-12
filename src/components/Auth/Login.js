@@ -1,15 +1,12 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
 import {Context} from '../../context/Context'
 
 export default function Login() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
     const queryStrings = new URLSearchParams(window.location.search)
     const isRegistered = queryStrings.has("registered")
-    const {setUserData} =useContext(Context)
+    const {setUserData, email, setEmail, password, setPassword} =useContext(Context)
     const history = useHistory();
 
     const handleUserLogin = async (e) => {

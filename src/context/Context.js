@@ -6,8 +6,13 @@ function ContextProvider({children}) {
     const [allSpells, setAllSpells] = useState([])
     const [selectedSpell, setSelectedSpell] = useState('')
     const [specificSpell, setSpecificSpell] = useState([])
-    const [isAuth, setIsAuth] = useState(false)
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+
     const [userData, setUserData] = useState({})
+
 
     //fetches every spell
     useEffect(()=>{
@@ -29,12 +34,10 @@ function ContextProvider({children}) {
         <Context.Provider value={{
             allSpells,
             specificSpell,
-            selectedSpell,
-            setSelectedSpell,
-            isAuth,
-            setIsAuth,
-            userData,
-            setUserData
+            selectedSpell,setSelectedSpell,
+            email, setEmail,
+            password, setPassword,
+            userData, setUserData
             
         }}>
             {children}

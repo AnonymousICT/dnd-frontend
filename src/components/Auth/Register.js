@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from 'axios'
 import {Link , useHistory} from 'react-router-dom'
+import {Context} from '../../context/Context'
 
 export default function Register() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const {email, setEmail, password, setPassword} =useContext(Context)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [displayName, setDisplayName] = useState('')
 
