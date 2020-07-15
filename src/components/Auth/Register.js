@@ -29,7 +29,6 @@ export default function Register() {
         <form className ='registration form' onSubmit={handleUserRegistration}>
             <input type='email' placeholder='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
             <input type='password' placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-            {/* this is user confirmation */}
             <input type='password' placeholder='type password again' value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
             <input placeholder='Display Name *Optional* ' value={displayName} onChange={(e)=>setDisplayName(e.target.value)}/>
             <input type='submit' value='Register New Account' />

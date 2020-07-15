@@ -1,6 +1,6 @@
 import React from 'react'
 import CharacterGrid from './CharacterGrid/CharacterGrid'
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 export default function Characters() {
     const history = useHistory();
@@ -12,6 +12,7 @@ export default function Characters() {
     }
     return (
         <div>
+            <Link to='/createCharacter' >Create a new character</Link>
             <CharacterGrid />
         </div>
     )

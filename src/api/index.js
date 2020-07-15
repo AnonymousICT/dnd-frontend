@@ -7,10 +7,22 @@ export const fetchClassData = async () => {
 
     try {
         const {data: {results}} = await axios.get(url)
-       return results.map((index) => index.name)
+       return results.map((index) => {return [index.name, index.url]})
     } catch (error) {
         return error
     }
+}
+
+export const fetchSpecificClass = async (job) => {
+    let url = `https://www.dnd5eapi.co${job}`
+
+    try {
+        const {data} = await axios.get(url)
+        return data
+    } catch (error) {
+        return error
+    }
+    
 }
 
 export const fetchSpellData = async () => {

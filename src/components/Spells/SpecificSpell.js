@@ -3,9 +3,24 @@ import {Context} from '../../context/Context'
 
 export default function SpecificSpell() {
     const {specificSpell} = useContext(Context)
-    // if(!specificSpell) return null
 
-    const {name, level, range, components, school, classes, material, desc, duration, higher_level, ritual, concentration, casting_time} = specificSpell
+    const {
+        name, 
+        level, 
+        range, 
+        components, 
+        school, 
+        classes, 
+        material, 
+        desc, 
+        duration, 
+        higher_level, 
+        ritual, 
+        concentration, 
+        casting_time
+    } = specificSpell
+
+    //need to do: refactor conditional rendering
 
     return (
         <div className='specific-spell-container'>
