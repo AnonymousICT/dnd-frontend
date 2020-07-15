@@ -18,13 +18,13 @@ export default function SelectCharacterClass() {
         }
     }
     
-   
     //need to do: destructure the object and refactor conditional rendering
+    //clear on load when swapping to a different class
     
     return (
         <div className='select-class-container'>
             <select value={characterClass} onChange={(e)=>setCharacterClass(e.target.value)}>
-                <option value=''>-----</option>
+                <option key="noOp" value=''>-----</option>
                 {allClasses.map(index => <option key={index[0]} value={index[1]}>{index[0]}</option>)}
             </select>
             <div className='class-info-container'>
@@ -44,7 +44,7 @@ export default function SelectCharacterClass() {
                             <br />
                             {choiceObj.from.map((skill ,i) => {
                                 return (
-                                    <>
+                                    <div key={i}>
                                         <label key={choiceIndex + "-" + i + "label"}>
                                             {skill.name}
                                         </label>
@@ -52,7 +52,7 @@ export default function SelectCharacterClass() {
                                             checked={isChecked["proficiencies" + choiceIndex + "-" + i] ? isChecked["proficiencies" + choiceIndex + "-" + i].checked : false}
                                             name={"proficiencies" + choiceIndex + "-" + i} value={skill.name}
                                             className="prof-choice" key={choiceIndex + "-" + i} type='checkbox' />
-                                    </>
+                                    </div>
                                 )
                             }
                             )} 
@@ -62,8 +62,7 @@ export default function SelectCharacterClass() {
                 }
                
                 {!classData.subclasses ? null : 
-                <p>Available sub-classes:
-                {classData.subclasses.map(subClass => subClass.name)} 
+                    <p>Available sub-classes: {classData.subclasses.map(subClass => subClass.name)} 
                 </p>}
             </div>
         </div>
