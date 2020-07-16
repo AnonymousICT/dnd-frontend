@@ -22,7 +22,28 @@ export const fetchSpecificClass = async (job) => {
     } catch (error) {
         return error
     }
-    
+}
+
+export const fetchRaceData = async () => {
+    let url = `${api_url}/races/`
+
+    try {
+        const {data: {results}} = await axios.get(url)
+       return results.map((index) => {return [index.name, index.url]})
+    } catch (error) {
+        return error
+    }
+}
+
+export const fetchSpecificRace = async (race) => {
+    let url = `https://www.dnd5eapi.co${race}`
+
+    try {
+        const {data} = await axios.get(url)
+        return data
+    } catch (error) {
+        return error
+    }
 }
 
 export const fetchSpellData = async () => {

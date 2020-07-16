@@ -1,34 +1,38 @@
 import React, {useState, useEffect, createContext} from 'react'
 import {
     fetchSpellData, fetchSpecificSpell,
-    fetchClassData, fetchSpecificClass} from '../api'
+    fetchClassData, fetchSpecificClass,
+    fetchRaceData, fetchSpecificRace,
+} from '../api'
 const Context = createContext()
 
 function ContextProvider({children}) {
-    // spell state
+    // all data state
     const [allSpells, setAllSpells] = useState([])
-    const [selectedSpell, setSelectedSpell] = useState('')
-    const [specificSpell, setSpecificSpell] = useState([])
-
-    // Classes
     const [allClasses, setAllClasses] = useState([])
+    const [allRaces, setAllRaces] = useState([])
+
+    // specific data return
+    const [specificSpell, setSpecificSpell] = useState([])
     const [classData, setClassData] = useState([])
-    // Races
-    // const [allRaces, setAllRaces] = useState([])
-
-
-    // user state
+    const [raceData, setRaceData] = useState([])
+    
+    // user auth state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userData, setUserData] = useState({})
-
-    // character state
+    
+    // user's choice state
     const [characterName, setCharacterName] = useState('')
     const [characterLevel ,setCharacterLevel] = useState(1)
-    // specific class data
     const [characterClass, setCharacterClass] = useState('')
+    const [characterRace, setCharacterRace] = useState('')
+    const [selectedSpell, setSelectedSpell] = useState('')
+    const [selectedLanguage, setSelectedLanguage] = useState("")
+    const [selectedTrait, setSelectedTrait] = useState("")
 
-
+    
+    
     //fetches every spell
     useEffect(()=>{
         const fetchedAllSpells = async () => {
@@ -62,7 +66,21 @@ function ContextProvider({children}) {
     }, [characterClass])
 
     // fetch all races
+    useEffect(()=>{
+        const fetchedRaceData = async() => {
+            setAllRaces(await fetchRaceData())
+        }
+        fetchedRaceData()
+    },[])
     
+    // fetch a specific Race
+    useEffect(()=>{
+        const fetchedSpecificRace = async () => {
+            setRaceData(await fetchSpecificRace(characterRace))
+        }
+        fetchedSpecificRace()
+    },[characterRace])
+
     return (
         <Context.Provider value={{
             allSpells,
@@ -78,6 +96,11 @@ function ContextProvider({children}) {
             characterLevel ,setCharacterLevel,
             characterClass, setCharacterClass,
             classData, setClassData,
+            allRaces, setAllRaces,
+            raceData, setRaceData,
+            characterRace, setCharacterRace,
+            selectedLanguage, setSelectedLanguage,
+            selectedTrait, setSelectedTrait
         }}>
             {children}
         </Context.Provider>

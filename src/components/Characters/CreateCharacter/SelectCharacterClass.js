@@ -7,6 +7,14 @@ export default function SelectCharacterClass() {
     const [isChecked, setIsChecked] = useState({})
     const {allClasses, characterClass, setCharacterClass, classData} = useContext(Context)
 
+    const {
+        name, 
+        hit_die, 
+        saving_throws, 
+        proficiencies, 
+        proficiency_choices,
+        subclasses } = classData
+
     const handleChecks = (e) => {
         let group = e.target.getAttribute('data-group');
         let selectedCount = Object.keys(isChecked).filter(key => isChecked[key].group === group && isChecked[key].checked).length;
@@ -18,7 +26,6 @@ export default function SelectCharacterClass() {
         }
     }
     
-    //need to do: destructure the object and refactor conditional rendering
     //clear on load when swapping to a different class
     
     return (
@@ -27,18 +34,19 @@ export default function SelectCharacterClass() {
                 <option key="noOp" value=''>-----</option>
                 {allClasses.map(index => <option key={index[0]} value={index[1]}>{index[0]}</option>)}
             </select>
+            
             <div className='class-info-container'>
-                <h1>{!classData.name ? null: classData.name}</h1>
-                <p>{!classData.hit_die ? null: `1d${classData.hit_die}`}</p>
+                <h1>{!name ? null: name}</h1>
+                <p>{!hit_die ? null: `1d${hit_die}`}</p>
                 <ul className='class-saving-throws'>
-                    {!classData.saving_throws ? null: classData.saving_throws.map(index => <li key={"st-"+index.name}>{index.name}</li>)}
+                    {!saving_throws ? null: saving_throws.map(index => <li key={"st-"+index.name}>{index.name}</li>)}
                 </ul>
                 <ul className='class-proficiences'>
-                    {!classData.proficiencies ? null: classData.proficiencies.map(index => <li key={"cp-"+index.name}>{index.name}</li>)}
+                    {!proficiencies ? null: proficiencies.map(index => <li key={"cp-"+index.name}>{index.name}</li>)}
                 </ul>
                 
-                {!classData.proficiency_choices ? null : 
-                    classData.proficiency_choices.map( (choiceObj, choiceIndex) => { return (
+                {!proficiency_choices ? null : 
+                    proficiency_choices.map( (choiceObj, choiceIndex) => { return (
                         <div className='border choices' data-key={choiceObj.choose} key={choiceIndex}> 
                             Choose {choiceObj.choose} from the list
                             <br />
@@ -48,10 +56,17 @@ export default function SelectCharacterClass() {
                                         <label key={choiceIndex + "-" + i + "label"}>
                                             {skill.name}
                                         </label>
-                                        <input onChange={handleChecks} data-count={choiceObj.choose} data-group={"group"+choiceIndex}
-                                            checked={isChecked["proficiencies" + choiceIndex + "-" + i] ? isChecked["proficiencies" + choiceIndex + "-" + i].checked : false}
-                                            name={"proficiencies" + choiceIndex + "-" + i} value={skill.name}
-                                            className="prof-choice" key={choiceIndex + "-" + i} type='checkbox' />
+                                        <input 
+                                            type='checkbox' 
+                                            className="prof-choice" 
+                                            onChange={handleChecks} 
+                                            name={"proficiencies" + choiceIndex + "-" + i} 
+                                            data-count={choiceObj.choose} data-group={"group"+choiceIndex}
+                                            checked={isChecked["proficiencies" + 
+                                            choiceIndex + "-" + i] ? isChecked["proficiencies" + choiceIndex + "-" + i].checked : false}
+                                            value={skill.name}
+                                            key={choiceIndex + "-" + i}
+                                        />
                                     </div>
                                 )
                             }
@@ -61,8 +76,8 @@ export default function SelectCharacterClass() {
                     })
                 }
                
-                {!classData.subclasses ? null : 
-                    <p>Available sub-classes: {classData.subclasses.map(subClass => subClass.name)} 
+                {!subclasses ? null : 
+                    <p>Available sub-classes: {subclasses.map(subClass => subClass.name)} 
                 </p>}
             </div>
         </div>
