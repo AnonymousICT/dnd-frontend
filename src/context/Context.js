@@ -3,6 +3,7 @@ import {
     fetchSpellData, fetchSpecificSpell,
     fetchClassData, fetchSpecificClass,
     fetchRaceData, fetchSpecificRace,
+    fetchAbilityScores, fetchAbilityScoreDesc,
 } from '../api'
 const Context = createContext()
 
@@ -11,11 +12,13 @@ function ContextProvider({children}) {
     const [allSpells, setAllSpells] = useState([])
     const [allClasses, setAllClasses] = useState([])
     const [allRaces, setAllRaces] = useState([])
+    const [allAttributes, setAttributes] = useState([])
 
     // specific data return
     const [specificSpell, setSpecificSpell] = useState([])
     const [classData, setClassData] = useState([])
     const [raceData, setRaceData] = useState([])
+    const [AttributeData, setAttributeData] = useState([])
     
     // user auth state
     const [email, setEmail] = useState('')
@@ -28,8 +31,9 @@ function ContextProvider({children}) {
     const [characterClass, setCharacterClass] = useState('')
     const [characterRace, setCharacterRace] = useState('')
     const [selectedSpell, setSelectedSpell] = useState('')
-    const [selectedLanguage, setSelectedLanguage] = useState("")
-    const [selectedTrait, setSelectedTrait] = useState("")
+    const [selectedLanguage, setSelectedLanguage] = useState('')
+    const [selectedTrait, setSelectedTrait] = useState('')
+    const [hoveredAttribute, setHoveredAttribute] = useState('')
 
     
     
@@ -81,6 +85,22 @@ function ContextProvider({children}) {
         fetchedSpecificRace()
     },[characterRace])
 
+    //fetch all attribute scores
+    useEffect(()=> {
+        const fetchedData = async() => {
+            setAttributes(await fetchAbilityScores())
+        }
+        fetchedData()
+    }, [])
+
+    //fetch attribute score desc
+    useEffect(()=>{
+        const fetchedData = async()=>{
+            setAttributeData(await fetchAbilityScoreDesc(hoveredAttribute))
+        }
+        fetchedData()
+    },[hoveredAttribute])
+
     return (
         <Context.Provider value={{
             allSpells,
@@ -100,7 +120,10 @@ function ContextProvider({children}) {
             raceData, setRaceData,
             characterRace, setCharacterRace,
             selectedLanguage, setSelectedLanguage,
-            selectedTrait, setSelectedTrait
+            selectedTrait, setSelectedTrait,
+            allAttributes, setAttributes,
+            AttributeData, setAttributeData,
+            hoveredAttribute, setHoveredAttribute,
         }}>
             {children}
         </Context.Provider>

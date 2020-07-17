@@ -46,6 +46,28 @@ export const fetchSpecificRace = async (race) => {
     }
 }
 
+export const fetchAbilityScores = async () => {
+    let url = `${api_url}/ability-scores`
+    try {
+        const {data: {results}} = await axios.get(url)
+        return results.map((score)=>{
+            return [score.name, score.url]
+        })
+    } catch (error) {
+        return error
+    }
+}
+
+export const fetchAbilityScoreDesc = async (score) => {
+    let url = `https://www.dnd5eapi.co${score}`
+    try {
+        const {data} = await axios.get(url)
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
 export const fetchSpellData = async () => {
     let url = `${api_url}/spells/`
     //fetch the spell name and the url of each spell 
