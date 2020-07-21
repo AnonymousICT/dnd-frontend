@@ -28,7 +28,7 @@ export default function SelectCharacterClass() {
         }
     }
 
-    let headers = validCells; //Object.keys(((classLevels) || [])[0] || {});
+    let headers = validCells; 
     
     if(!classLevels) {}
     else {

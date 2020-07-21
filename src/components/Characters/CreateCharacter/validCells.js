@@ -1,9 +1,8 @@
 export const validCells = [
     "level",
-    "ability_score_bonuses",
     "prof_bonus",
-    "feature_choices",
     "features",
+    "feature_choices",
     "class_specific",
     "spellcasting",
     "subclass",
