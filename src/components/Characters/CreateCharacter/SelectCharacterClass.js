@@ -1,11 +1,13 @@
 import React, {useState, useContext} from 'react'
 import {Context} from '../../../context/Context'
+import {renderClassLevel} from './renderClassLevels'
+import {validCells} from './validCells'
 
 import './style.css'
 
 export default function SelectCharacterClass() {
     const [isChecked, setIsChecked] = useState({})
-    const {allClasses, characterClass, setCharacterClass, classData} = useContext(Context)
+    const {allClasses, characterClass, setCharacterClass, classData, classLevels, characterLevel} = useContext(Context)
 
     const {
         name, 
@@ -25,11 +27,21 @@ export default function SelectCharacterClass() {
             e.preventDefault();
         }
     }
+
+    let headers = validCells; //Object.keys(((classLevels) || [])[0] || {});
     
+    if(!classLevels) {}
+    else {
+             window.classLevels = classLevels;
+             console.log(classLevels)
+            }
+        
+
     //clear on load when swapping to a different class
     
     return (
         <div className='select-class-container'>
+            <h3>Choose your character's class</h3>
             <select value={characterClass} onChange={(e)=>setCharacterClass(e.target.value)}>
                 <option key="noOp" value=''>-----</option>
                 {allClasses.map(index => <option key={index[0]} value={index[1]}>{index[0]}</option>)}
@@ -80,6 +92,33 @@ export default function SelectCharacterClass() {
                     <p>Available sub-classes: {subclasses.map(subClass => subClass.name)} 
                 </p>}
             </div>
+            
+            {!classLevels ? null : 
+                <div className='class-levels-container'>
+                   <table>
+                        <thead>
+                            <tr>
+                                {headers.map((header, i) => 
+                                    <th className={header} key={i}>
+                                        {header}
+                                    </th>
+                                )}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {classLevels.filter((cl) => cl.level <= characterLevel).map((item , levelIndex) =>
+                                <tr key= {'class-row' + levelIndex}>
+                                {headers.map((header, id) => 
+                                            <td key={'class-cell'+ id}>
+                                                {renderClassLevel(item[header], header)}
+                                            </td>
+                                        )}
+                                </tr>
+                            )}
+                        </tbody>
+                   </table>
+                </div>
+            }
         </div>
     )
 }

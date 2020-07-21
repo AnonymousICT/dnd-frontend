@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import RaceSelector from './RaceSelector'
 import {Context} from '../../../context/Context'
 
 export default function AttributeEntry() {
@@ -16,20 +15,18 @@ export default function AttributeEntry() {
     }
     const sortFunction = (a, b) =>  attributeSort[a[0]] - attributeSort[b[0]]    
     
-    const onHover = (e) => {
+    const onMouseEnter = (e) => {
         setHoveredAttribute(e.target.getAttribute('value'))
     }
 
     return (
         <div>
-            <h3>Select your character's race</h3>
-            <RaceSelector />
             <h3>Enter your Attributes below</h3>
             {!AttributeData ? null : <div className='hover-div'>{AttributeData.desc}</div>}
             {allAttributes.sort(sortFunction).map((attribute, i) =>{
                 return (
                     <div className='attribute' key={i}>
-                        <label onMouseOver={onHover} value={attribute[1]} key={i}>{attribute[0]}</label>
+                        <label onMouseEnter={onMouseEnter} value={attribute[1]} key={i}>{attribute[0]}</label>
                         <input 
                             type="number"
                             min="3"

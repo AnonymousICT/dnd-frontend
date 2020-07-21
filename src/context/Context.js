@@ -4,6 +4,7 @@ import {
     fetchClassData, fetchSpecificClass,
     fetchRaceData, fetchSpecificRace,
     fetchAbilityScores, fetchAbilityScoreDesc,
+    fetchClassLeveling,
 } from '../api'
 const Context = createContext()
 
@@ -17,6 +18,7 @@ function ContextProvider({children}) {
     // specific data return
     const [specificSpell, setSpecificSpell] = useState([])
     const [classData, setClassData] = useState([])
+    const [classLevels, setClassLevels] = useState([])
     const [raceData, setRaceData] = useState([])
     const [AttributeData, setAttributeData] = useState([])
     
@@ -34,8 +36,6 @@ function ContextProvider({children}) {
     const [selectedLanguage, setSelectedLanguage] = useState('')
     const [selectedTrait, setSelectedTrait] = useState('')
     const [hoveredAttribute, setHoveredAttribute] = useState('')
-
-    
     
     //fetches every spell
     useEffect(()=>{
@@ -68,6 +68,14 @@ function ContextProvider({children}) {
         }
         fetchedSpecificClassData()
     }, [characterClass])
+
+    //fetch the specificClass' leveling
+    useEffect(()=>{
+        const fetchedLevelsData = async () => {
+            setClassLevels(await fetchClassLeveling(characterClass))
+        }
+        fetchedLevelsData()
+    },[characterClass])
 
     // fetch all races
     useEffect(()=>{
@@ -123,6 +131,7 @@ function ContextProvider({children}) {
             selectedTrait, setSelectedTrait,
             allAttributes, setAttributes,
             AttributeData, setAttributeData,
+            classLevels,
             hoveredAttribute, setHoveredAttribute,
         }}>
             {children}

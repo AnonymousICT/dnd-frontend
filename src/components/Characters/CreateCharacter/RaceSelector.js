@@ -22,6 +22,7 @@ export default function RaceSelector() {
 
     return (
         <div className='select-race-container'>
+            <h3>Choose your character's race</h3>
             <select value={characterRace} onChange={(e)=>setCharacterRace(e.target.value)}>
                 <option key="noOp" value=''>-----</option>
                 {allRaces.map(index => <option key={index[0]} value={index[1]}>

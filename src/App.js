@@ -16,7 +16,7 @@ export default function App() {
         <div>
             <header>
                 <h1>
-                    Dungeons and Dragons 5th Edition Resource center
+                    Dungeons and Dragons 5th Edition Resource Center
                 </h1>
                 <Navbar />
             </header>

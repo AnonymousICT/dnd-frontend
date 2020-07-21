@@ -24,6 +24,21 @@ export const fetchSpecificClass = async (job) => {
     }
 }
 
+export const fetchClassLeveling = async(job) => {
+    let url = `https://www.dnd5eapi.co${job}/levels`
+
+    try {
+        if(!job){
+            return null
+        } else {
+            const {data} = await axios.get(url)
+            return data
+        }
+    } catch (error) {
+        return error
+    }
+}
+
 export const fetchRaceData = async () => {
     let url = `${api_url}/races/`
 
