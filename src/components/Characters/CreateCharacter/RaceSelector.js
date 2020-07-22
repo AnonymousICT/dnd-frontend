@@ -36,7 +36,7 @@ export default function RaceSelector() {
                         <h1>{name}</h1>
                         <p>Speed: {speed}</p>
                         {ability_bonuses.map((ability)=>
-                            <p key={ability.name}>{ability.name} + {ability.bonus}</p>)}
+                            <p key={ability.name} value={ability.name +": "+ ability.bonus}>{ability.name} + {ability.bonus}</p>)}
                         <p>{alignment}</p>
                         <p>{age}</p>
                         <p>{size}: {size_description}</p>

@@ -33,7 +33,6 @@ export default function SelectCharacterClass() {
     if(!classLevels) {}
     else {
              window.classLevels = classLevels;
-             console.log(classLevels)
             }
         
 

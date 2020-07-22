@@ -10,3 +10,8 @@ td {
     border: 1px solid black;
     text-align: center;
 }
+
+.attribute-entry {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,9 +1,9 @@
-import React, {useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import {Context} from '../../../context/Context'
 
 export default function AttributeEntry() {
-
-    const {allAttributes, AttributeData, setHoveredAttribute} = useContext(Context)
+    const [attributeValue, setAttributeValue] = useState({})
+    const {allAttributes, AttributeData, setHoveredAttribute, raceData} = useContext(Context)
     
     const attributeSort = {
             STR: 0,
@@ -19,8 +19,25 @@ export default function AttributeEntry() {
         setHoveredAttribute(e.target.getAttribute('value'))
     }
 
+    const handleAttributeValueChange = (e) => {
+        setAttributeValue({...attributeValue, [e.target.name]: +e.target.value});
+    }    
+    
+    const {ability_bonuses} = raceData
+
+    const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
+    
+    Object.keys(attributeTotal).forEach(key => attributeTotal[key] += (ability_bonuses || []).filter(bonus => bonus.name === key)[0].bonus);
+    
+    const displayAttributeModifer = (attributeTotal) => {
+        return Math.round((attributeTotal - 1) / 2 - 4.9)
+    }
+
+    const displayRacialBonus = (name) => ((ability_bonuses || []).filter(bonus => bonus.name === name)[0] || {bonus:0}).bonus
+
+
     return (
-        <div>
+        <div className="attribute-entry">
             <h3>Enter your Attributes below</h3>
             {!AttributeData ? null : <div className='hover-div'>{AttributeData.desc}</div>}
             {allAttributes.sort(sortFunction).map((attribute, i) =>{
@@ -31,11 +48,19 @@ export default function AttributeEntry() {
                             type="number"
                             min="3"
                             max="18"
-                            defaultValue="10"
+                            placeholder="10"
+                            name={attribute[0]}
+                            value={attributeValue[attribute[0]] || 10}
+                            onChange={handleAttributeValueChange}
                         />
+                        <label name={`${attribute[0]} total`}>{attributeTotal[attribute[0]]} Total</label>
+
+                        <label name={`${attribute[0]} modifier`}>{displayAttributeModifer(attributeTotal[attribute[0]])} Modifier</label>
+
+                        <label name={`${attribute[0]} racial bonuses`}>{`${displayRacialBonus(attribute[0])} racial bonuses`}</label>
                     </div>
                 ) 
-
+                
             })}
         </div>
     )

@@ -66,15 +66,15 @@ export const renderClassLevel = (obj, key) => {
     }
     //childObj is the node we're looking at
     const renderNestedObject = (childObj) => {
-        //we're looking for either martial arts or sneak attack?
+        //we're looking for either martial arts or sneak attack
         let hasOverrideFunction = (key) => Object.keys(overrideFunctions).filter(funcName => funcName === key).length;
-        //convert the childobj into of its keys and then we map over it
+        //convert the childobj into an array of its keys and then we map over it
         return Object.keys(childObj).map(key => 
             //key of childObj that we're examining an object? 
             typeof childObj[key] === 'object' ?
                 //is it either martial arts or sneak attack?
                 hasOverrideFunction(key) ?
-                //if it is MA or SA do the thing override function else start over from the top using the key of the childObj
+                //if it is MA or SA do the override function else start over from the top using the key of the childObj
                 overrideFunctions[key](childObj[key], key) : renderNestedObject(childObj[key]) 
                 //otherwise it's a literal and can be easily rendered. aka it's chill dude
             : <div data-key={key} key={key}>{classLabels[key] || key}: {childObj[key]}</div>
