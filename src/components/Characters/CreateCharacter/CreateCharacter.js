@@ -1,28 +1,52 @@
-import React, {useContext}  from 'react'
+import React, {useState, useContext}  from 'react'
 import {Context} from '../../../context/Context'
-import RaceSelector from './RaceSelector'
-import SelectCharacterClass from './SelectCharacterClass'
-import AttributeEntry from './AttributeEntry'
+import NameLevelInput from './step1-NameLevelInput'
+import RaceSelector from './step2-RaceSelector'
+import SelectCharacterClass from './step3-SelectCharacterClass'
+import AttributeEntry from './step4-AttributeEntry'
+import Confirm from './step5-Confirm'
 import axios from 'axios'
 
 import './style.css'
 
-const handleSubmit =() => {
-    //do the thing Juli
-}
+
+// Proceed to next step
 
 export default function CreateCharacter() {
-    const {characterName, setCharacterName, characterLevel ,setCharacterLevel,} = useContext(Context)
+    const [formPage, setFormPage] = useState(1)
+    
+    
+    const nextStep = () => {
+        setFormPage(formPage+1)
+    }
+    
+    const prevStep = () => {
+        setFormPage(formPage-1)
+    }
+    
+    switch (formPage) {
+        case 1: 
+            return <NameLevelInput nextStep={nextStep}/>
+        case 2:
+            return <RaceSelector nextStep={nextStep} prevStep={prevStep}/>
+        case 3:
+            return <SelectCharacterClass nextStep={nextStep} prevStep={prevStep}/>
+        case 4: 
+            return <AttributeEntry nextStep={nextStep} prevStep={prevStep}/>
+        case 5:
+            return <Confirm prevStep={prevStep}/>
+        default:
+            (console.log('this is a multi-step form'))
+    }
 
     return ( 
         <div>
             <form className='character-create-form'>
-                <input type='string' value={characterName} onChange={(e)=>setCharacterName(e.target.value)} placeholder='Character Name'/>
-                <input type='number' value={characterLevel} onChange={(e)=>setCharacterLevel(e.target.value)} placeholder='level 1' min='1' max='20'/>
+                <NameLevelInput />
                 <RaceSelector />
                 <SelectCharacterClass />
                 <AttributeEntry />
-                <input  type='submit' value='Submit' />
+                <input type='submit' value='Submit' />
             </form>
         </div>
     )

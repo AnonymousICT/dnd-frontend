@@ -5,7 +5,7 @@ import {validCells} from './validCells'
 
 import './style.css'
 
-export default function SelectCharacterClass() {
+export default function SelectCharacterClass({nextStep, prevStep}) {
     const [isChecked, setIsChecked] = useState({})
     const {allClasses, characterClass, setCharacterClass, classData, classLevels, characterLevel} = useContext(Context)
 
@@ -118,6 +118,8 @@ export default function SelectCharacterClass() {
                    </table>
                 </div>
             }
+            <button onClick={prevStep}>Go Back</button>
+            <button onClick={nextStep}>Next</button>
         </div>
     )
 }

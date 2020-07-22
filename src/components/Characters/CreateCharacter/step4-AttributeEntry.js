@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import {Context} from '../../../context/Context'
 
-export default function AttributeEntry() {
+export default function AttributeEntry({nextStep, prevStep}) {
     const [attributeValue, setAttributeValue] = useState({})
     const {allAttributes, AttributeData, setHoveredAttribute, raceData} = useContext(Context)
     
@@ -24,7 +24,7 @@ export default function AttributeEntry() {
     }    
     
     const {ability_bonuses} = raceData
-
+                            //copy an object to another variable without the references
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
     
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += (ability_bonuses || []).filter(bonus => bonus.name === key)[0].bonus);
@@ -62,6 +62,8 @@ export default function AttributeEntry() {
                 ) 
                 
             })}
+            <button onClick={prevStep}>Go Back</button>
+            <button onClick={nextStep}>Next</button>
         </div>
     )
 }

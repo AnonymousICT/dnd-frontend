@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {Context} from '../../../context/Context'
 
-export default function RaceSelector() {
+export default function RaceSelector({nextStep, prevStep}) {
     const{allRaces, characterRace, setCharacterRace, raceData, setSelectedLanguage,  setSelectedTrait} = useContext(Context)
 
     const {
@@ -23,7 +23,7 @@ export default function RaceSelector() {
     return (
         <div className='select-race-container'>
             <h3>Choose your character's race</h3>
-            <select value={characterRace} onChange={(e)=>setCharacterRace(e.target.value)}>
+            <select required value={characterRace} onChange={(e)=>setCharacterRace(e.target.value)}>
                 <option key="noOp" value=''>-----</option>
                 {allRaces.map(index => <option key={index[0]} value={index[1]}>
                     {index[0]}
@@ -101,6 +101,8 @@ export default function RaceSelector() {
                     </section>
                 }
             </div>
+            <button onClick={prevStep}>Go Back</button>
+            <button onClick={nextStep}>Next</button>
         </div>
         
     )

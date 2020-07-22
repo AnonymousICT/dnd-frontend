@@ -13,7 +13,7 @@ import './App.css'
 export default function App() {
     
     return (
-        <div>
+        <div className='App'>
             <header>
                 <h1>
                     Dungeons and Dragons 5th Edition Resource Center
@@ -37,9 +37,9 @@ export default function App() {
                     <Route path='/register'>
                         <Register />
                     </Route>
-                        <Route path='/createCharacter'>
-                            <CreateCharacter />
-                        </Route>
+                    <Route path='/createCharacter'>
+                        <CreateCharacter />
+                    </Route>
                 </Switch>
             </main>
             <footer>
