@@ -102,7 +102,8 @@ export default function RaceSelector({nextStep, prevStep}) {
                 }
             </div>
             <button onClick={prevStep}>Go Back</button>
-            <button onClick={nextStep}>Next</button>
+
+            {!characterRace ? null : <button onClick={nextStep}>Next</button>}
         </div>
         
     )

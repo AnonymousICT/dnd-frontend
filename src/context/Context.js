@@ -36,7 +36,38 @@ function ContextProvider({children}) {
     const [selectedLanguage, setSelectedLanguage] = useState('')
     const [selectedTrait, setSelectedTrait] = useState('')
     const [hoveredAttribute, setHoveredAttribute] = useState('')
+    const [isChecked, setIsChecked] = useState({})
     
+    const [attributeValue, setAttributeValue] = useState({})
+
+
+    //attribute-entry methods
+    const attributeSort = {
+        STR: 0,
+        DEX: 1,
+        CON: 2,
+        INT: 3,
+        WIS: 4,
+        CHA: 5,
+    }
+const sortFunction = (a, b) =>  attributeSort[a[0]] - attributeSort[b[0]]    
+
+const handleAttributeValueChange = (e) => {
+    setAttributeValue({...attributeValue, [e.target.name]: +e.target.value});
+}    
+
+const {ability_bonuses} = raceData
+                            //copy an object to another variable without the references
+const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
+
+const racialBonus = (name) => ((ability_bonuses || []).filter(bonus => bonus.name === name)[0] || {bonus:0}).bonus
+
+Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
+
+const displayAttributeModifer = (attributeTotal) => {
+        return Math.round((attributeTotal - 1) / 2 - 4.9)
+}
+
     //fetches every spell
     useEffect(()=>{
         const fetchedAllSpells = async () => {
@@ -133,11 +164,17 @@ function ContextProvider({children}) {
             AttributeData, setAttributeData,
             classLevels,
             hoveredAttribute, setHoveredAttribute,
+            isChecked, setIsChecked,
+
+            attributeValue, setAttributeValue,
+            attributeSort,
+            sortFunction,
+            handleAttributeValueChange,
+            displayAttributeModifer,
         }}>
             {children}
         </Context.Provider>
     )
-
 }
 
 export {ContextProvider, Context}

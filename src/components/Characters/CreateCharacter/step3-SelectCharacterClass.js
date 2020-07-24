@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import {Context} from '../../../context/Context'
 import {renderClassLevel} from './renderClassLevels'
 import {validCells} from './validCells'
@@ -6,8 +6,7 @@ import {validCells} from './validCells'
 import './style.css'
 
 export default function SelectCharacterClass({nextStep, prevStep}) {
-    const [isChecked, setIsChecked] = useState({})
-    const {allClasses, characterClass, setCharacterClass, classData, classLevels, characterLevel} = useContext(Context)
+    const {allClasses, characterClass, setCharacterClass, classData, classLevels, characterLevel, isChecked, setIsChecked} = useContext(Context)
 
     const {
         name, 

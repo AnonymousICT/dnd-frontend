@@ -1,11 +1,9 @@
-import React, {useState, useContext}  from 'react'
-import {Context} from '../../../context/Context'
+import React, {useState}  from 'react'
 import NameLevelInput from './step1-NameLevelInput'
 import RaceSelector from './step2-RaceSelector'
 import SelectCharacterClass from './step3-SelectCharacterClass'
 import AttributeEntry from './step4-AttributeEntry'
 import Confirm from './step5-Confirm'
-import axios from 'axios'
 
 import './style.css'
 
@@ -46,6 +44,7 @@ export default function CreateCharacter() {
                 <RaceSelector />
                 <SelectCharacterClass />
                 <AttributeEntry />
+                <Confirm />
                 <input type='submit' value='Submit' />
             </form>
         </div>
