@@ -1,7 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 export default function Navbar() {
+    const history = useHistory();
+
+    const logout = () => {
+        localStorage.removeItem('x-auth-token')
+        history.push('/login')
+    }
+
     return (
         <nav className='navigation'>
             <ul className='navigation-list'>
@@ -14,6 +21,7 @@ export default function Navbar() {
                 <li className='navigation-item'>
                     <Link to='/characters'>Create a Character</Link>
                 </li>
+                <button onClick={logout}>Logout</button>
             </ul>
         </nav>
     )

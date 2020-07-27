@@ -1,23 +1,25 @@
-import React  from 'react'
+import React, {useContext}  from 'react'
+import {Context} from './context/Context'
 import {Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Spells from './components/Spells'
 import Characters from './components/Characters'
 import CreateCharacter from './components/Characters/CreateCharacter/CreateCharacter'
+import EditCharacter from './components/Characters/EditCharacter/EditCharacter'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 
 import './App.css'
 
 export default function App() {
-    
+    const {allCharacters} = useContext(Context)
+    console.log(allCharacters)
+
     return (
         <div className='App'>
             <header>
-                <h1>
-                    Dungeons and Dragons 5th Edition Resource Center
-                </h1>
+                <h1>Dungeons and Dragons 5th Edition Resource Center</h1>
                 <Navbar />
             </header>
             <main>
@@ -39,6 +41,9 @@ export default function App() {
                     </Route>
                     <Route path='/createCharacter'>
                         <CreateCharacter />
+                    </Route>
+                    <Route path='/character/edit'>
+                        <EditCharacter />
                     </Route>
                 </Switch>
             </main>

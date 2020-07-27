@@ -20,8 +20,9 @@ export default function SelectCharacterClass({nextStep, prevStep}) {
         let group = e.target.getAttribute('data-group');
         let selectedCount = Object.keys(isChecked).filter(key => isChecked[key].group === group && isChecked[key].checked).length;
         let choiceCount = e.target.getAttribute('data-count');
+        let key = e.target.getAttribute('value')
         if(isChecked[e.target.name] || (selectedCount < choiceCount)) {
-            setIsChecked({...isChecked, [e.target.name]: { checked: e.target.checked, group: group}})   
+            setIsChecked({...isChecked, [e.target.name]: { checked: e.target.checked, group: group, key:key}})   
         } else {
             e.preventDefault();
         }
@@ -35,7 +36,7 @@ export default function SelectCharacterClass({nextStep, prevStep}) {
             }
         
 
-    //clear on load when swapping to a different class
+    //clear on load when swapping to a different class/race
     
     return (
         <div className='select-class-container'>
@@ -71,7 +72,8 @@ export default function SelectCharacterClass({nextStep, prevStep}) {
                                             className="prof-choice" 
                                             onChange={handleChecks} 
                                             name={"proficiencies" + choiceIndex + "-" + i} 
-                                            data-count={choiceObj.choose} data-group={"group"+choiceIndex}
+                                            data-count={choiceObj.choose} 
+                                            data-group={"group"+choiceIndex}
                                             checked={isChecked["proficiencies" + 
                                             choiceIndex + "-" + i] ? isChecked["proficiencies" + choiceIndex + "-" + i].checked : false}
                                             value={skill.name}

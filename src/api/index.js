@@ -3,7 +3,7 @@ import axios from 'axios'
 const api_url='https://www.dnd5eapi.co/api'
 
 export const fetchClassData = async () => {
-    let url = `${api_url}/classes/`
+    const url = `${api_url}/classes/`
 
     try {
         const {data: {results}} = await axios.get(url)
@@ -14,7 +14,7 @@ export const fetchClassData = async () => {
 }
 
 export const fetchSpecificClass = async (job) => {
-    let url = `https://www.dnd5eapi.co${job}`
+    const url = `https://www.dnd5eapi.co${job}` 
 
     try {
         const {data} = await axios.get(url)
@@ -25,7 +25,7 @@ export const fetchSpecificClass = async (job) => {
 }
 
 export const fetchClassLeveling = async(job) => {
-    let url = `https://www.dnd5eapi.co${job}/levels`
+    const url = `https://www.dnd5eapi.co${job}/levels`
 
     try {
         if(!job){
@@ -40,7 +40,7 @@ export const fetchClassLeveling = async(job) => {
 }
 
 export const fetchRaceData = async () => {
-    let url = `${api_url}/races/`
+    const url = `${api_url}/races/`
 
     try {
         const {data: {results}} = await axios.get(url)
@@ -51,7 +51,7 @@ export const fetchRaceData = async () => {
 }
 
 export const fetchSpecificRace = async (race) => {
-    let url = `https://www.dnd5eapi.co${race}`
+    const url = `https://www.dnd5eapi.co${race}`
 
     try {
         const {data} = await axios.get(url)
@@ -62,7 +62,7 @@ export const fetchSpecificRace = async (race) => {
 }
 
 export const fetchAbilityScores = async () => {
-    let url = `${api_url}/ability-scores`
+    const url = `${api_url}/ability-scores`
     try {
         const {data: {results}} = await axios.get(url)
         return results.map((score)=>{
@@ -74,7 +74,7 @@ export const fetchAbilityScores = async () => {
 }
 
 export const fetchAbilityScoreDesc = async (score) => {
-    let url = `https://www.dnd5eapi.co${score}`
+    const url = `https://www.dnd5eapi.co${score}`
     try {
         const {data} = await axios.get(url)
         return data
@@ -84,7 +84,7 @@ export const fetchAbilityScoreDesc = async (score) => {
 }
 
 export const fetchSpellData = async () => {
-    let url = `${api_url}/spells/`
+    const url = `${api_url}/spells/`
     //fetch the spell name and the url of each spell 
     try {
         const {data: {results}} = await axios.get(url)
@@ -97,8 +97,18 @@ export const fetchSpellData = async () => {
 }
 
 export const fetchSpecificSpell = async (spell) => {
-    let url = `https://www.dnd5eapi.co${spell}`
+    const url = `https://www.dnd5eapi.co${spell}`
     
+    try {
+        const {data} = await axios.get(url)
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+export const fetchUsersCharacters = async () => {
+    const url = 'https://dnd-backend-node.herokuapp.com/characters'
     try {
         const {data} = await axios.get(url)
         return data

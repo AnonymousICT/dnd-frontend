@@ -4,7 +4,7 @@ import {
     fetchClassData, fetchSpecificClass,
     fetchRaceData, fetchSpecificRace,
     fetchAbilityScores, fetchAbilityScoreDesc,
-    fetchClassLeveling,
+    fetchClassLeveling, fetchUsersCharacters
 } from '../api'
 const Context = createContext()
 
@@ -14,7 +14,8 @@ function ContextProvider({children}) {
     const [allClasses, setAllClasses] = useState([])
     const [allRaces, setAllRaces] = useState([])
     const [allAttributes, setAttributes] = useState([])
-
+    const [allCharacters, setAllCharacters] = useState([])
+    
     // specific data return
     const [specificSpell, setSpecificSpell] = useState([])
     const [classData, setClassData] = useState([])
@@ -39,7 +40,7 @@ function ContextProvider({children}) {
     const [isChecked, setIsChecked] = useState({})
     
     const [attributeValue, setAttributeValue] = useState({})
-
+    const [characterId, setCharacterId] = useState('')
 
     //attribute-entry methods
     const attributeSort = {
@@ -140,6 +141,17 @@ const displayAttributeModifer = (attributeTotal) => {
         fetchedData()
     },[hoveredAttribute])
 
+
+    //fetch all user's characters
+    useEffect(()=>{
+        const fetchedCharacters = async () => {
+            setAllCharacters(await fetchUsersCharacters())
+        }
+        fetchedCharacters()
+    },[])
+
+    
+
     return (
         <Context.Provider value={{
             allSpells,
@@ -165,6 +177,8 @@ const displayAttributeModifer = (attributeTotal) => {
             classLevels,
             hoveredAttribute, setHoveredAttribute,
             isChecked, setIsChecked,
+            characterId, setCharacterId,
+            allCharacters,
 
             attributeValue, setAttributeValue,
             attributeSort,

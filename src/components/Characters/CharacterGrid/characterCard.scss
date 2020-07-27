@@ -1,0 +1,10 @@
+$border: 1px solid black;
+
+.character-card {
+    border: $border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    line-height: 1;
+}
