@@ -66,8 +66,7 @@ export default function SelectCharacterClass({nextStep, prevStep}) {
                                             onChange={handleChecks} 
                                             name={"proficiencies" + choiceIndex + "-" + i} 
                                             data-count={choiceObj.choose} data-group={"group"+choiceIndex}
-                                            checked={isChecked["proficiencies" + 
-                                            choiceIndex + "-" + i] ? isChecked["proficiencies" + choiceIndex + "-" + i].checked : false}
+                                            checked={isChecked["proficiencies" + choiceIndex + "-" + i].checked}
                                             value={skill.name}
                                             key={choiceIndex + "-" + i}
                                         />
