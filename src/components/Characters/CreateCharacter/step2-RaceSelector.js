@@ -92,7 +92,7 @@ export default function RaceSelector({nextStep, prevStep}) {
                             </div>
                         }
 
-                        {!subraces ? null: 
+                        {(!subraces || subraces.length === 0) ? null: 
                             <div>
                                 <h3>Available Sub-races</h3>
                                 {subraces.map(index => index.name)}

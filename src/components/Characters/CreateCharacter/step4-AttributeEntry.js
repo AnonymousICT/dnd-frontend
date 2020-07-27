@@ -3,7 +3,7 @@ import {Context} from '../../../context/Context'
 
 export default function AttributeEntry({nextStep, prevStep}) {
     const {allAttributes, AttributeData, setHoveredAttribute, raceData, attributeValue, sortFunction, handleAttributeValueChange,
-    displayAttributeModifer,} = useContext(Context)   
+    displayAttributeModifer,racialBonus} = useContext(Context)   
     
     const onMouseEnter = (e) => {
         setHoveredAttribute(e.target.getAttribute('value'))
@@ -12,8 +12,6 @@ export default function AttributeEntry({nextStep, prevStep}) {
     const {ability_bonuses} = raceData
                             //copy an object to another variable without the references
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
-
-    const racialBonus = (name) => ((ability_bonuses || []).filter(bonus => bonus.name === name)[0] || {bonus:0}).bonus
 
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
@@ -31,7 +29,7 @@ export default function AttributeEntry({nextStep, prevStep}) {
                             max="18"
                             placeholder="10"
                             name={attribute[0]}
-                            value={attributeValue[attribute[0]] || 10}
+                            value={attributeValue[attribute[0]]}
                             onChange={handleAttributeValueChange}
                         />
                         <label name={`${attribute[0]} total`}>{attributeTotal[attribute[0]]} Total</label>

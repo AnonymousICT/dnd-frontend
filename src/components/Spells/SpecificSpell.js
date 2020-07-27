@@ -25,12 +25,12 @@ export default function SpecificSpell() {
             {!name ? null : 
             <section>
                 <h1 className='spell-name'>{name}</h1>
-                <p>Level: {level} {(school || {name:""}).name} {ritual ? "(ritual)" : null}</p>
+                <p>Level: {level} {school.name} {ritual ? "(ritual)" : null}</p>
                 <p>Casting Time: {casting_time}</p>
                 <p>Spell Range: {range}</p>
                 <p>Components: {components} {material}</p>
-                <p>Duration: {concentration ? "Concentration ," : null} {duration}</p>
-                <p>Classes: {(classes || [{name: ""}]).map(index => index.name).join(', ')}</p>
+                <p>Duration: {concentration ? "Concentration, " : null} {duration}</p>
+                <p>Classes: {classes.map(index => index.name).join(', ')}</p>
                 <p>Description: {desc}</p>
                 <p>{higher_level}</p>
 
