@@ -47,7 +47,7 @@ export default function SelectCharacterClass({nextStep, prevStep}) {
             </select>
             
             <div className='class-info-container'>
-                <h1>{!name ? null: name}</h1>
+                <h1>{name}</h1>
                 <p>{!hit_die ? null: `1d${hit_die}`}</p>
                 <ul className='class-saving-throws'>
                     {!saving_throws ? null: saving_throws.map(index => <li key={"st-"+index.name}>{index.name}</li>)}

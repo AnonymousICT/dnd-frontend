@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import {
     fetchSpellData, fetchSpecificSpell,
     fetchClassData, fetchSpecificClass,
@@ -8,39 +8,158 @@ import {
 } from '../api'
 const Context = createContext()
 
-function ContextProvider({children}) {
+function ContextProvider({ children }) {
+    const defaultValues = {
+        isChecked: (classDataParam) => classDataParam
+            .proficiency_choices.map((choiceObj, choiceIndex) =>
+                choiceObj.from.map((skill, i) => "proficiencies" + choiceIndex + "-" + i))
+            .reduce((obj, item) => { return { ...obj, [item]: false }; },
+                {}),
+        allAttributes: [
+            { "index": "cha", "name": "CHA" },
+            { "index": "con", "name": "CON" },
+            { "index": "dex", "name": "DEX" },
+            { "index": "int", "name": "INT" },
+            { "index": "str", "name": "STR" },
+            { "index": "wis", "name": "WIS" }
+        ],
+        attributeValue: (allAttrs) => allAttrs.reduce((obj, item) => { return { ...obj, [item.name]: 10 }; }, {}),
+        specificSpell: {
+            name: "Nothingness",
+            level: 0,
+            range: "0 feet",
+            components: ["V", "S", "M"],
+            school: { name: "Abyssal" },
+            classes: [{
+                "name": "Homunculus",
+                "url": "/api/classes/wizard"
+            }],
+            material: "",
+            desc: [""],
+            duration: "Instantaneous",
+            higher_level: [""],
+            ritual: false,
+            concentration: false,
+            casting_time: "50 actions"
+        },
+        classData: {
+            index: "onion-knight",
+            name: "Onion Knight",
+            hit_die: 1,
+            proficiency_choices: [
+                {
+                    choose: 1,
+                    type: "proficiencies",
+                    from: [
+                        {
+                            "url": "/api/proficiencies/skill-animal-handling",
+                            "name": "Skill: Animal Handling"
+                        }
+                    ]
+                }
+            ],
+            proficiencies: [
+                {
+                    name: "Light armor",
+                    url: "/api/proficiencies/light-armor"
+                }
+            ],
+            saving_throws: [
+                {
+                    name: "CHA",
+                    url: "/api/ability-scores/cha"
+                }
+            ],
+            subclasses: [
+                {
+                    url: "/api/subclasses/all",
+                    name: "All"
+                }
+            ]
+        },
+        raceData: {
+            index: "missing-no",
+            name: "MissingNo",
+            speed: 30,
+            ability_bonuses: [
+                {
+                    name: "CON",
+                    url: "/api/ability-scores/con",
+                    bonus: 2
+                }
+            ],
+            alignment: "",
+            age: "",
+            size: "Medium",
+            size_description: "Your size is Medium.",
+            starting_proficiencies: [
+                {
+                    url: "/api/proficiencies/404",
+                    name: ""
+                }
+            ],
+            starting_proficiency_options: {
+                choose: 1,
+                type: "proficiencies",
+                from: [
+                    {
+                        "url": "/api/proficiencies/404",
+                        "name": ""
+                    }
+                ]
+            },
+            languages: [
+                {
+                    "url": "/api/languages/common",
+                    "name": "Common"
+                }
+            ],
+            language_desc: "You can speak, read, and write Common.",
+            traits: [
+                {
+                    "name": "",
+                    "url": "/api/traits/404"
+                }
+            ],
+            subraces: null
+        }
+    }
+
+    window.defaultValues = defaultValues;
+
     // all data state
     const [allSpells, setAllSpells] = useState([])
     const [allClasses, setAllClasses] = useState([])
     const [allRaces, setAllRaces] = useState([])
-    const [allAttributes, setAttributes] = useState([])
     const [allCharacters, setAllCharacters] = useState([])
-    
+    const [allAttributes, setAttributes] = useState(defaultValues.allAttributes)
+
     // specific data return
-    const [specificSpell, setSpecificSpell] = useState([])
-    const [classData, setClassData] = useState([])
+    const [specificSpell, setSpecificSpell] = useState(defaultValues.specificSpell)
+    const [classData, setClassData] = useState(defaultValues.classData)
     const [classLevels, setClassLevels] = useState([])
-    const [raceData, setRaceData] = useState([])
+    const [raceData, setRaceData] = useState(defaultValues.raceData)
     const [AttributeData, setAttributeData] = useState([])
-    
+
     // user auth state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userData, setUserData] = useState({})
-    
+
     // user's choice state
     const [characterName, setCharacterName] = useState('')
-    const [characterLevel ,setCharacterLevel] = useState(1)
+    const [characterLevel, setCharacterLevel] = useState(1)
     const [characterClass, setCharacterClass] = useState('')
     const [characterRace, setCharacterRace] = useState('')
     const [selectedSpell, setSelectedSpell] = useState('')
     const [selectedLanguage, setSelectedLanguage] = useState('')
     const [selectedTrait, setSelectedTrait] = useState('')
     const [hoveredAttribute, setHoveredAttribute] = useState('')
-    const [isChecked, setIsChecked] = useState({})
-    
-    const [attributeValue, setAttributeValue] = useState({})
+
     const [characterId, setCharacterId] = useState('')
+    const [isChecked, setIsChecked] = useState(defaultValues.isChecked(defaultValues.classData))
+
+    const [attributeValue, setAttributeValue] = useState(defaultValues.attributeValue(allAttributes))
 
     //attribute-entry methods
     const attributeSort = {
@@ -51,42 +170,44 @@ function ContextProvider({children}) {
         WIS: 4,
         CHA: 5,
     }
-const sortFunction = (a, b) =>  attributeSort[a[0]] - attributeSort[b[0]]    
+    const sortFunction = (a, b) => attributeSort[a[0]] - attributeSort[b[0]]
 
-const handleAttributeValueChange = (e) => {
-    setAttributeValue({...attributeValue, [e.target.name]: +e.target.value});
-}    
+    const handleAttributeValueChange = (e) => {
+        setAttributeValue({ ...attributeValue, [e.target.name]: +e.target.value });
+    }
 
-const {ability_bonuses} = raceData
-                            //copy an object to another variable without the references
-const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
+    const { ability_bonuses } = raceData
+    window.ability_bonuses = ability_bonuses;
 
-const racialBonus = (name) => ((ability_bonuses || []).filter(bonus => bonus.name === name)[0] || {bonus:0}).bonus
+    //copy an object to another variable without the references
+    const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
 
-Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
+    const racialBonus = (name) => ((ability_bonuses || defaultValues.raceData.ability_bonuses).filter(bonus => bonus.name === name)[0] || { bonus: 0 }).bonus
 
-const displayAttributeModifer = (attributeTotal) => {
+    Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
+
+    const displayAttributeModifer = (attributeTotal) => {
         return Math.round((attributeTotal - 1) / 2 - 4.9)
-}
+    }
 
     //fetches every spell
-    useEffect(()=>{
+    useEffect(() => {
         const fetchedAllSpells = async () => {
             setAllSpells(await fetchSpellData())
         }
         fetchedAllSpells()
-    },[])
+    }, [])
 
     //fetches a specific spell
-    useEffect(()=>{
+    useEffect(() => {
         const fetchedSpecificSpellData = async () => {
             setSpecificSpell(await fetchSpecificSpell(selectedSpell))
         }
         fetchedSpecificSpellData(selectedSpell)
-    },[selectedSpell])
+    }, [selectedSpell])
 
     // fetch all classses
-    useEffect(()=> {
+    useEffect(() => {
         const fetchedAllClasses = async () => {
             setAllClasses(await fetchClassData())
         }
@@ -94,7 +215,7 @@ const displayAttributeModifer = (attributeTotal) => {
     }, [])
 
     //fetch specificClass
-    useEffect(()=>{
+    useEffect(() => {
         const fetchedSpecificClassData = async () => {
             setClassData(await fetchSpecificClass(characterClass))
         }
@@ -102,44 +223,44 @@ const displayAttributeModifer = (attributeTotal) => {
     }, [characterClass])
 
     //fetch the specificClass' leveling
-    useEffect(()=>{
+    useEffect(() => {
         const fetchedLevelsData = async () => {
             setClassLevels(await fetchClassLeveling(characterClass))
         }
         fetchedLevelsData()
-    },[characterClass])
+    }, [characterClass])
 
     // fetch all races
-    useEffect(()=>{
-        const fetchedRaceData = async() => {
+    useEffect(() => {
+        const fetchedRaceData = async () => {
             setAllRaces(await fetchRaceData())
         }
         fetchedRaceData()
-    },[])
-    
+    }, [])
+
     // fetch a specific Race
-    useEffect(()=>{
+    useEffect(() => {
         const fetchedSpecificRace = async () => {
             setRaceData(await fetchSpecificRace(characterRace))
         }
         fetchedSpecificRace()
-    },[characterRace])
+    }, [characterRace])
 
     //fetch all attribute scores
-    useEffect(()=> {
-        const fetchedData = async() => {
+    useEffect(() => {
+        const fetchedData = async () => {
             setAttributes(await fetchAbilityScores())
         }
         fetchedData()
     }, [])
 
     //fetch attribute score desc
-    useEffect(()=>{
-        const fetchedData = async()=>{
+    useEffect(() => {
+        const fetchedData = async () => {
             setAttributeData(await fetchAbilityScoreDesc(hoveredAttribute))
         }
         fetchedData()
-    },[hoveredAttribute])
+    }, [hoveredAttribute])
 
 
     //fetch all user's characters
@@ -156,7 +277,7 @@ const displayAttributeModifer = (attributeTotal) => {
         <Context.Provider value={{
             allSpells,
             specificSpell,
-            selectedSpell,setSelectedSpell,
+            selectedSpell, setSelectedSpell,
             allClasses, setAllClasses,
 
             email, setEmail,
@@ -164,7 +285,7 @@ const displayAttributeModifer = (attributeTotal) => {
             userData, setUserData,
 
             characterName, setCharacterName,
-            characterLevel ,setCharacterLevel,
+            characterLevel, setCharacterLevel,
             characterClass, setCharacterClass,
             classData, setClassData,
             allRaces, setAllRaces,
@@ -179,6 +300,7 @@ const displayAttributeModifer = (attributeTotal) => {
             isChecked, setIsChecked,
             characterId, setCharacterId,
             allCharacters,
+            racialBonus,
 
             attributeValue, setAttributeValue,
             attributeSort,
@@ -191,4 +313,4 @@ const displayAttributeModifer = (attributeTotal) => {
     )
 }
 
-export {ContextProvider, Context}
+export { ContextProvider, Context }

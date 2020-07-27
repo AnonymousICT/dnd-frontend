@@ -14,7 +14,6 @@ import './App.css'
 
 export default function App() {
     const {allCharacters} = useContext(Context)
-    console.log(allCharacters)
 
     return (
         <div className='App'>
