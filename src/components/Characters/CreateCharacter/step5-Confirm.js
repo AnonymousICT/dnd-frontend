@@ -16,19 +16,15 @@ export default function Confirm({prevStep}) {
         allAttributes,
         sortFunction,
         raceData,
-
+        racialBonus
     } = useContext(Context)
 
     const {name, ability_bonuses} = raceData
 
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
 
-    const racialBonus = (name) => ((ability_bonuses || []).filter(bonus => bonus.name === name)[0] || {bonus:0}).bonus
-
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
-    console.log(attributeTotal)
-
     const handleCharacterSubmit = async (e) => {
         try {
             const newCharacter = {
@@ -57,8 +53,8 @@ export default function Confirm({prevStep}) {
                 <li>Character Name: {characterName}</li>
                 <li> Level {characterLevel}, {classData.name}</li>
                 <li>Race: {name}</li>
-                <li>{!selectedLanguage ? null : selectedLanguage}</li>
-                <li>{!selectedTrait ? null : selectedTrait}</li>
+                <li>{selectedLanguage}</li>
+                <li>{selectedTrait}</li>
                 {allAttributes.sort(sortFunction).map((attribute, i)=>{
                     return (
                     <li key={i}>{attribute[0]}: {attributeTotal[attribute[0]]}</li>
