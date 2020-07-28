@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {Context} from '../../../context/Context'
+import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 
 import BasicInfo from './BasicInfo'
@@ -7,17 +6,15 @@ import Attributes from './Attributes'
 
 export default function EditCharacter() {
     const [character, setCharacter] = useState({})
+
     const [userClass, setUserClass] = useState([])
     const [classLevels, setClasslevels] = useState([])
-    const {characterId, setCharacterId} = useContext(Context)
-    
-    setCharacterId((window.location.href.split('/').pop()) || window.location.href.split('/').pop().pop())
-
+    const characterId = (window.location.href.split('/').pop()) || window.location.href.split('/').pop().pop()
     
     useEffect(()=>{
         const fetchCharacter = async () => {
-            const {data} = await Axios.get(`https://dnd-backend-node.herokuapp.com/characters/${characterId}`, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
-            setCharacter(data[0])
+            const {data} = await Axios.get(`http://localhost:5000/characters/${characterId}`, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+            setCharacter(data)
         }
         fetchCharacter()
     }, [characterId])
@@ -26,22 +23,27 @@ export default function EditCharacter() {
     
     useEffect(()=>{
         const usersClassData = async () => {
-            const url = `https://www.dnd5eapi.co/api/classes/${job}`
-            const {data}=await Axios.get(url)
-            setUserClass(data)
+            if(job) {
+                const url = `https://www.dnd5eapi.co/api/classes/${job.toLowerCase()}`
+                const {data}=await Axios.get(url)
+                setUserClass(data)
+            }
         }
         usersClassData()
     },[job])
+    console.log(userClass)
 
     useEffect(()=>{
         const usersLevelData = async () => {
-            const url = `https://www.dnd5eapi.co/api/classes/${job}/levels`
-            const {data}=await Axios.get(url)
-            setClasslevels(data)
+            if(job) {
+                const url = `https://www.dnd5eapi.co/api/classes/${job.toLowerCase()}/levels`
+                const {data}=await Axios.get(url)
+                setClasslevels(data)
+            }
         }
         usersLevelData()
     },[job])
-
+    console.log(classLevels)
 
     return (
         <div className="character-container">

@@ -21,6 +21,8 @@ export default function Login() {
                 user: loginRes.data.user,
             })
             localStorage.setItem('x-auth-token', loginRes.data.token)
+            localStorage.setItem('userId', loginRes.data.user.id)
+            localStorage.setItem('displayName', loginRes.data.user.displayName)
             history.push('/characters?')
         } catch (err){
             console.err(err)

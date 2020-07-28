@@ -1,5 +1,4 @@
-import React, {useContext}  from 'react'
-import {Context} from './context/Context'
+import React  from 'react'
 import {Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
@@ -13,7 +12,6 @@ import Register from './components/Auth/Register'
 import './App.css'
 
 export default function App() {
-    const {allCharacters} = useContext(Context)
 
     return (
         <div className='App'>

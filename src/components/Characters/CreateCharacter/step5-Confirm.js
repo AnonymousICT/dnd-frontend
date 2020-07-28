@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import {Context} from '../../../context/Context'
@@ -18,19 +18,24 @@ export default function Confirm({prevStep}) {
         sortFunction,
         raceData,
         isChecked,
-        racialBonus
-
+        racialBonus,
     } = useContext(Context)
+
+    const userId = localStorage.getItem('userId')
 
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
 
+    useEffect(()=>{
+        setChoicesArray(Object.keys(isChecked).map(key => isChecked[key].key))
+    },[isChecked])
+    console.log(choicesArray)
+    
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
     const handleCharacterSubmit = async (e) => {
         try {
-            setChoicesArray(Object.keys(isChecked).map(key => isChecked[key].key))
-
             const newCharacter = {
+                userId,
                 name: characterName,
                 level: characterLevel,
                 race: raceData.name,

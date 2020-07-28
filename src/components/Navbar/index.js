@@ -6,6 +6,8 @@ export default function Navbar() {
 
     const logout = () => {
         localStorage.removeItem('x-auth-token')
+        localStorage.removeItem('displayName')
+        localStorage.removeItem('userId')
         history.push('/login')
     }
 
