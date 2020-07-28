@@ -3,6 +3,7 @@ import Axios from 'axios'
 
 import BasicInfo from './BasicInfo'
 import Attributes from './Attributes'
+import Skills from './Skills'
 
 export default function EditCharacter() {
     const [character, setCharacter] = useState({})
@@ -31,7 +32,6 @@ export default function EditCharacter() {
         }
         usersClassData()
     },[job])
-    console.log(userClass)
 
     useEffect(()=>{
         const usersLevelData = async () => {
@@ -43,17 +43,25 @@ export default function EditCharacter() {
         }
         usersLevelData()
     },[job])
-    console.log(classLevels)
 
+    const filteredLevel = classLevels.filter(level => {
+        return level.level === character.level
+    })
+
+    console.log(character)
     return (
         <div className="character-container">
             <BasicInfo character={character}/>
             <Attributes 
                 character={character} 
-                saving_throws={classLevels.saving_throws}
+                filteredLevel={filteredLevel}
+            />
+            <Skills 
+                character={character}
+                userClass={userClass}
+                filteredLevel={filteredLevel}
             />
                 {!languageChoice ? null : languageChoice}
-                {!profChoice ? null : profChoice.map((choice)=>choice)}
                 {!traitChoice ? null: traitChoice}
         </div>
     )
