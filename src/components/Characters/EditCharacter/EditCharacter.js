@@ -4,6 +4,7 @@ import Axios from 'axios'
 import BasicInfo from './BasicInfo'
 import Attributes from './Attributes'
 import Skills from './Skills'
+import BattleStats from './BattleStats'
 
 export default function EditCharacter() {
     const [character, setCharacter] = useState({})
@@ -54,13 +55,15 @@ export default function EditCharacter() {
             <Attributes 
                 character={character} 
                 filteredLevel={filteredLevel}
-                // attributesValues={attributeValues}
             />
             <Skills 
                 character={character}
                 userClass={userClass}
                 filteredLevel={filteredLevel}
-                // attributesValues={attributeValues}
+            />
+            <BattleStats 
+                character={character}
+                userClass={userClass}
             />
                 {!languageChoice ? null : languageChoice}
                 {!traitChoice ? null: traitChoice}
