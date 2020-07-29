@@ -21,7 +21,7 @@ export default function Attributes({
             charisma: attributeValue["CHA"],
         };
         console.log(updateCharacter);
-        await axios.put(`${process.env.REACT_APP_CLIENT_URL}/characters/${character._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+        await axios.put(`https://dnd-backend-node.herokuapp.com}/characters/${character._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
     }
 
     useEffect(()=>{

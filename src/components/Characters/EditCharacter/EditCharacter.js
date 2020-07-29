@@ -14,7 +14,7 @@ export default function EditCharacter() {
     
     useEffect(()=>{
         const fetchCharacter = async () => {
-            const {data} = await Axios.get(`${process.env.REACT_APP_CLIENT_URL}/characters/${characterId}`, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+            const {data} = await Axios.get(`https://dnd-backend-node.herokuapp.com}/characters/${characterId}`, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
             setCharacter(data)
         }
         fetchCharacter()

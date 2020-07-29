@@ -7,12 +7,13 @@ export default function CharacterGrid() {
     const {allCharacters} = useContext(Context)
     return (
         <div>
-            {(allCharacters || []).map(character => 
+            {!allCharacters ? "Loading" : allCharacters.map(character => <CharacterCard key={character._id} character={character}/>)}
+            {/* {(allCharacters || []).map(character => 
                 <CharacterCard 
                 key={character._id} 
                 character={character} 
                 />)
-            }
+            } */}
         </div>
     )
 }

@@ -51,7 +51,7 @@ export default function Confirm({prevStep}) {
                 wisdom: attributeTotal.WIS,
                 charisma: attributeTotal.CHA,
             }
-            await axios.post(`${process.env.REACT_APP_CLIENT_URL}/characters/new`, newCharacter)
+            await axios.post(`https://dnd-backend-node.herokuapp.com/characters/new`, newCharacter)
             history.push("/characters?created")
             updateAllCharcters()
         } catch (err) {
