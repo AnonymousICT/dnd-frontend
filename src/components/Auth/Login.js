@@ -13,7 +13,7 @@ export default function Login() {
         e.preventDefault();
         try{
             const loginUser = {email, password}
-            const loginRes = await axios.post("https://dnd-backend-node.herokuapp.com/users/login",
+            const loginRes = await axios.post("/users/login",
                 loginUser
             )
             setUserData({
