@@ -1,8 +1,9 @@
 import React, {useContext} from 'react'
-import {Context} from '../../context/Context'
+import {ResourceContext} from '../../context/ResourceContext'
+
 
 export default function SpecificSpell() {
-    const {specificSpell} = useContext(Context)
+    const {specificSpell} = useContext(ResourceContext)
 
     const {
         name, 

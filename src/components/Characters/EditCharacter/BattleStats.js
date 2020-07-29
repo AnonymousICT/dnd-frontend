@@ -1,8 +1,8 @@
 import React,{useContext } from 'react'
-import {Context} from '../../../context/Context'
+import {AttributeContext} from '../../../context/AttributeContext'
 
 export default function BattleStats({character:{dexterity, constitution, wisdom, job}, }) {
-    const {modMath} = useContext(Context)
+    const {modMath} = useContext(AttributeContext)
 
     const calculateInitialAC = () => {
         if(job === "Monk") {
@@ -15,7 +15,7 @@ export default function BattleStats({character:{dexterity, constitution, wisdom,
     }
     // armor class = 10+Dexmod as a default
     //initiative = Dev mod
-    //speed from race
+    //speed from race + check to see what level monk they are for unarmored movement
     //hit_die from class info
     //deathsaves
 

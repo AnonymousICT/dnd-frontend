@@ -2,26 +2,35 @@ import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import {Context} from '../../../context/Context'
+import {ResourceContext} from '../../../context/ResourceContext'
+import {AttributeContext} from '../../../context/AttributeContext'
 
 export default function Confirm({prevStep}) {
     const [choicesArray, setChoicesArray] = useState([])
     const history = useHistory();
     
     const {
-        updateAllCharcters,
         characterName, 
         characterLevel,  
-        classData,
         selectedLanguage, 
         selectedTrait,
+        isChecked,
+        updateAllCharacters,
+    } = useContext(Context)
+    
+    const {
+        classData,
+        raceData,
+    } =useContext(ResourceContext)
+    
+    const {
         attributeValue,
         allAttributes,
         sortFunction,
-        raceData,
-        isChecked,
         racialBonus,
-    } = useContext(Context)
-
+        
+    }=useContext(AttributeContext)
+    
     const userId = localStorage.getItem('userId')
 
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
@@ -53,7 +62,7 @@ export default function Confirm({prevStep}) {
             }
             await axios.post(`https://dnd-backend-node.herokuapp.com/characters/new`, newCharacter)
             history.push("/characters?created")
-            updateAllCharcters()
+            updateAllCharacters()
         } catch (err) {
             console.error(err)
         }

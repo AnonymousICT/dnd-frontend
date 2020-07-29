@@ -1,13 +1,23 @@
 import React, {useContext} from 'react'
 import {Context} from '../../../context/Context'
+import {ResourceContext} from '../../../context/ResourceContext'
 import {renderClassLevel} from './renderClassLevels'
 import {validCells} from './validCells'
 
 import './style.css'
 
 export default function SelectCharacterClass({nextStep, prevStep}) {
-    const {allClasses, characterClass, setCharacterClass, classData, classLevels, characterLevel, isChecked, setIsChecked} = useContext(Context)
-
+    const {
+        characterClass, setCharacterClass, 
+        characterLevel, 
+        isChecked, setIsChecked} = useContext(Context)
+        
+    const {
+        allClasses, 
+        classData, 
+        classLevels, 
+        
+    } = useContext(ResourceContext)
     const {
         name, 
         hit_die, 

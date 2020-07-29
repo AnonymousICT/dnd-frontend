@@ -1,9 +1,18 @@
 import React, {useContext} from 'react'
-import {Context} from '../../../context/Context'
+import {AttributeContext} from '../../../context/AttributeContext'
 
 export default function AttributeEntry({nextStep, prevStep}) {
-    const {allAttributes, AttributeData, setHoveredAttribute, attributeValue, sortFunction, handleAttributeValueChange,
-    displayAttributeModifer,racialBonus} = useContext(Context)   
+    const {
+        allAttributes, 
+        AttributeData, 
+        setHoveredAttribute, 
+        attributeValue, 
+        sortFunction, 
+        handleAttributeValueChange,
+        displayAttributeModifer,
+        racialBonus
+    } = useContext(AttributeContext)   
+    
     
     const onMouseEnter = (e) => {
         setHoveredAttribute(e.target.getAttribute('value'))

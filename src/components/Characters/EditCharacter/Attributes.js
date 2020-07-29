@@ -1,5 +1,5 @@
 import React,{useEffect, useContext } from 'react'
-import {Context} from '../../../context/Context'
+import {AttributeContext} from '../../../context/AttributeContext'
 import axios from 'axios'
 
 export default function Attributes({
@@ -7,7 +7,13 @@ export default function Attributes({
     filteredLevel,
     }) {
     
-    const {modMath, allAttributes, sortFunction, attributeValue, handleAttributeValueChange, setAttributeValue} = useContext(Context)
+    const {
+        modMath, 
+        allAttributes, 
+        sortFunction, 
+        attributeValue, 
+        handleAttributeValueChange, 
+        setAttributeValue} = useContext(AttributeContext)
     
     const getAttributeValue = (attributeName) => attributeValue[attributeName];
 

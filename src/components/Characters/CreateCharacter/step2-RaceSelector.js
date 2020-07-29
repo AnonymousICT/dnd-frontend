@@ -1,8 +1,18 @@
 import React, {useContext} from 'react'
 import {Context} from '../../../context/Context'
+import {ResourceContext} from '../../../context/ResourceContext'
 
 export default function RaceSelector({nextStep, prevStep}) {
-    const{allRaces, characterRace, setCharacterRace, raceData, setSelectedLanguage,  setSelectedTrait} = useContext(Context)
+    const{
+        characterRace, setCharacterRace, 
+        setSelectedLanguage,  
+        setSelectedTrait
+    } = useContext(Context)
+    
+    const{
+        allRaces, 
+        raceData, 
+    } = useContext(ResourceContext)
 
     const {
         name, 

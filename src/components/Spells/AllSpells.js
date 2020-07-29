@@ -1,8 +1,8 @@
 import React,{useContext} from 'react'
-import {Context} from '../../context/Context'
+import {ResourceContext} from '../../context/ResourceContext'
 
 export default function AllSpells() {
-    const {allSpells, setSelectedSpell} = useContext(Context)
+    const {allSpells, setSelectedSpell} = useContext(ResourceContext)
     return (
         <div className='all-spells-container'>
             <table className='spell-table'>

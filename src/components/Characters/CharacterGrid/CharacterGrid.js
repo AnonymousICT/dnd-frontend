@@ -8,12 +8,6 @@ export default function CharacterGrid() {
     return (
         <div>
             {!allCharacters ? "Loading" : allCharacters.map(character => <CharacterCard key={character._id} character={character}/>)}
-            {/* {(allCharacters || []).map(character => 
-                <CharacterCard 
-                key={character._id} 
-                character={character} 
-                />)
-            } */}
         </div>
     )
 }

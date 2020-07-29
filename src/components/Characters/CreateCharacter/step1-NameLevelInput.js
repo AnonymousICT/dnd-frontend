@@ -2,7 +2,12 @@ import React, {useContext} from 'react'
 import {Context} from '../../../context/Context'
 
 export default function NameLevelInput({nextStep}) {
-    const {characterName, setCharacterName, characterLevel ,setCharacterLevel,} = useContext(Context)
+    const {
+        characterName, 
+        setCharacterName, 
+        characterLevel ,
+        setCharacterLevel,
+    } = useContext(Context)
 
     return (
         <div>

@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react'
-import {Context} from '../../../context/Context'
+import {AttributeContext} from '../../../context/AttributeContext'
 
 const saveArray = [
     "STR",
@@ -35,7 +35,7 @@ export default function Skills({
     character, 
     userClass:{saving_throws}, 
     filteredLevel}) {
-        const {attributeValue, modMath, setAttributeValue} = useContext(Context)
+        const {attributeValue, modMath, setAttributeValue} = useContext(AttributeContext)
         
         useEffect(()=>{
             setAttributeValue({
@@ -93,7 +93,6 @@ export default function Skills({
             }
         }
     )
-
 
     return (
         <div className="skills-container">
