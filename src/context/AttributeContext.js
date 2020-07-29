@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
-import {fetchAbilityScores, fetchAbilityScoreDesc} from '../api'
+import {fetchAbilityScores, fetchAbilityScoreDesc} from '../api/AbilityScoreAPI'
 import {defaultValues} from './DefaultValues'
 import {ResourceContext} from './ResourceContext'
 

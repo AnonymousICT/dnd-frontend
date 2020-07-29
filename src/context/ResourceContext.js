@@ -2,12 +2,16 @@ import React, { useState, useEffect, createContext, useContext } from 'react'
 import {
     fetchSpellData, 
     fetchSpecificSpell, 
+} from '../api/SpellAPI'
+import {
     fetchClassData, 
     fetchSpecificClass,
+    fetchClassLeveling
+} from '../api/ClassAPI'
+import {
     fetchRaceData,
     fetchSpecificRace,
-    fetchClassLeveling
-} from '../api'
+} from '../api/RaceAPI'
 import {defaultValues} from './DefaultValues'
 import {Context} from './Context'
 const ResourceContext = createContext()

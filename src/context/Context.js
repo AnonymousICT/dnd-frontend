@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react'
-import {fetchUsersCharacters} from '../api'
+import {fetchUsersCharacters} from '../api/userAPI'
 import {defaultValues} from './DefaultValues'
 const Context = createContext()
 
