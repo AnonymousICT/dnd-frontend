@@ -1,51 +1,63 @@
-import React from 'react'
-
+import React,{useEffect, useContext } from 'react'
+import {Context} from '../../../context/Context'
+import axios from 'axios'
 
 export default function Attributes({
-    character:{
-        strength, 
-        dexterity, 
-        constitution, 
-        intelligence, 
-        wisdom, 
-        charisma,
-    },
+    character,
     filteredLevel,
     }) {
+    
+    const {modMath, allAttributes, sortFunction, attributeValue, handleAttributeValueChange, setAttributeValue} = useContext(Context)
+    
+    const getAttributeValue = (attributeName) => attributeValue[attributeName];
 
-    const modMath = (score) => {
-       return Math.round((score - 1) / 2 - 4.9)
-    } 
+    const handleNewAttributes = async (e) =>{
+        const updateCharacter = {
+            strength: attributeValue["STR"],
+            dexterity: attributeValue["DEX"],
+            constitution: attributeValue["CON"],
+            intelligence: attributeValue["INT"],
+            wisdom: attributeValue["WIS"],
+            charisma: attributeValue["CHA"],
+        };
+        console.log(updateCharacter);
+        await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${character._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+    }
+
+    useEffect(()=>{
+        setAttributeValue({
+            STR: character.strength,
+            DEX: character.dexterity, 
+            CON: character.constitution,
+            INT: character.intelligence,
+            WIS: character.wisdom,
+            CHA: character.charisma
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[character])
 
     return (
         <div className="container">
             <div>
                 Proficiency Bonus:{(filteredLevel[0] || []).prof_bonus}
             </div>
-            <div className="attributes-mods">
-                <label>Strength</label> {strength}
-                <label>Mod</label> {modMath(strength)}
-            </div>
-            <div className="attributes-mods">
-                <label>Dexterity</label> {dexterity}
-                <label>Mod</label> {modMath(dexterity)}
-            </div>
-            <div className="attributes-mods">
-                <label>Constitution</label> {constitution}
-                <label>Mod</label> {modMath(constitution)}
-            </div>
-            <div className="attributes-mods">
-                <label>Intelligence</label> {intelligence}
-                <label>Mod</label> {modMath(intelligence)}
-            </div>
-            <div className="attributes-mods">
-                <label>Wisdom</label> {wisdom}
-                <label>Mod</label> {modMath(wisdom)}
-            </div>
-            <div className="attributes-mods">
-                <label>Charisma</label> {charisma}
-                <label>Mod</label> {modMath(charisma)}
-            </div>
+            {allAttributes.sort(sortFunction).map((attribute, i) =>{
+                return (
+                    <div className="attribute" key={i}>
+                        <label>{attribute[0]}</label>
+                        <input 
+                            type="number"
+                            min="3"
+                            max="20"
+                            name={attribute[0]}
+                            value={attributeValue[attribute[0]] || 10}
+                            onChange={handleAttributeValueChange}
+                        />
+                        <label>{`${attribute[0]} Mod`} {modMath(getAttributeValue(attribute[0]))}</label>
+                    </div>
+                )
+            })}
+            <button onClick={handleNewAttributes}>Submit</button>
         </div>
     )
 }

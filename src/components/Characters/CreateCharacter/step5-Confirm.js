@@ -8,6 +8,7 @@ export default function Confirm({prevStep}) {
     const history = useHistory();
     
     const {
+        updateAllCharcters,
         characterName, 
         characterLevel,  
         classData,
@@ -28,7 +29,6 @@ export default function Confirm({prevStep}) {
     useEffect(()=>{
         setChoicesArray(Object.keys(isChecked).map(key => isChecked[key].key))
     },[isChecked])
-    console.log(choicesArray)
     
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
@@ -53,6 +53,7 @@ export default function Confirm({prevStep}) {
             }
             await axios.post("https://dnd-backend-node.herokuapp.com/characters/new", newCharacter)
             history.push("/characters?created")
+            updateAllCharcters()
         } catch (err) {
             console.error(err)
         }

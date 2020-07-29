@@ -20,7 +20,7 @@ export default function EditCharacter() {
         fetchCharacter()
     }, [characterId])
     
-    const {job, languageChoice, profChoice, traitChoice,} = character
+    const {job, languageChoice, traitChoice,} = character
     
     useEffect(()=>{
         const usersClassData = async () => {
@@ -48,18 +48,19 @@ export default function EditCharacter() {
         return level.level === character.level
     })
 
-    console.log(character)
     return (
         <div className="character-container">
             <BasicInfo character={character}/>
             <Attributes 
                 character={character} 
                 filteredLevel={filteredLevel}
+                // attributesValues={attributeValues}
             />
             <Skills 
                 character={character}
                 userClass={userClass}
                 filteredLevel={filteredLevel}
+                // attributesValues={attributeValues}
             />
                 {!languageChoice ? null : languageChoice}
                 {!traitChoice ? null: traitChoice}

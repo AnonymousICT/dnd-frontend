@@ -132,6 +132,7 @@ function ContextProvider({ children }) {
     const [allClasses, setAllClasses] = useState([])
     const [allRaces, setAllRaces] = useState([])
     const [allCharacters, setAllCharacters] = useState([])
+    const [fetchNewData, setFetchNewData] = useState(false);
     const [allAttributes, setAttributes] = useState(defaultValues.allAttributes)
 
     // specific data return
@@ -163,18 +164,29 @@ function ContextProvider({ children }) {
 
     //attribute-entry methods
     const attributeSort = {
-        STR: 0,
-        DEX: 1,
-        CON: 2,
-        INT: 3,
-        WIS: 4,
-        CHA: 5,
+        STR: {sortOrder: 0, translation: "strength"},
+        DEX: {sortOrder: 1, translation: "dexterity"},
+        CON: {sortOrder: 2, translation: "constitution"},
+        INT: {sortOrder: 3, translation: "intelligence"},
+        WIS: {sortOrder: 4, translation: "wisdom"},
+        CHA: {sortOrder: 5, translation: "charisma"},
+        strength: {sortOrder: 0, translation: "STR"},
+        dexterity: {sortOrder: 1, translation: "DEX"},
+        constitution: {sortOrder: 2, translation: "CON"},
+        intelligence: {sortOrder: 3, translation: "INT"},
+        wisdom: {sortOrder: 4, translation: "WIS"},
+        charisma: {sortOrder: 5, translation: "CHA"},
+        [undefined]: {sortOrder: 99, translation: "strength"}
     }
-    const sortFunction = (a, b) => attributeSort[a[0]] - attributeSort[b[0]]
+    const sortFunction = (a, b) => attributeSort[a[0]].sortOrder - attributeSort[b[0]].sortOrder
 
     const handleAttributeValueChange = (e) => {
         setAttributeValue({ ...attributeValue, [e.target.name]: +e.target.value });
     }
+        
+    const modMath = (score) => {
+        return Math.round((score - 1) / 2 - 4.9)
+     } 
 
     const { ability_bonuses } = raceData
     window.ability_bonuses = ability_bonuses;
@@ -269,9 +281,9 @@ function ContextProvider({ children }) {
             setAllCharacters(await fetchUsersCharacters())
         }
         fetchedCharacters()
-    },[])
+    },[fetchNewData])
 
-    
+    const updateAllCharcters = () => setFetchNewData(!fetchNewData);
 
     return (
         <Context.Provider value={{
@@ -299,8 +311,9 @@ function ContextProvider({ children }) {
             hoveredAttribute, setHoveredAttribute,
             isChecked, setIsChecked,
             characterId, setCharacterId,
-            allCharacters,
-            racialBonus,
+            allCharacters, setAllCharacters,
+            updateAllCharcters,
+            racialBonus, modMath,
 
             attributeValue, setAttributeValue,
             attributeSort,
