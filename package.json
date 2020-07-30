@@ -12,7 +12,9 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "sass": "^1.26.10"
+    "react-tabulator": "^0.13.2",
+    "sass": "^1.26.10",
+    "tabulator-tables": "^4.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

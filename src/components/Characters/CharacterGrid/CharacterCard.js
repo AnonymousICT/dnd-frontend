@@ -10,7 +10,7 @@ export default function CharacterCard({character}) {
     }
 
     return (
-        <div className="character-card" onClick={handleRedirect}>
+        <div className={"character-card " + character.job.toLowerCase()} onClick={handleRedirect}>
             <h2>{character.name}</h2>
             <p>Level {character.level} {character.race} {character.job}</p>
         </div>

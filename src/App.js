@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Spells from './components/Spells'
+import Equipment from './components/Equipment'
 import Characters from './components/Characters'
 import CreateCharacter from './components/Characters/CreateCharacter/CreateCharacter'
 import EditCharacter from './components/Characters/EditCharacter/EditCharacter'
@@ -26,6 +27,9 @@ export default function App() {
                     </Route>
                     <Route path='/spells'>
                         <Spells />
+                    </Route>
+                    <Route path='/equipment'>
+                        <Equipment />
                     </Route>
                     <Route path='/characters'>
                         <Characters />

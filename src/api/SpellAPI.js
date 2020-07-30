@@ -7,9 +7,7 @@ export const fetchSpellData = async () => {
     //fetch the spell name and the url of each spell 
     try {
         const {data: {results}} = await axios.get(url)
-        return results.map((spell)=>{
-            return [spell.name, spell.url]
-        })
+        return results
     } catch (error) {
         return error
     }

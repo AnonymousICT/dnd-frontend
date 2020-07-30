@@ -21,7 +21,10 @@ export default function Navbar() {
                     <Link to='/spells'>Spell List</Link>
                 </li>
                 <li className='navigation-item'>
-                    <Link to='/characters'>Create a Character</Link>
+                    <Link to='/equipment'>Equipment</Link>
+                </li>
+                <li className='navigation-item'>
+                    <Link to='/characters'>Characters</Link>
                 </li>
                 <button onClick={logout}>Logout</button>
             </ul>

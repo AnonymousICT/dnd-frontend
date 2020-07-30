@@ -1,24 +1,32 @@
 import React,{useContext} from 'react'
 import {ResourceContext} from '../../context/ResourceContext'
+import { ReactTabulator } from 'react-tabulator'
 
 export default function AllSpells() {
-    const {allSpells, setSelectedSpell} = useContext(ResourceContext)
+    const {allSpells, setSelection} = useContext(ResourceContext)
+    const columns = [
+        { 
+            title: "Name", 
+            field: "name", 
+            width: 200 ,
+            cellClick:(e, cell)=>{
+            setSelection(cell._cell.row.data.url)} 
+        },
+    ]
+    const options = {
+        pagination:"local",
+        paginationSize: 20,
+    }
+    
     return (
         <div className='all-spells-container'>
-            <table className='spell-table'>
-                <thead>
-                    <tr>
-                        <th>Spells</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {allSpells.map((index)=>
-                        <tr key={index}>
-                            <td key={index} onClick={(e)=>setSelectedSpell(index[1])}>{index[0]}</td>
-                        </tr> 
-                    )}
-                </tbody>
-            </table>
+            <div className="table">
+                <ReactTabulator 
+                    data={allSpells}
+                    columns={columns}
+                    options={options}
+                />
+            </div>
         </div>
     )
 }

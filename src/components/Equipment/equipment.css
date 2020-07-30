@@ -1,0 +1,11 @@
+.equipment-filters {
+    display: flex;
+    flex-wrap: wrap;
+}
+.equipment-filters > button {
+    flex: 1;
+}
+
+.table {
+    width: 200px;
+}

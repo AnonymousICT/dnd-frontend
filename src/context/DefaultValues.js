@@ -66,6 +66,12 @@ export const defaultValues = {
             }
         ]
     },
+    equipmentCategory: [
+        {
+            name:"worthless metal",
+            url: "api/equipment/shield"
+        }
+    ],
     raceData: {
         index: "missing-no",
         name: "MissingNo",
