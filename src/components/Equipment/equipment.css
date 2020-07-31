@@ -1,6 +1,13 @@
+.equipment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .equipment-filters {
     display: flex;
     flex-wrap: wrap;
+    width: 80%;
 }
 .equipment-filters > button {
     flex: 1;
@@ -8,4 +15,10 @@
 
 .table {
     width: 200px;
+    justify-self: left;
+}
+
+
+.table-container {
+    display: flex;
 }

@@ -3,14 +3,14 @@ import {ResourceContext} from '../../context/ResourceContext'
 import { ReactTabulator } from 'react-tabulator'
 
 export default function AllSpells() {
-    const {allSpells, setSelection} = useContext(ResourceContext)
+    const {allSpells, setSpellSelection} = useContext(ResourceContext)
     const columns = [
         { 
             title: "Name", 
             field: "name", 
             width: 200 ,
             cellClick:(e, cell)=>{
-            setSelection(cell._cell.row.data.url)} 
+            setSpellSelection(cell._cell.row.data.url)} 
         },
     ]
     const options = {

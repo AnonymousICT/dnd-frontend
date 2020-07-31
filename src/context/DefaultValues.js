@@ -31,6 +31,27 @@ export const defaultValues = {
         concentration: false,
         casting_time: "50 actions"
     },
+    specificEquipment: {
+        name: "Birthday suit",
+        equipment_category: {
+            name: "Armor",
+            url: "/api/equipment-categories/armor",
+        },
+        armor_category: "Light",
+        armor_class: {
+            base: 10,
+            dex_bonus: true,
+            max_bonus: null,
+        },
+        str_minimum: 0,
+        stealth_disadvantage: false,
+        weight: 0,
+        cost: {
+            qurantity: 0,
+            unit: "gp"
+        },
+        url: "api/equipment/birthday_suit"
+    },
     classData: {
         index: "onion-knight",
         name: "Onion Knight",

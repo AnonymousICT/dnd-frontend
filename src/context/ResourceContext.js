@@ -5,7 +5,7 @@ import { fetchClassData, fetchSpecificClass,fetchClassLeveling } from '../api/Cl
 
 import { fetchRaceData,fetchSpecificRace } from '../api/RaceAPI'
 
-import { fetchEquipmentData, fetchEquipmentCategories, fetchEquipmentCategory } from "../api/EquipmentAPI"
+import { fetchEquipmentData, fetchEquipmentCategories, fetchEquipmentCategory, fetchSpecificEquipment } from "../api/EquipmentAPI"
 
 import { defaultValues } from './DefaultValues'
 import { Context } from './Context'
@@ -15,7 +15,8 @@ const ResourceContext = createContext()
 function ResourceContextProvider({ children }) {
     //the user's character class
     const {characterClass, characterRace} = useContext(Context)
-    const [selection, setSelection] = useState('')
+    const [spellSelection, setSpellSelection] = useState('')
+    const [equipmentSelection, setEquipmentSelection] = useState('')
     
     /* SPELL API CALLS*/
     const [allSpells, setAllSpells] = useState([])
@@ -30,10 +31,10 @@ function ResourceContextProvider({ children }) {
     
     useEffect(() => {
         const fetchedSpecificSpellData = async () => {
-            setSpecificSpell(await fetchSpecificSpell(selection))
+            setSpecificSpell(await fetchSpecificSpell(spellSelection))
         }
-        fetchedSpecificSpellData(selection)
-    }, [selection])
+        fetchedSpecificSpellData(spellSelection)
+    }, [spellSelection])
     
     /* CLASS API CALLS*/
     const [allClasses, setAllClasses] = useState([])
@@ -84,8 +85,12 @@ function ResourceContextProvider({ children }) {
     /* EQUIPMENT API CALLS*/
     const [allEquipment, setAllEquipment] = useState([])
     const [equipmentCategories, setEquipmentCategories] = useState([])
-    const [equipmentCategory, setEquipementCategory] = useState(defaultValues.equipmentCategory)
-    
+    const [equipmentCategory, setEquipmentCategory] = useState(defaultValues.equipmentCategory)
+
+    const [specificEquipmentSelection, setSpecificEquipmentSelection] = useState('')
+    const [specificEquipment, setSpecificEquipment] = useState(defaultValues.specificEquipment)
+
+
     useEffect(()=>{
         const fetchedAllEquipment = async () => {
             setAllEquipment(await fetchEquipmentData())
@@ -102,16 +107,24 @@ function ResourceContextProvider({ children }) {
 
     useEffect(()=>{
         const fetchedEquipmentCategory = async () => {
-            setEquipementCategory(await fetchEquipmentCategory(selection))
+            setEquipmentCategory(await fetchEquipmentCategory(equipmentSelection))
         }
-        fetchedEquipmentCategory(selection)
-    }, [selection])
+        fetchedEquipmentCategory(equipmentSelection)
+    }, [equipmentSelection])
+
+    useEffect(()=>{
+        const fetchedSpecificEquipment = async () => {
+            setSpecificEquipment(await fetchSpecificEquipment(specificEquipmentSelection))
+        }
+        fetchedSpecificEquipment(specificEquipmentSelection)
+    }, [specificEquipmentSelection])
 
         return (
             <ResourceContext.Provider value={{
                 allSpells, setAllSpells,
                 specificSpell, setSpecificSpell,
-                selection, setSelection,
+                equipmentSelection, setEquipmentSelection,
+                spellSelection, setSpellSelection,
                 allClasses, setAllClasses,
                 allRaces, setAllRaces,
                 classData, setClassData,
@@ -119,7 +132,9 @@ function ResourceContextProvider({ children }) {
                 raceData, setRaceData,
                 allEquipment,
                 equipmentCategories,
-                equipmentCategory 
+                equipmentCategory,
+                specificEquipment, setSpecificEquipment,
+                specificEquipmentSelection, setSpecificEquipmentSelection
             }}>
             {children}
         </ResourceContext.Provider>

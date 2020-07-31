@@ -37,3 +37,14 @@ export const fetchEquipmentCategory = async (selection) => {
         return error
     }
 }
+
+export const fetchSpecificEquipment = async(selection) => {
+    const url = `https://www.dnd5eapi.co${selection}`
+
+    try {
+        const {data} = await axios.get(url)
+        return data
+    } catch (error) {
+        return error
+    }
+}
