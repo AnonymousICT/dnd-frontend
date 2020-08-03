@@ -1,8 +1,10 @@
 import React ,{useContext} from 'react'
 import {ResourceContext} from '../../context/ResourceContext'
+import {Context} from '../../context/Context'
 
 export default function SpecificEquipment() {
     const {specificEquipment} = useContext(ResourceContext)
+    const {selectCharacter, characterItems, setCharacterItems} = useContext(Context)
 
     const {
         name, 
@@ -20,6 +22,11 @@ export default function SpecificEquipment() {
         weight, 
         cost, 
         desc, } = specificEquipment
+
+    const addToCharacter = () => {
+        setCharacterItems([...characterItems, specificEquipment])
+
+    }
 
     return (
         <div>
@@ -48,6 +55,8 @@ export default function SpecificEquipment() {
                     {!desc? null : desc.map((sentence, i) => <p key={i}>{sentence}</p>)}
                     <p>Cost: {cost.quantity} {cost.unit}</p>
                     <p>Weight: {weight}</p>
+
+                    {!selectCharacter ? null : <button onClick={addToCharacter}>Add to Character</button>}
                 </section>
             }
         </div>

@@ -25,6 +25,10 @@ function ContextProvider({ children }) {
     const [fetchNewData, setFetchNewData] = useState(false);
 
     const [AttributeData, setAttributeData] = useState([])
+    //for equipment
+    const [selectCharacter, setSelectCharacter] = useState('')
+    const [characterItems, setCharacterItems] = useState([])
+
 
     //fetch all user's characters
     useEffect(()=>{
@@ -53,6 +57,8 @@ function ContextProvider({ children }) {
             characterId, setCharacterId,
             allCharacters, setAllCharacters,
             updateAllCharacters,
+            selectCharacter, setSelectCharacter,
+            characterItems, setCharacterItems
         }}>
             {children}
         </Context.Provider>
