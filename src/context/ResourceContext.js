@@ -38,7 +38,6 @@ function ResourceContextProvider({ children }) {
     
     /* CLASS API CALLS*/
     const [allClasses, setAllClasses] = useState([])
-    const [allRaces, setAllRaces] = useState([])
     const [classData, setClassData] = useState(defaultValues.classData)
     const [classLevels, setClassLevels] = useState([])
     
@@ -65,6 +64,7 @@ function ResourceContextProvider({ children }) {
     }, [characterClass])
     
     /* RACE API CALLS*/
+    const [allRaces, setAllRaces] = useState([])
     const [raceData, setRaceData] = useState(defaultValues.raceData)
 
     useEffect(() => {

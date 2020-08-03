@@ -1,6 +1,6 @@
 import React from 'react'
 import AllEquipment from './AllEquipment' 
-import SelectCharacter from './SelectCharacter'
+import SelectCharacter from '../Characters/SelectCharacter'
 
 export default function Equipment() {
     return (

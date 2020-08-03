@@ -11,6 +11,7 @@ function ContextProvider({ children }) {
     const [userData, setUserData] = useState({})
     
     // user's choice state
+    const [currentCharacter, setCurrentCharacter] = useState(defaultValues.currentCharacter)
     const [characterName, setCharacterName] = useState('')
     const [characterLevel, setCharacterLevel] = useState(1)
     const [characterClass, setCharacterClass] = useState('')
@@ -20,7 +21,7 @@ function ContextProvider({ children }) {
 
     const [characterId, setCharacterId] = useState('')
     const [isChecked, setIsChecked] = useState(defaultValues.isChecked(defaultValues.classData))
-
+ 
     const [allCharacters, setAllCharacters] = useState([])
     const [fetchNewData, setFetchNewData] = useState(false);
 
@@ -58,7 +59,8 @@ function ContextProvider({ children }) {
             allCharacters, setAllCharacters,
             updateAllCharacters,
             selectCharacter, setSelectCharacter,
-            characterItems, setCharacterItems
+            characterItems, setCharacterItems,
+            currentCharacter, setCurrentCharacter
         }}>
             {children}
         </Context.Provider>

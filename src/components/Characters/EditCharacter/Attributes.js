@@ -1,12 +1,16 @@
 import React,{useEffect, useContext } from 'react'
 import {AttributeContext} from '../../../context/AttributeContext'
+import {Context} from '../../../context/Context'
+
 import axios from 'axios'
 
 export default function Attributes({
-    character,
     filteredLevel,
     }) {
     
+    const {currentCharacter} = useContext(Context)
+
+
     const {
         modMath, 
         allAttributes, 
@@ -26,20 +30,20 @@ export default function Attributes({
             wisdom: attributeValue["WIS"],
             charisma: attributeValue["CHA"],
         };
-        await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${character._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+        await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
     }
 
     useEffect(()=>{
         setAttributeValue({
-            STR: character.strength,
-            DEX: character.dexterity, 
-            CON: character.constitution,
-            INT: character.intelligence,
-            WIS: character.wisdom,
-            CHA: character.charisma
+            STR: currentCharacter.strength,
+            DEX: currentCharacter.dexterity, 
+            CON: currentCharacter.constitution,
+            INT: currentCharacter.intelligence,
+            WIS: currentCharacter.wisdom,
+            CHA: currentCharacter.charisma
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[character])
+    },[currentCharacter])
 
     return (
         <div className="container">

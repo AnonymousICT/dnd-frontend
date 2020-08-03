@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import {Context} from '../../../context/Context'
 import Axios from 'axios'
 
 import BasicInfo from './BasicInfo'
 import Attributes from './Attributes'
 import Skills from './Skills'
 import BattleStats from './BattleStats'
+import AllItems from './AllItems'
 
 export default function EditCharacter() {
-    const [character, setCharacter] = useState({})
+    const {currentCharacter, setCurrentCharacter} = useContext(Context)
 
     const [userClass, setUserClass] = useState([])
     const [classLevels, setClasslevels] = useState([])
@@ -16,16 +18,17 @@ export default function EditCharacter() {
     useEffect(()=>{
         const fetchCharacter = async () => {
             const {data} = await Axios.get(`https://dnd-backend-node.herokuapp.com/characters/${characterId}`, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
-            setCharacter(data)
+            setCurrentCharacter(data)
         }
         fetchCharacter()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [characterId])
     
-    const {job, languageChoice, traitChoice,} = character
+    const {job, languageChoice, traitChoice,} = currentCharacter
     
     useEffect(()=>{
         const usersClassData = async () => {
-            if(job) {
+            if(job.toLowerCase() !== "stand user") {
                 const url = `https://www.dnd5eapi.co/api/classes/${job.toLowerCase()}`
                 const {data}=await Axios.get(url)
                 setUserClass(data)
@@ -36,7 +39,7 @@ export default function EditCharacter() {
 
     useEffect(()=>{
         const usersLevelData = async () => {
-            if(job) {
+            if(job.toLowerCase() !== "stand user") {
                 const url = `https://www.dnd5eapi.co/api/classes/${job.toLowerCase()}/levels`
                 const {data}=await Axios.get(url)
                 setClasslevels(data)
@@ -46,25 +49,22 @@ export default function EditCharacter() {
     },[job])
 
     const filteredLevel = classLevels.filter(level => {
-        return level.level === character.level
+        return level.level === currentCharacter.level
     })
 
     return (
         <div className="character-container">
-            <BasicInfo character={character}/>
-            <Attributes 
-                character={character} 
-                filteredLevel={filteredLevel}
-            />
+            <BasicInfo />
+            <Attributes filteredLevel={filteredLevel}/>
             <Skills 
-                character={character}
                 userClass={userClass}
                 filteredLevel={filteredLevel}
             />
             <BattleStats 
-                character={character}
                 userClass={userClass}
+                filteredLevel={filteredLevel}
             />
+            <AllItems />
                 {!languageChoice ? null : languageChoice}
                 {!traitChoice ? null: traitChoice}
         </div>

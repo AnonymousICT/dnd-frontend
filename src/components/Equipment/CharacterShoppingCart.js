@@ -4,17 +4,20 @@ import {Context} from '../../context/Context'
 import axios from 'axios'
 
 export default function CharacterShoppingCart() {
+
     const history = useHistory();
-    const {characterItems, selectCharacter, setCharacterItems} = useContext(Context)
+    const {characterItems, currentCharacter, selectCharacter, setCharacterItems} = useContext(Context)
+
+    console.log(currentCharacter)
 
     const removeItem = (index) => {
-        setCharacterItems(characterItems.filter((item, i) => index !== i))
+        setCharacterItems(...characterItems, characterItems.filter((item, i) => index !== i))
     }
 
     const submitToDb = async (e) => {
         try {
             const updateCharacterItem = {
-                items: characterItems
+                items: [...currentCharacter.items, ...characterItems]
             }
             await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${selectCharacter}`, updateCharacterItem, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
             history.push(`/character/edit/${selectCharacter}?itemsAdded=true`)
@@ -26,7 +29,6 @@ export default function CharacterShoppingCart() {
 
     return (
         <div className="character-cart">
-            This will display the items added to the specific character
             <ul>
                 {characterItems.length === 0 ?  "Cart is empty" : characterItems.map((item, i) => 
                     <div key={i}>

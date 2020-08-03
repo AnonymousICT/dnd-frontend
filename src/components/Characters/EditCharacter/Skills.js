@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react'
 import {AttributeContext} from '../../../context/AttributeContext'
+import {Context} from '../../../context/Context'
 
 const saveArray = [
     "STR",
@@ -32,22 +33,22 @@ const skillArray = [
 ]
 
 export default function Skills({
-    character, 
     userClass:{saving_throws}, 
     filteredLevel}) {
         const {attributeValue, modMath, setAttributeValue} = useContext(AttributeContext)
+        const {currentCharacter} = useContext(Context)
         
         useEffect(()=>{
             setAttributeValue({
-                STR: character.strength,
-                DEX: character.dexterity, 
-                CON: character.constitution,
-                INT: character.intelligence,
-                WIS: character.wisdom,
-                CHA: character.charisma
+                STR: currentCharacter.strength,
+                DEX: currentCharacter.dexterity, 
+                CON: currentCharacter.constitution,
+                INT: currentCharacter.intelligence,
+                WIS: currentCharacter.wisdom,
+                CHA: currentCharacter.charisma
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        },[character])
+        },[currentCharacter])
 
     const skillModifiers = {
         Athletics: "STR",
@@ -100,7 +101,7 @@ export default function Skills({
             <div className="save-container">
                 {displayCheckboxes(saveArray, savingThrows, null)}
                 <h2>Skills</h2>
-                {displayCheckboxes(skillArray, (character.profChoice || []).map(choice => choice.replace("Skill: ", "")), skillModifiers)}
+                {displayCheckboxes(skillArray, (currentCharacter.profChoice || []).map(choice => choice.replace("Skill: ", "")), skillModifiers)}
             </div>
         </div>
     )

@@ -1,4 +1,19 @@
 export const defaultValues = {
+    currentCharacter: {
+        name: "Jojo",
+        level: "6",
+        race: "human",
+        job: "Stand User",
+        strength: 10,
+        dexterity: 10,
+        constitution:10,
+        intellgence:10,
+        wisdom: 10,
+        charisma: 10,
+        items:[],
+        profChoice: []
+
+    },
     isChecked: (classDataParam) => classDataParam
         .proficiency_choices.map((choiceObj, choiceIndex) =>
             choiceObj.from.map((skill, i) => "proficiencies" + choiceIndex + "-" + i))
