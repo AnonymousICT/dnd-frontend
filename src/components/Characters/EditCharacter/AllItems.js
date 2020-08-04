@@ -1,19 +1,36 @@
-import React, {useContext} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Context} from '../../../context/Context'
 import axios from 'axios'
 
 export default function AllItems() {
+    const [isEquipmentChecked, setIsEquipmentChecked] = useState({})
     const { currentCharacter, setCurrentCharacter } = useContext(Context)
     
-    const {items} = currentCharacter
-    const handleEquipped = (item) => {
-        item.isEquipped = !item.isEquipped;
-        let allItems = currentCharacter.items.map((equip) => equip._id === item._id? item : equip);
-        currentCharacter.items = allItems;
+    useEffect(()=>{
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        if(currentCharacter.items.length > 0) {
+            const checkboxes = currentCharacter.items.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.uid]: item.isEquipped
+                }
+            }, {});
+            console.log("checkboxes", checkboxes);
+            setIsEquipmentChecked(checkboxes);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[currentCharacter])
+
+    console.log(currentCharacter)
+
+    const handleEquipped = (e, item) => {
+        item.isEquipped = e.target.checked;
+        setIsEquipmentChecked({...isEquipmentChecked, [item.uid]: e.target.checked})   
+        let characterItems = currentCharacter.items.map((equipment) => equipment.uid === item.uid ? item : equipment);
+        setCurrentCharacter({...currentCharacter, items: characterItems});
         console.log("current character", currentCharacter);
-        setCurrentCharacter(currentCharacter);
         //Save the character
-        submitToDb(allItems)
+        submitToDb(characterItems)
     }
 
     const submitToDb = async (items) => {
@@ -27,12 +44,14 @@ export default function AllItems() {
         }
     } 
 
-    console.log(currentCharacter, "outside function")
     const renderEquipped = (item, key) => {
+        if(!item) {
+            return <li>Missing Item</li>
+        }
         if(item.equipment_category.name === "Weapon" || item.equipment_category.name === "Armor") {
             return (
                 <li key={key} title="check to equip">
-                    <input type="checkbox" value={item.isEquipped || false} onChange={()=>handleEquipped(item)} />
+                    <input type="checkbox" value={item.name} checked={isEquipmentChecked[item.uid] || false} onChange={(e)=>handleEquipped(e, item)} />
                     <label>{item.name}</label>
                 </li>
             )
@@ -42,9 +61,9 @@ export default function AllItems() {
     }
 
     return (
-        !currentCharacter.items ? null : 
+        !currentCharacter.items ? <ul><li>Loading...</li></ul> : 
             <ul>
-                {items.map((item, i) => item ? renderEquipped(item, i): "Loading")}
+                {currentCharacter.items.map((item, i) => renderEquipped(item, i))}
             </ul>
     )
 }

@@ -1,6 +1,8 @@
 import React ,{useContext} from 'react'
 import {ResourceContext} from '../../context/ResourceContext'
 import {Context} from '../../context/Context'
+import uuid from 'react-uuid'
+
 
 export default function SpecificEquipment() {
     const {specificEquipment} = useContext(ResourceContext)
@@ -23,9 +25,15 @@ export default function SpecificEquipment() {
         cost, 
         desc, } = specificEquipment
 
-    const addToCharacter = () => {
-        setCharacterItems([...characterItems, specificEquipment])
 
+    const addToCharacter = () => {
+        setCharacterItems(
+            [
+                ...characterItems, 
+                // this makes a shallow copy of a different item
+                {...specificEquipment, uid: uuid()}
+            ]
+        )
     }
 
     return (
@@ -56,7 +64,7 @@ export default function SpecificEquipment() {
                     <p>Cost: {cost.quantity} {cost.unit}</p>
                     <p>Weight: {weight}</p>
 
-                    {!selectCharacter ? null : <button onClick={addToCharacter}>Add to Character</button>}
+                    {!selectCharacter ? null : <button onClick={addToCharacter} data-key={uuid()}>Add to Character</button>}
                 </section>
             }
         </div>
