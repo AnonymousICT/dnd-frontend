@@ -7,6 +7,7 @@ export default function BattleStats({userClass, filteredLevel}) {
     const {modMath} = useContext(AttributeContext)
     const {currentCharacter} = useContext(Context)
     const {dexterity, constitution, level, wisdom, job, race} = currentCharacter;
+
     const calculateInitialAC = () => {
         if(job === "Monk") {
             return modMath(dexterity)+modMath(wisdom)+10
@@ -17,6 +18,27 @@ export default function BattleStats({userClass, filteredLevel}) {
         }
     }
 
+    const calculateEquippedAC = (character) => {
+        let equippedArmor = character.items.filter(item => item.isEquipped)
+
+        let armorStats = (equippedArmor[0] || []).armor_class
+        if(character.items.length === 0 || !equippedArmor) {
+            return calculateInitialAC()
+        } else if (!armorStats) {
+            return calculateInitialAC()
+        } else if(armorStats.dex_bonus && armorStats.max_bonus=== null) {
+            return armorStats.base + modMath(dexterity)
+        } else if (armorStats.dex_bonus && armorStats.max_bonus > 0) {
+            if(modMath(dexterity) > armorStats.max_bonus) {
+                return armorStats.base + armorStats.max_bonus
+            } else {
+                return armorStats.base + modMath(dexterity)
+            }
+        } else {
+            return armorStats.base
+        }
+    }
+ 
     const averagetHitDie = (hitDie) => {
         return (hitDie/ 2) + 1
     }
@@ -33,7 +55,6 @@ export default function BattleStats({userClass, filteredLevel}) {
         } else {
             speed = 30
         }
-
         
         if(job === "Monk") {
             monkBonus = filteredLevel[0] ? filteredLevel[0].class_specific.unarmored_movement: 0
@@ -46,7 +67,7 @@ export default function BattleStats({userClass, filteredLevel}) {
     //deathsaves
     return (
         <div className="battle-stats-container">
-            <p>Armor class: {calculateInitialAC()}</p>
+            <p>Armor class: {calculateEquippedAC(currentCharacter)}</p>
             <p>Initiative: {modMath(dexterity)}</p>
             <p>Speed: {calculateSpeed(race , job)} feet</p>
 

@@ -15,13 +15,10 @@ export default function AllItems() {
                     [item.uid]: item.isEquipped
                 }
             }, {});
-            console.log("checkboxes", checkboxes);
             setIsEquipmentChecked(checkboxes);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[currentCharacter])
-
-    console.log(currentCharacter)
 
     const handleEquipped = (e, item) => {
         item.isEquipped = e.target.checked;
@@ -48,7 +45,7 @@ export default function AllItems() {
         if(!item) {
             return <li>Missing Item</li>
         }
-        if(item.equipment_category.name === "Weapon" || item.equipment_category.name === "Armor") {
+        if(item.equipment_category.name === "Armor") {
             return (
                 <li key={key} title="check to equip">
                     <input type="checkbox" value={item.name} checked={isEquipmentChecked[item.uid] || false} onChange={(e)=>handleEquipped(e, item)} />

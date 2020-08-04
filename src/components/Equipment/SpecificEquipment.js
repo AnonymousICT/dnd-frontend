@@ -27,14 +27,7 @@ export default function SpecificEquipment() {
 
 
     const addToCharacter = () => {
-        setCharacterItems(
-            [
-                ...characterItems, 
-                // this makes a shallow copy of a different item
-                {...specificEquipment, uid: uuid()}
-            ]
-        )
-    }
+        setCharacterItems([...characterItems,  {...specificEquipment, uid: uuid()}])}
 
     return (
         <div>
