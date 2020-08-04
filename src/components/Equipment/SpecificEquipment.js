@@ -12,6 +12,7 @@ export default function SpecificEquipment() {
         name, 
         armor_category, 
         armor_class,
+        str_minimum,
         stealth_disadvantage, 
         category_range,
         damage,
@@ -25,6 +26,7 @@ export default function SpecificEquipment() {
         cost, 
         desc, } = specificEquipment
 
+        console.log(specificEquipment)
 
     const addToCharacter = () => {
         setCharacterItems([...characterItems,  {...specificEquipment, uid: uuid()}])}
@@ -41,6 +43,8 @@ export default function SpecificEquipment() {
 
 
                     {!armor_class ? null : <p>Armor Class: {armor_class.base} {armor_class.max_bonus ? `- Max Dex Bonus: ${armor_class.max_bonus}` : null}</p>}
+
+            {str_minimum === 0 ? null : <p>Strength Minimum to use: {str_minimum}</p>}
 
                     <p>{stealth_disadvantage ? "Stealth: Disadvantage" : null}</p>
                     {!damage ? null : <p>{damage.damage_dice} {damage.damage_type.name}</p>}

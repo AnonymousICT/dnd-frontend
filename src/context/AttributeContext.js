@@ -1,12 +1,15 @@
 import React, { useState, useEffect, createContext, useContext } from 'react'
 import {fetchAbilityScores, fetchAbilityScoreDesc} from '../api/AbilityScoreAPI'
+import axios from 'axios'
 import {defaultValues} from './DefaultValues'
 import {ResourceContext} from './ResourceContext'
+import {Context} from './Context'
 
 const AttributeContext = createContext()
 
 function AttributeContextProvider({children}) {
     const {raceData} = useContext(ResourceContext)
+    const {currentCharacter, setCurrentCharacter} = useContext(Context)
 
     const [allAttributes, setAttributes] = useState(defaultValues.allAttributes)
     const [hoveredAttribute, setHoveredAttribute] = useState('')
@@ -31,10 +34,24 @@ function AttributeContextProvider({children}) {
     }
     const sortFunction = (a, b) => attributeSort[a[0]].sortOrder - attributeSort[b[0]].sortOrder
 
-    const handleAttributeValueChange = (e) => {
-        setAttributeValue({ ...attributeValue, [e.target.name]: +e.target.value });
-    }
+    const handleAttributeValueChange = async (attribute) => {
+        console.log("attribute", attribute);
+        const attributes = { ...attributeValue, ...attribute }
+        setAttributeValue(attributes);
+
+        const updateCharacter = {
+            strength: attributes["STR"],
+            dexterity: attributes["DEX"],
+            constitution: attributes["CON"],
+            intelligence: attributes["INT"],
+            wisdom: attributes["WIS"],
+            charisma: attributes["CHA"],
+        };
         
+        await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+        setCurrentCharacter({...currentCharacter, ...updateCharacter});
+    }
+
     const modMath = (score) => {
         return Math.round((score - 1) / 2 - 4.9)
      } 

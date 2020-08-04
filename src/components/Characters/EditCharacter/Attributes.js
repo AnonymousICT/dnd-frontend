@@ -2,7 +2,6 @@ import React,{useEffect, useContext } from 'react'
 import {AttributeContext} from '../../../context/AttributeContext'
 import {Context} from '../../../context/Context'
 
-import axios from 'axios'
 
 export default function Attributes({
     filteredLevel,
@@ -21,17 +20,6 @@ export default function Attributes({
     
     const getAttributeValue = (attributeName) => attributeValue[attributeName];
 
-    const handleNewAttributes = async (e) =>{
-        const updateCharacter = {
-            strength: attributeValue["STR"],
-            dexterity: attributeValue["DEX"],
-            constitution: attributeValue["CON"],
-            intelligence: attributeValue["INT"],
-            wisdom: attributeValue["WIS"],
-            charisma: attributeValue["CHA"],
-        };
-        await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
-    }
 
     useEffect(()=>{
         setAttributeValue({
@@ -60,13 +48,13 @@ export default function Attributes({
                             max="20"
                             name={attribute[0]}
                             value={attributeValue[attribute[0]] || 10}
-                            onChange={handleAttributeValueChange}
+                            onChange={(e) => handleAttributeValueChange({[e.target.name]: +e.target.value})}
                         />
                         <label>{`${attribute[0]} Mod`} {modMath(getAttributeValue(attribute[0]))}</label>
                     </div>
                 )
             })}
-            <button onClick={handleNewAttributes}>Submit</button>
         </div>
     )
 }
+

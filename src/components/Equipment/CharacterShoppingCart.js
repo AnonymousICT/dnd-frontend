@@ -8,8 +8,6 @@ export default function CharacterShoppingCart() {
     const history = useHistory();
     const {characterItems, currentCharacter, selectCharacter, setCharacterItems} = useContext(Context)
 
-    console.log(currentCharacter)
-
     const removeItem = (index) => {
         setCharacterItems(...characterItems, characterItems.filter((item, i) => index !== i))
     }

@@ -12,22 +12,50 @@ export default function AllItems() {
             const checkboxes = currentCharacter.items.reduce((obj, item) => {
                 return {
                     ...obj,
-                    [item.uid]: item.isEquipped
+                    [item.uid]: checkItemRequirements(item, currentCharacter) ? item.isEquipped : false
                 }
             }, {});
             setIsEquipmentChecked(checkboxes);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[currentCharacter])
+    },[currentCharacter]);
+
+    useEffect(()=>{
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        if(currentCharacter.items.length > 0) {
+            const checkboxes = currentCharacter.items.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.uid]: checkItemRequirements(item, currentCharacter) ? item.isEquipped : false
+                }
+            }, {});
+            setIsEquipmentChecked(checkboxes);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[currentCharacter.strength]);
+
+    console.log(currentCharacter)
+
+    const checkItemRequirements = (item, character) => {
+        if(character.strength >= item.str_minimum) {
+            return true;
+        } else {
+            item.isEquipped = false;
+            return false;
+        }
+    }
 
     const handleEquipped = (e, item) => {
-        item.isEquipped = e.target.checked;
-        setIsEquipmentChecked({...isEquipmentChecked, [item.uid]: e.target.checked})   
-        let characterItems = currentCharacter.items.map((equipment) => equipment.uid === item.uid ? item : equipment);
-        setCurrentCharacter({...currentCharacter, items: characterItems});
-        console.log("current character", currentCharacter);
-        //Save the character
-        submitToDb(characterItems)
+        if(checkItemRequirements(item, currentCharacter)) {
+            item.isEquipped = e.target.checked;
+            setIsEquipmentChecked({...isEquipmentChecked, [item.uid]: e.target.checked})   
+            let characterItems = currentCharacter.items.map((equipment) => equipment.uid === item.uid ? item : equipment);
+            setCurrentCharacter({...currentCharacter, items: characterItems});
+            //Save the character
+            submitToDb(characterItems)
+        } else {
+            e.preventDefault();
+        }
     }
 
     const submitToDb = async (items) => {
