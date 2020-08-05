@@ -35,7 +35,6 @@ function AttributeContextProvider({children}) {
     const sortFunction = (a, b) => attributeSort[a[0]].sortOrder - attributeSort[b[0]].sortOrder
 
     const handleAttributeValueChange = async (attribute) => {
-        console.log("attribute", attribute);
         const attributes = { ...attributeValue, ...attribute }
         setAttributeValue(attributes);
 

@@ -29,6 +29,8 @@ function ContextProvider({ children }) {
     //for equipment
     const [selectCharacter, setSelectCharacter] = useState('')
     const [characterItems, setCharacterItems] = useState([])
+    //for spells
+    const [characterSpells, setCharacterSpells] = useState([])
 
 
     //fetch all user's characters
@@ -60,7 +62,8 @@ function ContextProvider({ children }) {
             updateAllCharacters,
             selectCharacter, setSelectCharacter,
             characterItems, setCharacterItems,
-            currentCharacter, setCurrentCharacter
+            currentCharacter, setCurrentCharacter,
+            characterSpells, setCharacterSpells
         }}>
             {children}
         </Context.Provider>

@@ -2,16 +2,16 @@ import React from 'react'
 
 import AllSpells from './AllSpells'
 import SpecificSpell from './SpecificSpell'
-import SelectCharacter from '../Characters/SelectCharacter'
-
-
+import AddToSpellbook from './AddToSpellbook'
 import './spells.css'
+import SelectSpellcaster from './SelectSpellcaster'
 
 
 export default function Spells() {
     return (
         <div className='spells'>
-            <SelectCharacter />
+            <SelectSpellcaster />
+            <AddToSpellbook />
             <AllSpells  />
             <SpecificSpell />
         </div>

@@ -7,7 +7,19 @@ export const fetchSpellData = async () => {
     //fetch the spell name and the url of each spell 
     try {
         const {data: {results}} = await axios.get(url)
-        return results
+        return results;
+    } catch (error) {
+        return error
+    }
+}
+
+export const fetchAllSpecificSpellData = async () => {
+    const url = `${api_url}/spells/`
+    try {
+        const {data: {results}} = await axios.get(url)
+        // don't do this
+        const allSpells = Promise.all(results.map((spell) => fetchSpecificSpell(spell.url)))
+        return allSpells;
     } catch (error) {
         return error
     }

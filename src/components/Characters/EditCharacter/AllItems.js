@@ -34,8 +34,6 @@ export default function AllItems() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[currentCharacter.strength]);
 
-    console.log(currentCharacter)
-
     const checkItemRequirements = (item, character) => {
         if(character.strength >= item.str_minimum) {
             return true;

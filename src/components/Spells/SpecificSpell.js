@@ -1,8 +1,9 @@
 import React, {useContext} from 'react'
 import {ResourceContext} from '../../context/ResourceContext'
-
+import {Context} from '../../context/Context'
 
 export default function SpecificSpell() {
+    const {selectCharacter, characterSpells, setCharacterSpells} = useContext(Context)
     const {specificSpell} = useContext(ResourceContext)
 
     const {
@@ -21,6 +22,10 @@ export default function SpecificSpell() {
         casting_time
     } = specificSpell
 
+    const addToCharacter = () => {
+        setCharacterSpells([...characterSpells,  {...specificSpell}])}
+
+
     return (
         <div className='specific-spell-container'>
             {!name ? null : 
@@ -34,7 +39,7 @@ export default function SpecificSpell() {
                 <p>Classes: {classes.map(index => index.name).join(', ')}</p>
                 <p>Description: {desc}</p>
                 <p>{higher_level}</p>
-
+                {!selectCharacter ? null : <button onClick={addToCharacter}>Add to Character</button>}
             </section>}
         </div>
     )

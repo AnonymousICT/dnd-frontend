@@ -26,8 +26,6 @@ export default function SpecificEquipment() {
         cost, 
         desc, } = specificEquipment
 
-        console.log(specificEquipment)
-
     const addToCharacter = () => {
         setCharacterItems([...characterItems,  {...specificEquipment, uid: uuid()}])}
 

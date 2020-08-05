@@ -9,7 +9,7 @@ export default function CharacterShoppingCart() {
     const {characterItems, currentCharacter, selectCharacter, setCharacterItems} = useContext(Context)
 
     const removeItem = (index) => {
-        setCharacterItems(...characterItems, characterItems.filter((item, i) => index !== i))
+        setCharacterItems([...characterItems.filter((item, i) => index !== i)])
     }
 
     const submitToDb = async (e) => {
@@ -24,16 +24,21 @@ export default function CharacterShoppingCart() {
             console.error(err)
         }
     } 
+    
+    const renderItem = () => {
+        console.log(characterItems);
+        return characterItems.map((item, i) => 
+            <div key={i}>
+                <li key={i}>{item.name}</li>
+                <button onClick={()=>removeItem(i)}>X</button>
+            </div>
+        )
+    }
 
     return (
         <div className="character-cart">
             <ul>
-                {characterItems.length === 0 ?  "Cart is empty" : characterItems.map((item, i) => 
-                    <div key={i}>
-                        <li key={i}>{item.name}</li>
-                        <button onClick={()=>removeItem(i)}>X</button>
-                    </div>
-                )}
+                {characterItems.length === 0 ?  "Cart is empty" : renderItem()}
             </ul>
 
             <button onClick={submitToDb}>Finalize selection</button>

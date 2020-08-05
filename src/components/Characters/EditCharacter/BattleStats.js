@@ -6,7 +6,7 @@ import {Context} from '../../../context/Context'
 export default function BattleStats({userClass, filteredLevel}) {
     const {modMath} = useContext(AttributeContext)
     const {currentCharacter} = useContext(Context)
-    const {dexterity, constitution, level, wisdom, job, race} = currentCharacter;
+    const {dexterity, constitution, level, wisdom, job, race, currentHP} = currentCharacter;
 
     const calculateInitialAC = () => {
         switch(job.toLowerCase()) {
@@ -44,8 +44,8 @@ export default function BattleStats({userClass, filteredLevel}) {
         return (hitDie/ 2) + 1
     }
 
-    const calculateHP = () => {
-        return (averagetHitDie(userClass.hit_die) + modMath(constitution)) * level 
+    const calculateMaxHP = (character) => {
+        return (averagetHitDie(userClass.hit_die) + modMath(character.constitution)) * level 
     }
 
     const calculateSpeed = (race, job) => {
@@ -58,6 +58,7 @@ export default function BattleStats({userClass, filteredLevel}) {
     }
 
     // WORK ON CURRENT HP
+    
     return (
         <div className="battle-stats-container">
             <div>
@@ -66,8 +67,11 @@ export default function BattleStats({userClass, filteredLevel}) {
                 <p>Speed: {calculateSpeed(race , job)} feet</p>
             </div>
             <div>
-                <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">Max Hit Points: { calculateHP() }</p>
-                <div>Current hit points: </div>
+                <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">Max Hit Points: { calculateMaxHP(currentCharacter) }</p>
+                <div>
+                    <label>Current hit points: </label>
+                     {currentHP} /{calculateMaxHP(currentCharacter)}
+                </div>
             </div>
             <p>Hit Dice:  1d{userClass.hit_die}</p>
 
