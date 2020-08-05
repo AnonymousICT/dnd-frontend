@@ -12,6 +12,19 @@ export default function AddToSpellbook() {
         setCharacterSpells([...characterSpells.filter((spell, i) => index !== i)])
     }
 
+    console.log(selectCharacter)
+    const submitSpellsToDb = async (e) => {
+        try {
+            const updateCharacterSpells = {
+                spells: [...currentCharacter.spells, ...characterSpells]
+            }
+            await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${selectCharacter}`, updateCharacterSpells, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+            history.push(`/character/edit/${selectCharacter}?spellsAdded=true`)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <div className="character-spellbook">
             <ul>
@@ -22,6 +35,7 @@ export default function AddToSpellbook() {
                     </div>
                 )}
             </ul>
+            <button onClick={submitSpellsToDb}>Add to spellbook</button>
         </div>
     )
 }

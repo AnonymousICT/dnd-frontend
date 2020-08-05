@@ -14,7 +14,7 @@ export default function EditCharacter() {
     const [userClass, setUserClass] = useState([])
     const [classLevels, setClasslevels] = useState([])
     const characterId = (window.location.href.split('/').pop()) || window.location.href.split('/').pop().pop()
-    
+
     useEffect(()=>{
         const fetchCharacter = async () => {
             const {data} = await Axios.get(`https://dnd-backend-node.herokuapp.com/characters/${characterId}`, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
@@ -51,6 +51,7 @@ export default function EditCharacter() {
     const filteredLevel = classLevels.filter(level => {
         return level.level === currentCharacter.level
     })
+    console.log(currentCharacter)
 
     return (
         <div className="character-container">

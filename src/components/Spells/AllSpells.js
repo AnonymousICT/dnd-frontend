@@ -10,13 +10,12 @@ import {fetchAllSpecificSpellData} from '../../api/SpellAPI'
 export default function AllSpells() {
     const [allSpellModels, setAllSpellModels] = useState([])
     const [spellMasterList, setSpellMasterList] = useState([])
-    const { selectCharacter, currentCharacter, setCurrentCharacter, allCharacters } = useContext(Context)
+    const { selectCharacter, allCharacters } = useContext(Context)
     const {allSpells, setSpellSelection} = useContext(ResourceContext)
 
     useEffect(() => {
         const fireAndForget = async () => {
             const apiAllSpells = await fetchAllSpecificSpellData()
-            console.log(apiAllSpells);
             setSpellMasterList([...apiAllSpells])
         }
         fireAndForget();
@@ -26,7 +25,7 @@ export default function AllSpells() {
     useEffect(() => {
         let character = allCharacters.find((char) => char._id === selectCharacter)
         if(spellMasterList.length && character) {
-            setAllSpellModels([...spellMasterList.filter((spell) => { console.log(spell); return spell.classes.find((job) => job.name  === character.job)} )])
+            setAllSpellModels([...spellMasterList.filter((spell) => {return spell.classes.find((job) => job.name  === character.job)} )])
         }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,8 +44,6 @@ export default function AllSpells() {
         pagination:"local",
         paginationSize: 20,
     }
-    console.log(allSpellModels);
-    console.log(currentCharacter)
 
     return (
         <div className='all-spells-container'>

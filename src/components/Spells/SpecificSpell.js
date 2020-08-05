@@ -23,8 +23,11 @@ export default function SpecificSpell() {
     } = specificSpell
 
     const addToCharacter = () => {
-        setCharacterSpells([...characterSpells,  {...specificSpell}])}
-
+        // if the current character already has the spell don't add it
+        //get all of the current character's spells
+        //compare it to the specific spell
+        setCharacterSpells([...characterSpells,  {...specificSpell}])
+    }
 
     return (
         <div className='specific-spell-container'>
