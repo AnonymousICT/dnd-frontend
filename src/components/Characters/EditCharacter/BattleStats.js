@@ -1,12 +1,20 @@
-import React,{ useContext } from 'react'
+import React,{useState, useEffect, useContext } from 'react'
 import {AttributeContext} from '../../../context/AttributeContext'
 import {Context} from '../../../context/Context'
+import axios from 'axios'
+import DebounceInput from 'react-debounce-input'
 
 
 export default function BattleStats({userClass, filteredLevel}) {
+    const [currentHitPoints, setCurrentHitPoints] = useState(0)
     const {modMath} = useContext(AttributeContext)
-    const {currentCharacter} = useContext(Context)
-    const {dexterity, constitution, level, wisdom, job, race, currentHP} = currentCharacter;
+    const {currentCharacter, setCurrentCharacter} = useContext(Context)
+    const {dexterity, constitution, level, wisdom, job, race} = currentCharacter;
+    let {currentHP} = currentCharacter;
+
+    useEffect(()=>{
+        setCurrentHitPoints(currentHP)
+    },[currentHP])
 
     const calculateInitialAC = () => {
         switch(job.toLowerCase()) {
@@ -57,8 +65,23 @@ export default function BattleStats({userClass, filteredLevel}) {
         return speed + (monkBonus || 0)
     }
 
-    // WORK ON CURRENT HP
+    const handleCurrentHpChange = (e) => {
+        let hpValue = +e.target.value;
+        setCurrentCharacter({...currentCharacter, currentHP: hpValue })
+        submitToDb(hpValue);
+    }
     
+    const submitToDb = async (hp) => {
+        try {
+            const updateCharacterCurrentHP = {
+                currentHP: hp
+            }
+            await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}`, updateCharacterCurrentHP, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+        } catch (err) {
+            console.error(err)
+        }
+    } 
+
     return (
         <div className="battle-stats-container">
             <div>
@@ -70,7 +93,12 @@ export default function BattleStats({userClass, filteredLevel}) {
                 <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">Max Hit Points: { calculateMaxHP(currentCharacter) }</p>
                 <div>
                     <label>Current hit points: </label>
-                     {currentHP} /{calculateMaxHP(currentCharacter)}
+                    <DebounceInput
+                        type="number"
+                        max={calculateMaxHP(currentCharacter) || 0}
+                        onChange={handleCurrentHpChange}
+                        placeholder="Current Hp"
+                        value={currentHitPoints || 0} />/{calculateMaxHP(currentCharacter)}
                 </div>
             </div>
             <p>Hit Dice:  1d{userClass.hit_die}</p>
