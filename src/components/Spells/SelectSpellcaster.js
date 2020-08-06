@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import { Context } from '../../context/Context'
 
 export default function SelectSpellCaster() {
-    const { allCharacters, selectCharacter, setSelectCharacter,  setCurrentCharacter} = useContext(Context)
+    const { allCharacters, selectCharacter, setSelectCharacter,  setCurrentCharacter, nonSpellCaster } = useContext(Context)
 
     const handleSelection = (e) => {
         setSelectCharacter(e.target.value)
@@ -15,10 +15,7 @@ export default function SelectSpellCaster() {
     },[selectCharacter])
 
     let spellcasters = allCharacters.filter(character => 
-        character.job !== "Barbarian" 
-        && character.job !== "Fighter"
-        && character.job !== "Monk"
-        && character.job !== "Rogue"
+       !nonSpellCaster.includes(character.job)
     )
         
     return (

@@ -22,7 +22,7 @@ export const renderClassLevel = (obj, key) => {
         magical_secrets_max_5: "Magical Secrets - max spell level 5",
         magical_secrets_max_7: "Magical Secrets - max spell level 7",
         magical_secrets_max_9: "Magical Secrets - max spell level 9",
-        cantrips_known: "Cantips known",
+        cantrips_known: "Cantrips known",
         spells_known: "Spells known",
         spell_slots_level_1: "Level 1 spell slots",
         spell_slots_level_2: "Level 2 spell slots",

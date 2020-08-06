@@ -32,6 +32,14 @@ function ContextProvider({ children }) {
     //for spells
     const [characterSpells, setCharacterSpells] = useState([])
 
+    const nonSpellCaster = [
+        "Barbarian", 
+        "Fighter",
+        "Monk", 
+        "Rogue",
+    ]
+
+
 
     //fetch all user's characters
     useEffect(()=>{
@@ -63,7 +71,8 @@ function ContextProvider({ children }) {
             selectCharacter, setSelectCharacter,
             characterItems, setCharacterItems,
             currentCharacter, setCurrentCharacter,
-            characterSpells, setCharacterSpells
+            characterSpells, setCharacterSpells,
+            nonSpellCaster
         }}>
             {children}
         </Context.Provider>

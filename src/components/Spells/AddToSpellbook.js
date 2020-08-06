@@ -12,7 +12,6 @@ export default function AddToSpellbook() {
         setCharacterSpells([...characterSpells.filter((spell, i) => index !== i)])
     }
 
-    console.log(selectCharacter)
     const submitSpellsToDb = async (e) => {
         try {
             const updateCharacterSpells = {

@@ -1,32 +1,35 @@
 import React,{useState, useEffect, useContext} from 'react'
 import {ResourceContext} from '../../context/ResourceContext'
-import { ReactTabulator } from 'react-tabulator'
 import { Context } from '../../context/Context'
+import { ReactTabulator } from 'react-tabulator'
 import {fetchAllSpecificSpellData} from '../../api/SpellAPI'
-
-//check the current user's class vs the spell class requirements
-//only add 1 copy EVER to the spellbook
+import bookloading from './bookloading.gif'
 
 export default function AllSpells() {
+    const [loading, setLoading] = useState(true)
     const [allSpellModels, setAllSpellModels] = useState([])
     const [spellMasterList, setSpellMasterList] = useState([])
     const { selectCharacter, allCharacters } = useContext(Context)
     const {allSpells, setSpellSelection} = useContext(ResourceContext)
 
     useEffect(() => {
+        setLoading(true);
         const fireAndForget = async () => {
             const apiAllSpells = await fetchAllSpecificSpellData()
             setSpellMasterList([...apiAllSpells])
+            setLoading(false);
         }
         fireAndForget();
     }
     ,[])
 
     useEffect(() => {
+        //setLoading(true);
         let character = allCharacters.find((char) => char._id === selectCharacter)
         if(spellMasterList.length && character) {
             setAllSpellModels([...spellMasterList.filter((spell) => {return spell.classes.find((job) => job.name  === character.job)} )])
         }
+        //setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     ,[selectCharacter, spellMasterList])
@@ -48,12 +51,13 @@ export default function AllSpells() {
     return (
         <div className='all-spells-container'>
             <div className="table">
-                <ReactTabulator 
-                    data={allSpellModels.length === 0 ? allSpells : 
-                        allSpellModels}
-                    columns={columns}
-                    options={options}
-                />
+                {loading ? <img src={bookloading} alt="Loading..." /> : null }
+                    <ReactTabulator 
+                        data={allSpellModels.length === 0 ? allSpells : 
+                            allSpellModels}
+                        columns={columns}
+                        options={options}
+                    />
             </div>
         </div>
     )

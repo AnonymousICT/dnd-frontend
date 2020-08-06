@@ -7,9 +7,10 @@ import Attributes from './Attributes'
 import Skills from './Skills'
 import BattleStats from './BattleStats'
 import AllItems from './AllItems'
+import Spellbook from './Spellbook'
 
 export default function EditCharacter() {
-    const {currentCharacter, setCurrentCharacter} = useContext(Context)
+    const {currentCharacter, setCurrentCharacter, nonSpellCaster} = useContext(Context)
 
     const [userClass, setUserClass] = useState([])
     const [classLevels, setClasslevels] = useState([])
@@ -51,7 +52,6 @@ export default function EditCharacter() {
     const filteredLevel = classLevels.filter(level => {
         return level.level === currentCharacter.level
     })
-    console.log(currentCharacter)
 
     return (
         <div className="character-container">
@@ -65,9 +65,11 @@ export default function EditCharacter() {
                 userClass={userClass}
                 filteredLevel={filteredLevel}
             />
-            <AllItems />
                 {!languageChoice ? null : languageChoice}
                 {!traitChoice ? null: traitChoice}
+            <AllItems />
+            {!nonSpellCaster.includes(currentCharacter.job) ? 
+            <Spellbook filteredLevel={filteredLevel} /> : null}
         </div>
     )
 }

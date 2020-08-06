@@ -3,10 +3,11 @@ import {ResourceContext} from '../../context/ResourceContext'
 import {Context} from '../../context/Context'
 
 export default function SpecificSpell() {
-    const {selectCharacter, characterSpells, setCharacterSpells} = useContext(Context)
+    const {selectCharacter, characterSpells, setCharacterSpells, currentCharacter} = useContext(Context)
     const {specificSpell} = useContext(ResourceContext)
 
     const {
+        _id,
         name, 
         level, 
         range, 
@@ -23,15 +24,21 @@ export default function SpecificSpell() {
     } = specificSpell
 
     const addToCharacter = () => {
-        // if the current character already has the spell don't add it
-        //get all of the current character's spells
-        //compare it to the specific spell
         setCharacterSpells([...characterSpells,  {...specificSpell}])
+    }
+
+    const renderButton = () => {
+        return (
+            !selectCharacter ? null : 
+                (currentCharacter || {spells:[]}).spells.find((spell) => spell._id === _id) ?
+                <button disabled={true} onClick={addToCharacter}>Spell Already Known</button> :
+                <button disabled={false} onClick={addToCharacter}>Add to Character</button>
+        );
     }
 
     return (
         <div className='specific-spell-container'>
-            {!name ? null : 
+            {!name || name === "Nothingness" ? null : 
             <section>
                 <h1 className='spell-name'>{name}</h1>
                 <p>Level: {level} {school.name} {ritual ? "(ritual)" : null}</p>
@@ -42,7 +49,7 @@ export default function SpecificSpell() {
                 <p>Classes: {classes.map(index => index.name).join(', ')}</p>
                 <p>Description: {desc}</p>
                 <p>{higher_level}</p>
-                {!selectCharacter ? null : <button onClick={addToCharacter}>Add to Character</button>}
+                {renderButton()}
             </section>}
         </div>
     )

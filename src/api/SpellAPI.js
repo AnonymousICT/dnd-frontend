@@ -1,6 +1,8 @@
 import axios from 'axios'
-
+import {defaultValues} from '../context/DefaultValues'
 import {api_url} from "./AbilityScoreAPI"
+
+const {specificSpell} = defaultValues
 
 export const fetchSpellData = async () => {
     const url = `${api_url}/spells/`
@@ -26,6 +28,7 @@ export const fetchAllSpecificSpellData = async () => {
 }
 
 export const fetchSpecificSpell = async (spell) => {
+    if(!spell) return specificSpell;
     const url = `https://www.dnd5eapi.co${spell}`
     
     try {
