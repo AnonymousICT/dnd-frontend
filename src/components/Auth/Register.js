@@ -18,7 +18,7 @@ export default function Register() {
                 return 
             }
             const registerUser = { email, password, passwordCheck:confirmPassword, displayName}
-            await axios.post(`https://dnd-backend-node.herokuapp.com/users/register`, registerUser);
+            await axios.post('https://dnd-backend-node.herokuapp.com/users/register', registerUser);
             history.push("/login?registered")
         } catch (err) {
             console.error(err)

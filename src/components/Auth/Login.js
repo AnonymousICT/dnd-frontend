@@ -2,11 +2,12 @@ import React, {useContext} from 'react'
 import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
 import {Context} from '../../context/Context'
+import {fetchUsersCharacters} from '../../api/userAPI'
 
 export default function Login() {
     const queryStrings = new URLSearchParams(window.location.search)
     const isRegistered = queryStrings.has("registered")
-    const {setUserData, email, setEmail, password, setPassword} =useContext(Context)
+    const {setUserData, email, setEmail, password, setPassword, setAllCharacters} =useContext(Context)
     const history = useHistory();
 
     const handleUserLogin = async (e) => {
@@ -23,7 +24,8 @@ export default function Login() {
             localStorage.setItem('x-auth-token', loginRes.data.token)
             localStorage.setItem('userId', loginRes.data.user.id)
             localStorage.setItem('displayName', loginRes.data.user.displayName)
-            history.push('/characters?')
+            setAllCharacters(await fetchUsersCharacters())
+            history.push('/characters')
         } catch (err){
             console.error(err)
         }

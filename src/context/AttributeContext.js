@@ -47,8 +47,10 @@ function AttributeContextProvider({children}) {
             charisma: attributes["CHA"],
         };
         
-        await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
-        setCurrentCharacter({...currentCharacter, ...updateCharacter});
+        if(currentCharacter && currentCharacter._id) {
+            await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}` , updateCharacter, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
+            setCurrentCharacter({...currentCharacter, ...updateCharacter});
+        }
     }
 
     const modMath = (score) => {
@@ -56,7 +58,7 @@ function AttributeContextProvider({children}) {
      } 
      const { ability_bonuses } = raceData
      window.ability_bonuses = ability_bonuses;
-    const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
+    const attributeTotal = {...attributeValue};
     
     const racialBonus = (name) => ((ability_bonuses || defaultValues.raceData.ability_bonuses).filter(bonus => bonus.name === name)[0] || { bonus: 0 }).bonus
 

@@ -18,7 +18,7 @@ export default function AttributeEntry({nextStep, prevStep}) {
         setHoveredAttribute(e.target.getAttribute('value'))
     }
                             //copy an object to another variable without the references
-    const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
+    const attributeTotal = {...attributeValue};
 
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
@@ -37,7 +37,7 @@ export default function AttributeEntry({nextStep, prevStep}) {
                             placeholder="10"
                             name={attribute[0]}
                             value={attributeValue[attribute[0]]}
-                            onChange={handleAttributeValueChange}
+                            onChange={(e) => handleAttributeValueChange({[e.target.name]: +e.target.value})}
                         />
                         <label name={`${attribute[0]} total`}>{attributeTotal[attribute[0]]} Total</label>
 
