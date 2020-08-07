@@ -36,9 +36,9 @@ export default function Confirm({prevStep}) {
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
 
     useEffect(()=>{
-        setChoicesArray(Object.keys(isChecked).map(key => isChecked[key].key))
+        setChoicesArray(Object.keys(isChecked).filter(el => el !== (null || undefined)).map(key => isChecked[key].key))
     },[isChecked])
-    
+
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
     const handleCharacterSubmit = async (e) => {
@@ -52,7 +52,6 @@ export default function Confirm({prevStep}) {
                 traitChoice: selectedTrait,
                 profChoice: choicesArray,
                 job: classData.name,
-                choices: choicesArray,
                 strength: attributeTotal.STR,
                 dexterity: attributeTotal.DEX,
                 constitution: attributeTotal.CON,
@@ -67,8 +66,6 @@ export default function Confirm({prevStep}) {
             console.error(err)
         }
     }
-
-    //bug note changing races creates an undesired effect. must create a function to reset state of stuff that isn't applicable to other races
 
     return (
 

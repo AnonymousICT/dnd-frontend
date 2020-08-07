@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useEffect, useContext} from 'react'
 import {Context} from '../../../context/Context'
 import {ResourceContext} from '../../../context/ResourceContext'
 
@@ -29,6 +29,13 @@ export default function RaceSelector({nextStep, prevStep}) {
         traits, 
         trait_options, 
         subraces} = raceData
+
+    useEffect(()=>{
+        setCharacterRace('')
+        setSelectedLanguage('')  
+        setSelectedTrait('')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return (
         <div className='select-race-container'>
@@ -113,7 +120,7 @@ export default function RaceSelector({nextStep, prevStep}) {
             </div>
             <button onClick={prevStep}>Go Back</button>
 
-            {!characterRace ? null : <button onClick={nextStep}>Next</button>}
+            {!characterRace ? <button disabled onClick={nextStep}>Next</button> : <button onClick={nextStep}>Next</button>}
         </div>
         
     )
