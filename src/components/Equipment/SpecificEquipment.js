@@ -30,9 +30,9 @@ export default function SpecificEquipment() {
         setCharacterItems([...characterItems,  {...specificEquipment, uid: uuid()}])}
 
     return (
-        <div>
+        <div className="specific-equipment-container">
             {!name ? null :
-                <section>
+                <section className="specific-equipment">
                     <h2>{name}</h2>
                     <h4>{equipment_category.name}</h4>
                     { !category_range ? null: <h4>Category: { category_range}</h4>}

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "lodash": "^4.17.19",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.1",
@@ -15,7 +16,6 @@
     "react-scripts": "3.4.1",
     "react-tabulator": "^0.13.2",
     "react-uuid": "^1.0.2",
-    "sass": "^1.26.10",
     "tabulator-tables": "^4.7.2"
   },
   "scripts": {

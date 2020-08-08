@@ -51,13 +51,14 @@ export default function AllSpells() {
     return (
         <div className='all-spells-container'>
             <div className="table">
-                {loading ? <img src={bookloading} alt="Loading..." /> : null }
+                {loading ? <img src={bookloading} alt="Loading..." /> : 
                     <ReactTabulator 
-                        data={allSpellModels.length === 0 ? allSpells : 
-                            allSpellModels}
+                    data={allSpellModels.length === 0 ? allSpells : 
+                        allSpellModels}
                         columns={columns}
                         options={options}
-                    />
+                        />
+                }
             </div>
         </div>
     )

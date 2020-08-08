@@ -1,0 +1,85 @@
+.character-card {
+    position: relative;
+}
+
+.character-icon {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.2;
+}
+
+.barbarian::before{
+    @extend .character-icon;
+    background: url('/assets/icons/BARBARIAN.png') no-repeat center center;
+    background-size: contain;
+}
+
+.bard::before{
+    @extend .character-icon;
+    background: url('/assets/icons/BARD.png') no-repeat center center;
+    background-size: contain;
+}
+
+.cleric::before{
+    @extend .character-icon;
+    background: url('/assets/icons/CLERIC.png') no-repeat center center;
+    background-size: contain;
+}
+
+.druid::before{
+    @extend .character-icon;
+    background: url('/assets/icons/DRUID.png') no-repeat center center;
+    background-size: contain;
+}
+
+.fighter::before{
+    @extend .character-icon;
+    background: url('/assets/icons/FIGHTER.png') no-repeat center center;
+    background-size: contain;
+}
+
+.monk::before{
+    @extend .character-icon;
+    background: url('/assets/icons/monk.png') no-repeat center center;
+    background-size: contain;
+}
+
+.paladin::before{
+    @extend .character-icon;
+    background: url('/assets/icons/Paladin.png') no-repeat center center;
+    background-size: contain;
+}
+
+.ranger::before{
+    @extend .character-icon;
+    background: url('/assets/icons/Ranger.png') no-repeat center center;
+    background-size: contain;
+}
+
+.rogue::before{
+    @extend .character-icon;
+    background: url('/assets/icons/Rogue.png') no-repeat center center;
+    background-size: contain;
+}
+
+.sorcerer::before{
+    @extend .character-icon;
+    background: url('/assets/icons/sorcerer.png') no-repeat center center;
+    background-size: contain;
+}
+
+.warlock::before{
+    @extend .character-icon;
+    background: url('/assets/icons/warlock.png') no-repeat center center;
+    background-size: contain;
+}
+
+.wizard::before{
+    @extend .character-icon;
+    background: url('/assets/icons/wizard.png') no-repeat center center;
+    background-size: contain;
+}

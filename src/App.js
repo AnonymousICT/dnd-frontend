@@ -10,14 +10,15 @@ import EditCharacter from './components/Characters/EditCharacter/EditCharacter'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 
-import './App.css'
+import './App.scss'
 
 export default function App() {
 
     return (
         <div className='App'>
             <header>
-                <h1>Dungeons and Dragons 5th Edition Resource Center</h1>
+                <h1>D&D CG</h1>
+                <h3>5th edition character generator</h3>
                 <Navbar />
             </header>
             <main>

@@ -1,0 +1,15 @@
+@import './scss/colors.scss';
+@import './scss/fonts.scss';
+@import './scss/elements.scss';
+@import './scss/navbar.scss';
+
+// components
+@import './scss/class-icons.scss';
+
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+

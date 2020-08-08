@@ -1,0 +1,18 @@
+.spells {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.cart {
+    display: none;
+}
+/* On the Mobile level there will be a button to make the cart slide over the list */
+.character-spellbook {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.specific-spell-container {
+    display: flex;
+}

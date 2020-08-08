@@ -1,10 +1,6 @@
 import React, {useContext} from 'react'
 import {ResourceContext} from '../../context/ResourceContext'
 import { ReactTabulator } from 'react-tabulator'
-import SpecificEquipment from './SpecificEquipment'
-import CharacterShoppingCart from './CharacterShoppingCart'
-
-import './equipment.css'
 
 export default function AllEquipment() {
     const {
@@ -37,7 +33,6 @@ export default function AllEquipment() {
 
     return (
         <div className="equipment-container">
-            <CharacterShoppingCart />
             <div className="equipment-filters">
                 {!equipmentCategories ? <h1>Loading...</h1> : equipmentCategories.map(category => <button onClick={(e)=>setEquipmentSelection(e.target.value)} value={category[1]} key={category[0]}>{category[0]}</button>)}
             </div>
@@ -50,7 +45,6 @@ export default function AllEquipment() {
                         layout={"fitDataTable"}
                     />
                 </div>
-                <SpecificEquipment />
             </div>
         </div>
     )

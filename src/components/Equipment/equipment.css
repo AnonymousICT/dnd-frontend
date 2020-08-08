@@ -18,7 +18,11 @@
     justify-self: left;
 }
 
-
 .table-container {
     display: flex;
+}
+
+.specific-equipment {
+    display: flex;
+    flex-direction: column;
 }

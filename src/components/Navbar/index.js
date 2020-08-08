@@ -26,7 +26,7 @@ export default function Navbar() {
                 <li className='navigation-item'>
                     <Link to='/characters'>Characters</Link>
                 </li>
-                <button onClick={logout}>Logout</button>
+                <button className="navigation-button" onClick={logout}>Logout</button>
             </ul>
         </nav>
     )
