@@ -9,7 +9,7 @@ import CreateCharacter from './components/Characters/CreateCharacter/CreateChara
 import EditCharacter from './components/Characters/EditCharacter/EditCharacter'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
-import Test from './components/Test'
+
 
 import './App.scss'
 
@@ -47,9 +47,6 @@ export default function App() {
                     </Route>
                     <Route path='/character/edit'>
                         <EditCharacter />
-                    </Route>
-                    <Route path ='/test'>
-                        <Test />
                     </Route>
                 </Switch>
             </main>
