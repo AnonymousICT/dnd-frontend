@@ -12,7 +12,7 @@ export default function AllSpells() {
     const [allSpellModels, setAllSpellModels] = useState([])
     const [spellMasterList, setSpellMasterList] = useState([])
     const { selectCharacter, allCharacters } = useContext(Context)
-    const {allSpells, setSpellSelection} = useContext(ResourceContext)
+    const { setSpellSelection } = useContext(ResourceContext)
 
     useEffect(() => {
         setLoading(true);
@@ -21,8 +21,11 @@ export default function AllSpells() {
                 setSpellMasterList(cache.spells);
             } else {
                 const data = await fetchAllSpecificSpellData();
-                setSpellMasterList(data);
-                cache.spells = data;
+                const sortedSpells = data.sort((a, b) => a.level - b.level);
+                sortedSpells.map((spell, idx) => spell.row = idx);
+                console.log(sortedSpells);
+                setSpellMasterList(sortedSpells);
+                cache.spells = sortedSpells;
             }
             setLoading(false);
         }
@@ -38,7 +41,7 @@ export default function AllSpells() {
     ,[allCharacters, selectCharacter, spellMasterList])
 
     const columns = [
-        { 
+        {
             title: "Name", 
             field: "name", 
             width: 200 ,
@@ -56,7 +59,7 @@ export default function AllSpells() {
             <div className="table">
                 {loading ? <img src={bookloading} alt="Loading..." /> : 
                     <ReactTabulator 
-                        data={allSpellModels.length === 0 ? allSpells : 
+                        data={allSpellModels.length === 0 ? spellMasterList : 
                             allSpellModels}
                         columns={columns}
                         options={options}
