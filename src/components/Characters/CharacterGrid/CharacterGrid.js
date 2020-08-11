@@ -4,9 +4,10 @@ import CharacterCard from './CharacterCard'
 
 
 export default function CharacterGrid() {
-    const {allCharacters} = useContext(Context)
+    const {allCharacters} = useContext(Context);
+    
     return (
-        <div>
+        <div className="character-grid">
             {!allCharacters ? "Loading" : allCharacters.map(character => <CharacterCard key={character._id} character={character}/>)}
         </div>
     )

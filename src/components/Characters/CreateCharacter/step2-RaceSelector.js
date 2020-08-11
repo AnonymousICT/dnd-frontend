@@ -7,12 +7,12 @@ export default function RaceSelector({nextStep, prevStep}) {
         characterRace, setCharacterRace, 
         setSelectedLanguage,  
         setSelectedTrait
-    } = useContext(Context)
+    } = useContext(Context);
     
     const{
         allRaces, 
         raceData, 
-    } = useContext(ResourceContext)
+    } = useContext(ResourceContext);
 
     const {
         name, 
@@ -28,14 +28,14 @@ export default function RaceSelector({nextStep, prevStep}) {
         language_options, 
         traits, 
         trait_options, 
-        subraces} = raceData
+        subraces
+    } = raceData;
 
     useEffect(()=>{
         setCharacterRace('')
         setSelectedLanguage('')  
         setSelectedTrait('')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[setCharacterRace, setSelectedLanguage, setSelectedTrait])
 
     return (
         <div className='select-race-container'>

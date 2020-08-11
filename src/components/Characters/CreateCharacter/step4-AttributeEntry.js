@@ -17,7 +17,6 @@ export default function AttributeEntry({nextStep, prevStep}) {
     const onMouseEnter = (e) => {
         setHoveredAttribute(e.target.getAttribute('value'))
     }
-                            //copy an object to another variable without the references
     const attributeTotal = {...attributeValue};
 
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));

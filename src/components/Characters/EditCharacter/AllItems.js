@@ -3,11 +3,10 @@ import {Context} from '../../../context/Context'
 import axios from 'axios'
 
 export default function AllItems() {
-    const [isEquipmentChecked, setIsEquipmentChecked] = useState({})
-    const { currentCharacter, setCurrentCharacter } = useContext(Context)
+    const [isEquipmentChecked, setIsEquipmentChecked] = useState({});
+    const { currentCharacter, setCurrentCharacter } = useContext(Context);
     
     useEffect(()=>{
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         if(currentCharacter.items.length > 0) {
             const checkboxes = currentCharacter.items.reduce((obj, item) => {
                 return {
@@ -17,11 +16,10 @@ export default function AllItems() {
             }, {});
             setIsEquipmentChecked(checkboxes);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[currentCharacter]);
 
     useEffect(()=>{
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+   
         if(currentCharacter.items.length > 0) {
             const checkboxes = currentCharacter.items.reduce((obj, item) => {
                 return {
@@ -31,8 +29,7 @@ export default function AllItems() {
             }, {});
             setIsEquipmentChecked(checkboxes);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[currentCharacter.strength]);
+    },[currentCharacter, currentCharacter.strength]);
 
     const checkItemRequirements = (item, character) => {
         if(character.strength >= item.str_minimum) {
@@ -49,7 +46,7 @@ export default function AllItems() {
             setIsEquipmentChecked({...isEquipmentChecked, [item.uid]: e.target.checked})   
             let characterItems = currentCharacter.items.map((equipment) => equipment.uid === item.uid ? item : equipment);
             setCurrentCharacter({...currentCharacter, items: characterItems});
-            //Save the character
+
             submitToDb(characterItems)
         } else {
             e.preventDefault();

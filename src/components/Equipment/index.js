@@ -4,6 +4,8 @@ import SelectCharacter from '../Characters/SelectCharacter'
 import CharacterShoppingCart from './CharacterShoppingCart'
 import SpecificEquipment from './SpecificEquipment'
 
+import './equipment.scss'
+
 export default function Equipment() {
     return (
         <div>

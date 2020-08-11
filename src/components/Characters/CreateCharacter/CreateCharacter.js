@@ -7,12 +7,8 @@ import Confirm from './step5-Confirm'
 
 import './style.css'
 
-
-// Proceed to next step
-
 export default function CreateCharacter() {
     const [formPage, setFormPage] = useState(1)
-    
     
     const nextStep = () => {
         setFormPage(formPage+1)

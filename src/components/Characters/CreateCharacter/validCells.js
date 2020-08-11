@@ -6,4 +6,4 @@ export const validCells = [
     "class_specific",
     "spellcasting",
     "subclass",
-]
+];

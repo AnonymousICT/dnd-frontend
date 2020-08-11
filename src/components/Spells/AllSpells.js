@@ -5,6 +5,8 @@ import { ReactTabulator } from 'react-tabulator'
 import {fetchAllSpecificSpellData} from '../../api/SpellAPI'
 import bookloading from './bookloading.gif'
 
+const cache = {};
+
 export default function AllSpells() {
     const [loading, setLoading] = useState(true)
     const [allSpellModels, setAllSpellModels] = useState([])
@@ -15,24 +17,25 @@ export default function AllSpells() {
     useEffect(() => {
         setLoading(true);
         const fireAndForget = async () => {
-            const apiAllSpells = await fetchAllSpecificSpellData()
-            setSpellMasterList([...apiAllSpells])
+            if (cache.spells) {
+                setSpellMasterList(cache.spells);
+            } else {
+                const data = await fetchAllSpecificSpellData();
+                setSpellMasterList(data);
+                cache.spells = data;
+            }
             setLoading(false);
         }
         fireAndForget();
-    }
-    ,[])
+    },[])
 
     useEffect(() => {
-        //setLoading(true);
         let character = allCharacters.find((char) => char._id === selectCharacter)
         if(spellMasterList.length && character) {
             setAllSpellModels([...spellMasterList.filter((spell) => {return spell.classes.find((job) => job.name  === character.job)} )])
         }
-        //setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    ,[selectCharacter, spellMasterList])
+    ,[allCharacters, selectCharacter, spellMasterList])
 
     const columns = [
         { 
@@ -53,11 +56,11 @@ export default function AllSpells() {
             <div className="table">
                 {loading ? <img src={bookloading} alt="Loading..." /> : 
                     <ReactTabulator 
-                    data={allSpellModels.length === 0 ? allSpells : 
-                        allSpellModels}
+                        data={allSpellModels.length === 0 ? allSpells : 
+                            allSpellModels}
                         columns={columns}
                         options={options}
-                        />
+                    />
                 }
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import CharacterGrid from './CharacterGrid/CharacterGrid'
 import {Link, useHistory} from 'react-router-dom'
-import './characters.css'
+import './characters.scss'
 
 export default function Characters() {
     const history = useHistory();

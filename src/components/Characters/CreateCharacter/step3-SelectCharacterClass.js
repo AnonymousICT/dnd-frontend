@@ -41,13 +41,8 @@ export default function SelectCharacterClass({nextStep, prevStep}) {
     let headers = validCells; 
     
     if(!classLevels) {}
-    else {
-             window.classLevels = classLevels;
-            }
-        
-
-    //clear on load when swapping to a different class/race
-    
+    else { window.classLevels = classLevels;}
+   
     return (
         <div className='select-class-container'>
             <h3>Choose your character's class</h3>

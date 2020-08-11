@@ -16,28 +16,27 @@ export default function Confirm({prevStep}) {
         selectedTrait,
         isChecked,
         updateAllCharacters,
-    } = useContext(Context)
+    } = useContext(Context);
     
     const {
         classData,
         raceData,
-    } =useContext(ResourceContext)
+    } =useContext(ResourceContext);
     
     const {
         attributeValue,
         allAttributes,
         sortFunction,
         racialBonus,
-        
-    }=useContext(AttributeContext)
+    }=useContext(AttributeContext);
     
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('userId');
 
     const attributeTotal = JSON.parse(JSON.stringify(attributeValue));
 
     useEffect(()=>{
         setChoicesArray(Object.keys(isChecked).filter(el => el !== (null || undefined)).map(key => isChecked[key].key))
-    },[isChecked])
+    },[isChecked]);
 
     Object.keys(attributeTotal).forEach(key => attributeTotal[key] += racialBonus(key));
     
@@ -58,12 +57,12 @@ export default function Confirm({prevStep}) {
                 intelligence: attributeTotal.INT,
                 wisdom: attributeTotal.WIS,
                 charisma: attributeTotal.CHA,
-            }
-            await axios.post(`https://dnd-backend-node.herokuapp.com/characters/new`, newCharacter)
-            history.push("/characters?created")
-            updateAllCharacters()
+            };
+            await axios.post(`https://dnd-backend-node.herokuapp.com/characters/new`, newCharacter);
+            history.push("/characters?created");
+            updateAllCharacters();
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
     }
 

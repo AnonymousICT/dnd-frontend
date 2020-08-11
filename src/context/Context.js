@@ -38,8 +38,8 @@ function ContextProvider({ children }) {
         "Monk", 
         "Rogue",
     ]
-
-
+    
+    const [modalOpen, setModalOpen] = useState(false)
 
     //fetch all user's characters
     useEffect(()=>{
@@ -72,7 +72,8 @@ function ContextProvider({ children }) {
             characterItems, setCharacterItems,
             currentCharacter, setCurrentCharacter,
             characterSpells, setCharacterSpells,
-            nonSpellCaster
+            nonSpellCaster,
+            modalOpen, setModalOpen
         }}>
             {children}
         </Context.Provider>

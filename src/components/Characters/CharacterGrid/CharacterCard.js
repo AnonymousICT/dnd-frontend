@@ -1,18 +1,16 @@
-import React,{useContext} from 'react'
-import {useHistory} from 'react-router-dom'
-import {Context} from '../../../context/Context'
-import './characterCard.scss'
-
-
+import React,{useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import {Context} from '../../../context/Context';
+import './characterCard.scss';
 
 export default function CharacterCard({character}) {
-    const {setCurrentCharacter} = useContext(Context)
-
+    const {setCurrentCharacter} = useContext(Context);
     const history = useHistory();
+
     const handleRedirect = (char) => {
         setCurrentCharacter(char)
         history.push(`character/edit/${char._id}`)
-    }
+    };
 
     return (
         <div className={"character-card " + character.job.toLowerCase()} onClick={() => handleRedirect(character)}>

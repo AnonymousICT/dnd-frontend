@@ -7,7 +7,7 @@ export default function NameLevelInput({nextStep}) {
         setCharacterName, 
         characterLevel ,
         setCharacterLevel,
-    } = useContext(Context)
+    } = useContext(Context);
 
     return (
         <div>

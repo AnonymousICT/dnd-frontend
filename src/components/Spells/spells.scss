@@ -14,5 +14,12 @@
 }
 
 .specific-spell-container {
-    display: flex;
+    
+  section {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 70%;
+  }
 }
