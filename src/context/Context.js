@@ -40,14 +40,18 @@ function ContextProvider({ children }) {
     ]
     
     const [modalOpen, setModalOpen] = useState(false)
-
+    const auth = localStorage.getItem('x-auth-token')
     //fetch all user's characters
     useEffect(()=>{
-        const fetchedCharacters = async () => {
-            setAllCharacters(await fetchUsersCharacters())
+        if (auth) {
+            const fetchedCharacters = async () => {
+                setAllCharacters(await fetchUsersCharacters())
+            }
+            fetchedCharacters()
+        } else {
+            return
         }
-        fetchedCharacters()
-    },[fetchNewData])
+    },[fetchNewData, auth])
 
     const updateAllCharacters = () => setFetchNewData(!fetchNewData);
 

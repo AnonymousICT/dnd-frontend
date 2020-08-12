@@ -27,14 +27,14 @@ export default function Login() {
     }
 
     return (
-        <>
-        {isRegistered && <p className="account-created-message">Your account has been created</p>}
-        <form className='login form' onSubmit={handleUserLogin}>
-            <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='email'/>
-            <input value={password} onChange={(e)=>setPassword(e.target.value)} type='password' placeholder='password' />
-            <input type='submit' value='Login' />;
-            <Link to='/register'> Don't have an account? Sign up for one here!</Link>
-        </form>
-        </>
+        <div className="auth-form-container">
+            {isRegistered && <p className="account-created-message">Your account has been created</p>}
+            <form className='login-form' onSubmit={handleUserLogin}>
+                <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='email'/>
+                <input value={password} onChange={(e)=>setPassword(e.target.value)} type='password' placeholder='password' />
+                <input type='submit' value='Login' />
+                <Link to='/register'> Don't have an account? Sign up for one here!</Link>
+            </form>
+        </div>
     )
 }

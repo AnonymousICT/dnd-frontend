@@ -5,11 +5,21 @@
 
 // components
 @import './scss/class-icons.scss';
+@import './scss/Auth.scss';
 
 .App {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    h1{
+        color: $text;
+    }
+    h3{
+        color: $text;
+        span{
+            color: $accent;
+        }
+    }
 }
 

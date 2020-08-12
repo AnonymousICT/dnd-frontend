@@ -1,9 +1,12 @@
 @import './colors.scss';
 
+
 body {
     margin: 0;
     padding: 0;
-    background: $main-background
+    background: $main-background;
+    color: $text;
+    font-family: Roboto;
 }
 
 ul{
@@ -14,5 +17,16 @@ ul{
         a {
         text-decoration: none;
         }
+    }
+}
+
+h1{
+    font-family: Lato;
+}
+
+a{
+    color: $secondary;
+    :active{
+        color: $secondary;
     }
 }

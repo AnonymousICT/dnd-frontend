@@ -16,70 +16,93 @@
     @extend .character-icon;
     background: url('/assets/icons/BARBARIAN.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
 }
 
 .bard::before{
     @extend .character-icon;
     background: url('/assets/icons/BARD.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .cleric::before{
     @extend .character-icon;
     background: url('/assets/icons/CLERIC.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .druid::before{
     @extend .character-icon;
     background: url('/assets/icons/DRUID.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .fighter::before{
     @extend .character-icon;
     background: url('/assets/icons/FIGHTER.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .monk::before{
     @extend .character-icon;
     background: url('/assets/icons/monk.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .paladin::before{
     @extend .character-icon;
     background: url('/assets/icons/Paladin.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .ranger::before{
     @extend .character-icon;
     background: url('/assets/icons/Ranger.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .rogue::before{
     @extend .character-icon;
     background: url('/assets/icons/Rogue.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .sorcerer::before{
     @extend .character-icon;
     background: url('/assets/icons/sorcerer.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .warlock::before{
     @extend .character-icon;
     background: url('/assets/icons/warlock.png') no-repeat center center;
     background-size: contain;
+    background-position: 160px;
+
 }
 
 .wizard::before{
     @extend .character-icon;
     background: url('/assets/icons/wizard.png') no-repeat center center;
-    background-size: contain;
+    background-size: auto;
+    background-position: 115px;
+
 }

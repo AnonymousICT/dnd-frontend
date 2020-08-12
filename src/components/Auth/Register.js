@@ -24,13 +24,15 @@ export default function Register() {
     }
 
     return (
-        <form className ='registration form' onSubmit={handleUserRegistration}>
-            <input type='email' placeholder='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            <input type='password' placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-            <input type='password' placeholder='type password again' value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
-            <input placeholder='Display Name *Optional* ' value={displayName} onChange={(e)=>setDisplayName(e.target.value)}/>
-            <input type='submit' value='Register New Account' />
-            <Link to='/login'> Already have an account? Click here to Login</Link>
-        </form>
+        <div className='auth-form-container'>
+            <form className ='registration form' onSubmit={handleUserRegistration}>
+                <input type='email' placeholder='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <input type='password' placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <input type='password' placeholder='type password again' value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
+                <input placeholder='Display Name *Optional* ' value={displayName} onChange={(e)=>setDisplayName(e.target.value)}/>
+                <input type='submit' value='Register New Account' />
+                <Link to='/login'> Already have an account? Click here to Login</Link>
+            </form>
+        </div>
     )
 }

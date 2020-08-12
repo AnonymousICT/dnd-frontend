@@ -19,7 +19,7 @@ export default function App() {
         <div className='App'>
             <header>
                 <h1>D&D CG</h1>
-                <h3>5th edition character generator</h3>
+                <h3><span>5th edition</span> character generator</h3>
                 <Navbar />
             </header>
             <main>
