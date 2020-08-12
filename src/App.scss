@@ -12,13 +12,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
     h1{
         color: $text;
     }
     h3{
         color: $text;
         span{
-            color: $accent;
+            color: $secondary;
         }
     }
 }

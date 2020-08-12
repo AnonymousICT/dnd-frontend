@@ -1,25 +1,33 @@
+@import '../../scss/colors.scss';
+
 .spells {
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-.cart {
-    display: none;
-}
-/* On the Mobile level there will be a button to make the cart slide over the list */
-.character-spellbook {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-}
-
-.specific-spell-container {
     
-  section {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 70%;
-  }
+    .tbl-row:hover {
+        background-color: $secondary;
+    }
+    .cart {
+        display: none;
+    }
+    /* On the Mobile level there will be a button to make the cart slide over the list */
+    .character-spellbook {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+    }
+    
+    
+    
+    .specific-spell-container {
+        
+        section {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 70%;
+        }
+    }
 }

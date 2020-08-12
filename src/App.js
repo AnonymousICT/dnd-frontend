@@ -51,7 +51,7 @@ export default function App() {
                 </Switch>
             </main>
             <footer>
-
+            <p>Art assets are courtesy of <a href="https://www.melissapalacios.com/" target="blank">Melissa Palacios</a></p>
             </footer>
         </div>
     )

@@ -11,4 +11,13 @@ $border: 1px solid $text;
     line-height: 1;
     margin-bottom: 1em;
     padding: 10px;
+    color: black;
+    box-shadow: 0 0 3px;
+    .race{
+        color: $accent;
+        font-weight: 600;
+    }
+    .class{
+        font-weight: 600;
+    }
 }

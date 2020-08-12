@@ -9,7 +9,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .barbarian::before{
@@ -103,6 +103,6 @@
     @extend .character-icon;
     background: url('/assets/icons/wizard.png') no-repeat center center;
     background-size: auto;
-    background-position: 115px;
+    background-position: 160px;
 
 }

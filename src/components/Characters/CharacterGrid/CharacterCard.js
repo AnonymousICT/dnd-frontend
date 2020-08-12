@@ -15,7 +15,7 @@ export default function CharacterCard({character}) {
     return (
         <div className={"character-card " + character.job.toLowerCase()} onClick={() => handleRedirect(character)}>
             <h2>{character.name}</h2>
-            <p>Level {character.level} {character.race} {character.job}</p>
+            <p>Level {character.level} <span className="race">{character.race}</span> <span className="class">{character.job}</span></p>
         </div>
     )
 }
