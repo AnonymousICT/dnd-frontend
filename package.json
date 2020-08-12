@@ -15,7 +15,6 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "react-tabulator": "^0.13.2",
     "react-uuid": "^1.0.2",
     "tabulator-tables": "^4.7.2"
   },

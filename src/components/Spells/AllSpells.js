@@ -12,9 +12,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
-const cache = {};
-const useLocalStorage = true;
-
 export default function AllSpells() {
     const [loading, setLoading] = useState(true)
     const [allSpellModels, setAllSpellModels] = useState([])
@@ -35,32 +32,16 @@ export default function AllSpells() {
     };
 
     useEffect(() => {
-        const cachingUtility = { 
-            get: (name) => {
-                if(useLocalStorage) {
-                    return JSON.parse(localStorage.getItem(name));
-                } else {
-                    return cache[name];
-                }
-            }, 
-            set: (name, value) => {
-                if(useLocalStorage) {
-                    localStorage.setItem(name, JSON.stringify(value));
-                } else {
-                    cache[name] = value;
-                }
-            }
-        }
         setLoading(true);
         const fireAndForget = async () => {
-            if (!cachingUtility.get("spells")) {
+            if (!JSON.parse(localStorage.getItem("spells"))) {
                 const data = await fetchAllSpecificSpellData();
                 const sortedSpells = data.sort((a, b) => a.level - b.level);
                 sortedSpells.map((spell, idx) => spell.row = idx);
                 setSpellMasterList(sortedSpells);
-                cachingUtility.set("spells", sortedSpells);
+                localStorage.setItem("spells", JSON.stringify(sortedSpells));
             }
-            setSpellMasterList(cachingUtility.get("spells"));
+            setSpellMasterList(JSON.parse(localStorage.getItem("spells")));
             setLoading(false);
         }
         fireAndForget();
