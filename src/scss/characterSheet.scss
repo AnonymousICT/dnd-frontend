@@ -1,7 +1,7 @@
 @import './colors.scss';
 
 .characters{
-
+    display: flex;
 }
 .character-container {
     .basic-info{
@@ -12,6 +12,7 @@
             }
         }
     }
+
     .attribute-container {
         
         .prof-bonus{
@@ -29,6 +30,21 @@
             input {
                 text-align: center;
                 margin: 5px;
+            }
+        }
+    }
+
+    .skills-container {
+        border: 1px solid;
+        display: flex;
+        flex-direction: column;
+        .save-container {
+            border: 1px solid;
+            div {
+                border: 1px solid;
+                margin-bottom: 8px;
+                input {
+                }
             }
         }
     }

@@ -3,12 +3,9 @@ import {AttributeContext} from '../../../context/AttributeContext'
 import {Context} from '../../../context/Context'
 
 
-export default function Attributes({
-    filteredLevel,
-    }) {
+export default function Attributes({filteredLevel}) {
     
-    const {currentCharacter} = useContext(Context)
-
+    const {currentCharacter} = useContext(Context);
 
     const {
         modMath, 
@@ -30,7 +27,7 @@ export default function Attributes({
             WIS: currentCharacter.wisdom,
             CHA: currentCharacter.charisma
         });
-    },[currentCharacter, setAttributeValue])
+    },[currentCharacter, setAttributeValue]);
 
     return (
         <div className="attribute-container">
