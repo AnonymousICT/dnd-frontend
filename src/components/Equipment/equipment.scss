@@ -1,3 +1,5 @@
+@import '../../scss/colors.scss';
+
 .equipment-container {
     display: flex;
     flex-direction: column;
@@ -13,9 +15,8 @@
     flex: 1;
 }
 
-.table {
-    width: 200px;
-    justify-self: left;
+.tbl-row:hover {
+    background-color: $secondary;
 }
 
 .table-container {
