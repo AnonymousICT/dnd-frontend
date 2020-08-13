@@ -5,7 +5,6 @@ import {fetchAllSpecificSpellData} from '../../api/SpellAPI'
 import bookloading from './bookloading.gif'
 import RenderTable from '../Table/RenderTable'
 
-
 export default function AllSpells() {
     const [loading, setLoading] = useState(true)
     const [allSpellModels, setAllSpellModels] = useState([])

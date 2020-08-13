@@ -9,7 +9,7 @@ export default function BasicInfo() {
     return (
         <div className="basic-info">
             <h1>{name}</h1>
-            <h2>Level {level} {race} {job}</h2>
+            <h2>Level {level} <span>{race} </span> {job}</h2>
         </div>
     )
 }

@@ -22,8 +22,7 @@ export default function EditCharacter() {
             setCurrentCharacter(data)
         }
         fetchCharacter()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [characterId])
+    }, [characterId, setCurrentCharacter])
     
     const {job, languageChoice, traitChoice,} = currentCharacter
     

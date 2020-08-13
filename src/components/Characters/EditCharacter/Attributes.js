@@ -30,13 +30,12 @@ export default function Attributes({
             WIS: currentCharacter.wisdom,
             CHA: currentCharacter.charisma
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[currentCharacter])
+    },[currentCharacter, setAttributeValue])
 
     return (
-        <div className="container">
-            <div>
-                Proficiency Bonus:{(filteredLevel[0] || []).prof_bonus}
+        <div className="attribute-container">
+            <div className="prof-bonus">
+                Proficiency Bonus: <span>{(filteredLevel[0] || []).prof_bonus}</span>
             </div>
             {allAttributes.sort(sortFunction).map((attribute, i) =>{
                 return (
@@ -50,7 +49,7 @@ export default function Attributes({
                             value={attributeValue[attribute[0]] || 10}
                             onChange={(e) => handleAttributeValueChange({[e.target.name]: +e.target.value})}
                         />
-                        <label>{`${attribute[0]} Mod`} {modMath(getAttributeValue(attribute[0]))}</label>
+                        <label>Modifier {modMath(getAttributeValue(attribute[0]))}</label>
                     </div>
                 )
             })}

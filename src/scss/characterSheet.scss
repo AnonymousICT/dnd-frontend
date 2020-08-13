@@ -1,0 +1,35 @@
+@import './colors.scss';
+
+.characters{
+
+}
+.character-container {
+    .basic-info{
+        h2{
+            font-size: 20px;
+            span{
+                color: $accent;
+            }
+        }
+    }
+    .attribute-container {
+        
+        .prof-bonus{
+            margin-bottom: 1rem;
+            span{
+                border: 1px solid black;
+                padding: 1px 8px;
+            }
+        }
+        .attribute {
+            label:first-child {
+                display: inline-block;
+                width: 50px;
+            }
+            input {
+                text-align: center;
+                margin: 5px;
+            }
+        }
+    }
+}
