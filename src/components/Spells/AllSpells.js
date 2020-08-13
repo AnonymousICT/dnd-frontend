@@ -1,7 +1,7 @@
 import React,{useState, useEffect, useContext} from 'react'
-import {ResourceContext} from '../../context/ResourceContext'
+import { ResourceContext } from '../../context/ResourceContext'
 import { Context } from '../../context/Context'
-import {fetchAllSpecificSpellData} from '../../api/SpellAPI'
+import { fetchAllSpecificSpellData } from '../../api/SpellAPI'
 import bookloading from './bookloading.gif'
 import RenderTable from '../Table/RenderTable'
 
@@ -47,5 +47,4 @@ export default function AllSpells() {
             </div>
         </div>
     )
-}
-            
+}       

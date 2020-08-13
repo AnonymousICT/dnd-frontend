@@ -45,6 +45,23 @@
                 margin-bottom: 8px;
                 input {
                 }
+                label {
+
+                }
+            }
+        }
+    }
+
+    .battle-stats-container {
+        border: 1px solid;
+        .first-row {
+            border: 1px solid;
+            display: flex;
+            justify-content: space-around;
+            .battle-stat {
+                border: 1px solid;
+                margin: 0 10px;
+                vertical-align: center;
             }
         }
     }

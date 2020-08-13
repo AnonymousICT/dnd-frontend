@@ -47,8 +47,7 @@ export default function Skills({
                 WIS: currentCharacter.wisdom,
                 CHA: currentCharacter.charisma
             });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        },[currentCharacter])
+        },[currentCharacter, setAttributeValue])
 
     const skillModifiers = {
         Athletics: "STR",

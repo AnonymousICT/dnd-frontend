@@ -7,7 +7,7 @@ import DebounceInput from 'react-debounce-input'
 
 export default function BattleStats({userClass, filteredLevel}) {
     const [currentHitPoints, setCurrentHitPoints] = useState(0)
-    const {modMath} = useContext(AttributeContext)
+    const { modMath } = useContext(AttributeContext)
     const {currentCharacter, setCurrentCharacter} = useContext(Context)
     const {dexterity, constitution, level, wisdom, job, race} = currentCharacter;
     let {currentHP} = currentCharacter;
@@ -84,10 +84,18 @@ export default function BattleStats({userClass, filteredLevel}) {
 
     return (
         <div className="battle-stats-container">
-            <div>
-                <p>Armor class: {calculateEquippedAC(currentCharacter)}</p>
-                <p>Initiative: {modMath(dexterity)}</p>
-                <p>Speed: {calculateSpeed(race , job)} feet</p>
+            <div className='first-row'>
+                <div className='battle-stat'>
+                    <p>Armor <br/>class </p>
+                    <p>{calculateEquippedAC(currentCharacter)}</p>
+                </div>
+                <div className='battle-stat'>
+                    <p>Initiative </p> 
+                    <p>{modMath(dexterity)}</p>
+                </div>
+                <div className='battle-stat'>
+                    <p>Speed </p> <p>{calculateSpeed(race , job)} feet</p>
+                </div>
             </div>
             <div>
                 <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">Max Hit Points: { calculateMaxHP(currentCharacter) }</p>

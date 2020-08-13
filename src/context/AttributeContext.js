@@ -55,9 +55,9 @@ function AttributeContextProvider({children}) {
 
     const modMath = (score) => {
         return Math.round((score - 1) / 2 - 4.9)
-     } 
-     const { ability_bonuses } = raceData
-     window.ability_bonuses = ability_bonuses;
+    } 
+    const { ability_bonuses } = raceData
+    window.ability_bonuses = ability_bonuses;
     const attributeTotal = {...attributeValue};
     
     const racialBonus = (name) => ((ability_bonuses || defaultValues.raceData.ability_bonuses).filter(bonus => bonus.name === name)[0] || { bonus: 0 }).bonus
