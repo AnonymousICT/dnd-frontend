@@ -5,14 +5,18 @@ export default function SelectSpellCaster() {
     const { allCharacters, selectCharacter, setSelectCharacter,  setCurrentCharacter, nonSpellCaster } = useContext(Context)
 
     const handleSelection = (e) => {
-        setSelectCharacter(e.target.value)
+        if(e.target.value === "NoOp") {
+            setSelectCharacter(null)
+        } else {
+            setSelectCharacter(e.target.value)
+        }
     }
 
     useEffect(()=>{
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
         setCurrentCharacter(allCharacters.find((item)=>item._id === selectCharacter)) 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[selectCharacter])
+    
+    },[allCharacters, selectCharacter, setCurrentCharacter])
 
     let spellcasters = allCharacters.filter(character => 
        !nonSpellCaster.includes(character.job)

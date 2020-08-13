@@ -85,9 +85,9 @@ export default function Skills({
                 ) 
             } else {
                 return (
-                <div key={i}>
+                <div className='checked' key={i}>
                         <input type="checkbox" readOnly defaultChecked onClick={(e) => e.preventDefault()}/>
-                        <label>{label} {modMath(getValue(modifiers, label)) + (filteredLevel[0] || []).prof_bonus}</label>
+                        <label>{label} <span>{modMath(getValue(modifiers, label)) + (filteredLevel[0] || []).prof_bonus}</span></label>
                     </div>
                 )
             }

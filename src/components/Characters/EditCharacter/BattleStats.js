@@ -86,44 +86,56 @@ export default function BattleStats({userClass, filteredLevel}) {
         <div className="battle-stats-container">
             <div className='first-row'>
                 <div className='battle-stat'>
-                    <p>Armor <br/>class </p>
                     <p>{calculateEquippedAC(currentCharacter)}</p>
+                    <p title="Armor Class">AC</p>
                 </div>
                 <div className='battle-stat'>
-                    <p>Initiative </p> 
                     <p>{modMath(dexterity)}</p>
+                    <p title="Initiative Bonus">Initiative</p> 
                 </div>
                 <div className='battle-stat'>
-                    <p>Speed </p> <p>{calculateSpeed(race , job)} feet</p>
+                    <p>{calculateSpeed(race , job)}ft</p>
+                    <p>Speed</p> 
                 </div>
             </div>
-            <div>
-                <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">Max Hit Points: { calculateMaxHP(currentCharacter) }</p>
-                <div>
-                    <label>Current hit points: </label>
-                    <DebounceInput
-                        type="number"
-                        max={calculateMaxHP(currentCharacter) || 0}
-                        onChange={handleCurrentHpChange}
-                        placeholder="Current Hp"
-                        value={currentHitPoints || 0} />/{calculateMaxHP(currentCharacter)}
+            <div className='second-row'>
+                <h4>Hit Points</h4>
+                <div className="hit-points">
+                    <div>
+                        <label>Current</label>
+                        
+                        <DebounceInput
+                            type="number"
+                            max={calculateMaxHP(currentCharacter) || 0}
+                            onChange={handleCurrentHpChange}
+                            placeholder="Current Hp"
+                            value={currentHitPoints || 0} />
+                    </div>
+                    <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">
+                        Max:
+                        <span>
+                            { calculateMaxHP(currentCharacter)}
+                        </span>
+                    </p>
                 </div>
             </div>
-            <p>Hit Dice:  1d{userClass.hit_die}</p>
+            <div className='third row'>
+                <p>Hit Dice:  1d{userClass.hit_die}</p>
 
-            <div className="death-saves">
-                <label 
-                title="If you're character's hit points are reduced to 0, you must roll 11 or higher on a d20 to succeed. If you roll a natural 20 you automatically get up with 1 hp">Successful Death Saves</label>
-                <div>
-                    <input type="checkbox"/>
-                    <input type="checkbox"/>
-                    <input type="checkbox"/>
-                </div>
-                <label title="If you're character's hit poitns are reduced to 0 roll a d20. If you roll 10 or below you have failed 1 death save. If you roll a natural 1 you have failed two death saves">Failed Death Saves</label>
-                <div>
-                    <input type="checkbox"/>
-                    <input type="checkbox"/>
-                    <input type="checkbox"/>
+                <div className="death-saves">
+                    <label 
+                    title="If you're character's hit points are reduced to 0, you must roll 11 or higher on a d20 to succeed. If you roll a natural 20 you automatically get up with 1 hp">Successful Death Saves</label>
+                    <div>
+                        <input type="checkbox"/>
+                        <input type="checkbox"/>
+                        <input type="checkbox"/>
+                    </div>
+                    <label title="If you're character's hit poitns are reduced to 0 roll a d20. If you roll 10 or below you have failed 1 death save. If you roll a natural 1 you have failed two death saves">Failed Death Saves</label>
+                    <div>
+                        <input type="checkbox"/>
+                        <input type="checkbox"/>
+                        <input type="checkbox"/>
+                    </div>
                 </div>
             </div>
         </div>

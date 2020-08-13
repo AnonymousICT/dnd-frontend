@@ -5,7 +5,7 @@ import { fetchAllSpecificSpellData } from '../../api/SpellAPI'
 import bookloading from './bookloading.gif'
 import RenderTable from '../Table/RenderTable'
 
-export default function AllSpells() {
+export default function AllSpells({setShowModal}) {
     const [loading, setLoading] = useState(true)
     const [allSpellModels, setAllSpellModels] = useState([])
     const [spellMasterList, setSpellMasterList] = useState([])
@@ -40,10 +40,15 @@ export default function AllSpells() {
     }
     ,[allCharacters, selectCharacter, spellMasterList])
 
+    const rowClicked = (row) => {
+        setSpellSelection(row.url);
+        setShowModal(true);
+    }
+
     return (
         <div className='all-spells-container'>
             <div className="table-container">
-                {loading ? <img src={bookloading} alt="Loading..." /> : <RenderTable data={allSpellModels} setSpecificData={setSpellSelection} />}
+                {loading ? <img src={bookloading} alt="Loading..." /> : <RenderTable data={allSpellModels} rowClicked={rowClicked} />}
             </div>
         </div>
     )

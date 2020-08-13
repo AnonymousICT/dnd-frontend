@@ -2,6 +2,7 @@
 
 .characters{
     display: flex;
+    flex-direction: column;
 }
 .character-container {
     .basic-info{
@@ -35,18 +36,19 @@
     }
 
     .skills-container {
-        border: 1px solid;
         display: flex;
         flex-direction: column;
         .save-container {
-            border: 1px solid;
             div {
-                border: 1px solid;
                 margin-bottom: 8px;
                 input {
+                    display: none;
                 }
-                label {
-
+            }
+            .checked {
+                span {
+                    color: $accent;
+                    font-weight: 600;
                 }
             }
         }
@@ -55,14 +57,63 @@
     .battle-stats-container {
         border: 1px solid;
         .first-row {
-            border: 1px solid;
             display: flex;
             justify-content: space-around;
             .battle-stat {
-                border: 1px solid;
                 margin: 0 10px;
                 vertical-align: center;
+                width: 0;
+                flex: 1 1 0;
+                
+                p:first-child{
+                    border: 1px solid;
+                    padding: 1rem 1.2rem;
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                &:nth-child(2) {
+                    p:first-child{
+                        padding: 1rem 1.5rem;
+                    }
+                }
+                &:nth-child(3) {
+                    p:first-child{
+                        padding: 1rem 1.3rem;
+                    }
+                }
+            } 
+        }
+        .second-row{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            h4 {
+                width:100%;
+                margin: 0em;
             }
+            .hit-points {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+            p {
+                span {
+                    border: 1px solid $text;
+                    padding: 7px;
+                    color: $accent;
+                }
+            }
+            Input {
+                width: 40px;
+                padding: 10px;
+            }
+        }
+        .third-row{
+            display: flex;
         }
     }
 }

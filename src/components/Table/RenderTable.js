@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
-export default function RenderTable({data, setSpecificData}) {
+export default function RenderTable({data, rowClicked}) {
     const [rowsPerPage, setRowsPerPage] = useState(20);
     const [page, setPage] = useState(0);
 
@@ -41,7 +41,7 @@ export default function RenderTable({data, setSpecificData}) {
                     </TableHead>
                     <TableBody>
                     {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                        <TableRow className="tbl-row" key={row.name} onClick={(e)=>setSpecificData(row.url)}>
+                        <TableRow className="tbl-row" key={row.name} onClick={(e)=>rowClicked(row)}>
                             <TableCell align="center" component="th" scope="row">
                                 {row.name}
                             </TableCell>

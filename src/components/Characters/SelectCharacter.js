@@ -10,10 +10,8 @@ export default function SelectCharacter() {
   
 
     useEffect(()=>{
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         setCurrentCharacter(allCharacters.find((item)=>item._id === selectCharacter)) 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[selectCharacter])
+    },[allCharacters, selectCharacter, setCurrentCharacter])
 
     return (
         <div>

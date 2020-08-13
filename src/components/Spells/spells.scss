@@ -9,9 +9,9 @@
         background-color: $secondary;
     }
     .cart {
-        display: none;
+        display: block;
     }
-    /* On the Mobile level there will be a button to make the cart slide over the list */
+
     .character-spellbook {
         display: flex;
         flex-direction: column;
@@ -19,13 +19,11 @@
     }
 
     .specific-spell-container {
-        
+        width: 100%;
         section {
             background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
             border: 1px solid #888;
-            width: 70%;
+            width: 100%;
         }
     }
 }

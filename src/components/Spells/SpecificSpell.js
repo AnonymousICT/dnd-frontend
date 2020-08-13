@@ -36,21 +36,25 @@ export default function SpecificSpell() {
         );
     }
 
-    return (
-        <div className='specific-spell-container'>
-            {!name || name === "Nothingness" ? null : 
-            <section>
-                <h1 className='spell-name'>{name}</h1>
-                <p>Level: {level} {school.name} {ritual ? "(ritual)" : null}</p>
-                <p>Casting Time: {casting_time}</p>
-                <p>Spell Range: {range}</p>
-                <p>Components: {components} {material}</p>
-                <p>Duration: {concentration ? "Concentration, " : null} {duration}</p>
-                <p>Classes: {classes.map(index => index.name).join(', ')}</p>
-                <p>Description: {desc}</p>
-                <p>{higher_level}</p>
-                {renderButton()}
-            </section>}
-        </div>
-    )
+    const renderSpecificSpell = () => {
+        return (
+            <div className='specific-spell-container'>
+                {!name || name === "Nothingness" ? null : 
+                <section>
+                    <h1 className='spell-name'>{name}</h1>
+                    <p>Level: {level} {school.name} {ritual ? "(ritual)" : null}</p>
+                    <p>Casting Time: {casting_time}</p>
+                    <p>Spell Range: {range}</p>
+                    <p>Components: {components} {material}</p>
+                    <p>Duration: {concentration ? "Concentration, " : null} {duration}</p>
+                    <p>Classes: {classes.map(index => index.name).join(', ')}</p>
+                    <p>Description: {desc}</p>
+                    <p>{higher_level}</p>
+                    {renderButton()}
+                </section>}
+            </div>
+        )
+    }
+
+    return renderSpecificSpell();
 }
