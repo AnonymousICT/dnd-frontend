@@ -20,7 +20,7 @@ export default function displayCheckboxes(initArray, valuesArray, modifiers, fil
                 return (
                     <div key={i} data-title="is proficient">
                         <input type="checkbox" readOnly defaultChecked onClick={(e) => e.preventDefault()}/>
-                        <label className='checked'>{label} <span>{modMath(getValue(modifiers, label)) + profBonus(filteredLevel)}</span></label>
+                        <label className='checked'>{label} <span>{(modMath(getValue(modifiers, label))) + profBonus(filteredLevel)}</span></label>
                     </div>
                 )
             }

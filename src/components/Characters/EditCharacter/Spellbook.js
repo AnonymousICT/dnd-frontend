@@ -5,15 +5,15 @@ import { Context } from '../../../context/Context'
 //only add 1 copy EVER to the spellbook
     const spellLabels = {
         cantrips_known: "Cantrips known: ",
-        spell_slots_level_1: "Level 1 spell slots: ",
-        spell_slots_level_2: "Level 2 spell slots: ",
-        spell_slots_level_3: "Level 3 spell slots: ",
-        spell_slots_level_4: "Level 4 spell slots: ",
-        spell_slots_level_5: "Level 5 spell slots: ",
-        spell_slots_level_6: "Level 6 spell slots: ",
-        spell_slots_level_7: "Level 7 spell slots: ",
-        spell_slots_level_8: "Level 8 spell slots: ",
-        spell_slots_level_9: "Level 9 spell slots: ",
+        spell_slots_level_1: "Level 1 spells: ",
+        spell_slots_level_2: "Level 2 spells: ",
+        spell_slots_level_3: "Level 3 spells: ",
+        spell_slots_level_4: "Level 4 spells: ",
+        spell_slots_level_5: "Level 5 spells: ",
+        spell_slots_level_6: "Level 6 spells: ",
+        spell_slots_level_7: "Level 7 spells: ",
+        spell_slots_level_8: "Level 8 spells: ",
+        spell_slots_level_9: "Level 9 spells: ",
     }
     
     export default function Spellbook({filteredLevel}) {
@@ -37,9 +37,11 @@ import { Context } from '../../../context/Context'
     }
 
     return (
-        <div className="spells-container">
+        <div>
             <h2>Spells</h2>
-            {renderSpellList()}
+            <div className="spells-container">
+                {renderSpellList()}
+            </div>
         </div>
     )
 }

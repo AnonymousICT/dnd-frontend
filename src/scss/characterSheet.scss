@@ -1,144 +1,191 @@
-@import './colors.scss';
+@import "./colors.scss";
 
 main {
-    width:100%;
-    max-width: 280px;
+  width: 100%;
+  max-width: 280px;
 }
 
-.characters{
-    display: flex;
-    flex-direction: column;
+.characters {
+  display: flex;
+  flex-direction: column;
 }
-.character-container {
+.slider-container {
+  position: relative;
+
+  .page-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    .active {
+      background-color: $secondary;
+      border-radius: 0.3em;
+      border-width: 1px;      
+    }
+  }
+
+  .nav {
+    position: absolute;
+    top: 50%;
+    &.previous {
+      transform: scaleX(-1);
+      left: 0;
+    }
+    &.next {
+      right: 0;
+    }
+
+    span {
+        display: contents;
+    }
+  }
+
+  .character-container {
+    overflow-x: hidden;
     display: grid;
-    grid-template-columns: repeat(5, 100%);
+    grid-template-columns: repeat(7, 100%);
     will-change: transform;
     align-content: center;
-    overflow-x: auto;
     scroll-snap-coordinate: 0 0;
     scroll-snap-points-x: repeat(100%);
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    & > * {
-        scroll-snap-align: start;
+
+    &:focus {
+      outline: none;
     }
 
-    .basic-info{
-        h2{
-            font-size: 20px;
-            span{
-                color: $accent;
-            }
+    & > * {
+      scroll-snap-align: start;
+    }
+
+    .basic-info {
+      h2 {
+        font-size: 20px;
+        span {
+          color: $accent;
         }
+      }
     }
 
     .attribute-container {
-        padding-top: 1em;
-        .prof-bonus{
-            margin-bottom: 1rem;
-            span{
-                border: 1px solid black;
-                padding: 1px 8px;
-            }
+      padding-top: 1em;
+      .prof-bonus {
+        margin-bottom: 1rem;
+        span {
+          border: 1px solid black;
+          padding: 1px 8px;
         }
-        .attribute {
-            label:first-child {
-                display: inline-block;
-                width: 50px;
-            }
-            input {
-                text-align: center;
-                margin: 5px;
-            }
+      }
+      .attribute {
+        label:first-child {
+          display: inline-block;
+          width: 50px;
         }
+        input {
+          text-align: center;
+          margin: 5px;
+        }
+      }
     }
 
     .skills-save-container {
-        display: flex;
-        flex-direction: column;
-        .save-container, .skills-container {
-            div {
-                margin-bottom: 8px;
-                input {
-                    display: none;
-                }
-            }
-            .checked {
-                span {
-                    color: $accent;
-                    font-weight: 600;
-                }
-            }
+      display: flex;
+      flex-direction: column;
+      .save-container,
+      .skills-container {
+        div {
+          margin-bottom: 8px;
+          input {
+            display: none;
+          }
         }
+        .checked {
+          span {
+            color: $accent;
+            font-weight: 600;
+          }
+        }
+      }
     }
 
     .battle-stats-container {
-        margin: 1em;
-        border: 1px solid;
-        .first-row {
-            display: flex;
-            justify-content: space-around;
-            .battle-stat {
-                margin: 0 10px;
-                vertical-align: center;
-                width: 0;
-                flex: 1 1 0;
-                
-                p:first-child{
-                    border: 1px solid;
-                    padding: 1rem 1.2rem;
-                    flex: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
+      margin: 1em;
+      border: 1px solid;
+      .first-row {
+        display: flex;
+        justify-content: space-around;
+        .battle-stat {
+          margin: 0 10px;
+          vertical-align: center;
+          width: 0;
+          flex: 1 1 0;
 
-                p:last-child{
-                    font-size: 14px;
-                    margin-top: -14px;                    
-                }
-
-                &:nth-child(2) {
-                    p:first-child{
-                        padding: 1rem 1.5rem;
-                    }
-                }
-                &:nth-child(3) {
-                    p:first-child{
-                        padding: 1rem 1.3rem;
-                    }
-                }
-            } 
-        }
-        .second-row{
+          p:first-child {
+            border: 1px solid;
+            padding: 1rem 1.2rem;
+            flex: 1;
             display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
             align-items: center;
-            h4 {
-                width:100%;
-                margin: 0em;
+            justify-content: center;
+          }
+
+          p:last-child {
+            font-size: 14px;
+            margin-top: -14px;
+          }
+
+          &:nth-child(2) {
+            p:first-child {
+              padding: 1rem 1.5rem;
             }
-            .hit-points {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
+          }
+          &:nth-child(3) {
+            p:first-child {
+              padding: 1rem 1.3rem;
             }
-            p {
-                span {
-                    border: 1px solid $text;
-                    padding: 7px;
-                    color: $accent;
-                }
-            }
-            Input {
-                width: 40px;
-                padding: 10px;
-            }
+          }
         }
-        .third-row{
-            display: flex;
+      }
+      .second-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        h4 {
+          width: 100%;
+          margin: 0em;
         }
+        .hit-points {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+        }
+        p {
+          span {
+            border: 1px solid $text;
+            padding: 7px;
+            color: $accent;
+          }
+        }
+        Input {
+          width: 40px;
+          padding: 10px;
+        }
+      }
+      .third-row {
+        display: flex;
+      }
     }
+
+    .spells-container {
+      column-count: 2;
+      padding: 10px;
+      label {
+        font-weight: 600;
+        color: $accent;
+      }
+    }
+  }
 }
