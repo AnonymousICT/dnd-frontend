@@ -1,30 +1,30 @@
-@import '../../scss/colors.scss';
+@import "../../scss/colors.scss";
 
 .spells {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .tbl-row:hover {
+    background-color: $secondary;
+  }
+  .cart {
+    display: block;
+  }
+
+  .character-spellbook {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    
-    .tbl-row:hover {
-        background-color: $secondary;
-    }
-    .cart {
-        display: block;
-    }
+    margin-bottom: 1em;
+  }
 
-    .character-spellbook {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1em;
+  .specific-spell-container {
+    width: 100%;
+    section {
+      background-color: #fefefe;
+      border: 1px solid #888;
+      width: 100%;
+      padding: 0 1em 1em;
     }
-
-    .specific-spell-container {
-        width: 100%;
-        section {
-            background-color: #fefefe;
-            border: 1px solid #888;
-            width: 100%;
-            padding: 0 1em 1em;
-        }
-    }
+  }
 }

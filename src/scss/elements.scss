@@ -1,37 +1,38 @@
-@import './colors.scss';
-
+@import "./colors.scss";
 
 body {
-    margin: 0;
-    padding: 0;
-    background: $main-background;
-    color: $text;
-    font-family: Roboto;
+  margin: 0;
+  padding: 0;
+  background: $main-background;
+  color: $text;
+  font-family: Roboto;
 }
 
-ul{
-    list-style: none;
-    text-decoration: none;
-    padding-inline-start: 0;
+ul {
+  list-style: none;
+  text-decoration: none;
+  padding-inline-start: 0;
 
-    li {
-        a {
-        text-decoration: none;
-        }
+  li {
+    a {
+      text-decoration: none;
     }
+  }
 }
 
-h1, h2, h3{
-    font-family: Lato;
+h1,
+h2,
+h3 {
+  font-family: Lato;
 }
 
-a{
+a {
+  color: $accent;
+  :active {
     color: $accent;
-    :active{
-        color: $accent;
-    }
+  }
 }
 
 .tabulator {
-    text-align: center;
+  text-align: center;
 }

@@ -1,145 +1,176 @@
-import React,{useState, useEffect, useContext } from 'react'
-import {AttributeContext} from '../../../context/AttributeContext'
-import {Context} from '../../../context/Context'
-import axios from 'axios'
-import DebounceInput from 'react-debounce-input'
+import React, { useState, useEffect, useContext } from "react";
+import { AttributeContext } from "../../../context/AttributeContext";
+import { Context } from "../../../context/Context";
+import axios from "axios";
+import DebounceInput from "react-debounce-input";
 
-export default function BattleStats({userClass, filteredLevel}) {
-    const [currentHitPoints, setCurrentHitPoints] = useState(0)
-    const { modMath } = useContext(AttributeContext)
-    const {currentCharacter, setCurrentCharacter} = useContext(Context)
-    const {dexterity, constitution, level, wisdom, job, race} = currentCharacter;
-    let {currentHP} = currentCharacter;
+export default function BattleStats({ userClass, filteredLevel }) {
+  const [currentHitPoints, setCurrentHitPoints] = useState(0);
+  const { modMath } = useContext(AttributeContext);
+  const { currentCharacter, setCurrentCharacter } = useContext(Context);
+  const {
+    dexterity,
+    constitution,
+    level,
+    wisdom,
+    job,
+    race,
+  } = currentCharacter;
+  let { currentHP } = currentCharacter;
 
-    useEffect(()=>{
-        setCurrentHitPoints(currentHP)
-    },[currentHP])
+  useEffect(() => {
+    setCurrentHitPoints(currentHP);
+  }, [currentHP]);
 
-    const calculateInitialAC = () => {
-        switch(job.toLowerCase()) {
-            case "monk":
-                return modMath(dexterity) + modMath(wisdom) + 10;
-            case "barbarian":
-                return modMath(dexterity) + modMath(constitution) + 10;
-            default:
-                return modMath(dexterity) + 10;
-        }
+  const calculateInitialAC = () => {
+    switch (job.toLowerCase()) {
+      case "monk":
+        return modMath(dexterity) + modMath(wisdom) + 10;
+      case "barbarian":
+        return modMath(dexterity) + modMath(constitution) + 10;
+      default:
+        return modMath(dexterity) + 10;
     }
+  };
 
-    const calculateEquippedAC = (character) => {
-        let equippedArmor = character.items.filter(item => item.isEquipped)
+  const calculateEquippedAC = (character) => {
+    let equippedArmor = character.items.filter((item) => item.isEquipped);
 
-        let armorStats = (equippedArmor[0] || {armor_class:null}).armor_class
-        if(character.items.length === 0 || !equippedArmor || !armorStats || !armorStats.base) {
-            return calculateInitialAC()
-        } else if(armorStats.dex_bonus) {
-            if(!armorStats.max_bonus) {
-                return armorStats.base + modMath(dexterity)
-            } else {
-                if(modMath(dexterity) > armorStats.max_bonus) {
-                    return armorStats.base + armorStats.max_bonus
-                } else {
-                    return armorStats.base + modMath(dexterity)
-                }
-            }
+    let armorStats = (equippedArmor[0] || { armor_class: null }).armor_class;
+    if (
+      character.items.length === 0 ||
+      !equippedArmor ||
+      !armorStats ||
+      !armorStats.base
+    ) {
+      return calculateInitialAC();
+    } else if (armorStats.dex_bonus) {
+      if (!armorStats.max_bonus) {
+        return armorStats.base + modMath(dexterity);
+      } else {
+        if (modMath(dexterity) > armorStats.max_bonus) {
+          return armorStats.base + armorStats.max_bonus;
         } else {
-            return armorStats.base
+          return armorStats.base + modMath(dexterity);
         }
+      }
+    } else {
+      return armorStats.base;
     }
- 
-    const averagetHitDie = (hitDie) => {
-        return (hitDie/ 2) + 1
-    }
+  };
 
-    const calculateMaxHP = (character) => {
-        return (averagetHitDie(userClass.hit_die) + modMath(character.constitution)) * level 
-    }
+  const averagetHitDie = (hitDie) => {
+    return hitDie / 2 + 1;
+  };
 
-    const calculateSpeed = (race, job) => {
-        let speed
-        let monkBonus
-        let unarmoredMovement = filteredLevel
-            .find((item) => item && item.class_specific && item.class_specific.unarmored_movement);
-        if(unarmoredMovement) {
-            unarmoredMovement = unarmoredMovement.class_specific.unarmored_movement || 0;
-        } else {
-            unarmoredMovement = 0;
-        }
-        if(race === "Gnome" || race ==="Halfling") { speed = 25 }  
-        else { speed = 30 }
-        if(job === "Monk") { monkBonus = unarmoredMovement }  
-        return speed + (monkBonus || 0)
-    }
-
-    const handleCurrentHpChange = (e) => {
-        let hpValue = +e.target.value;
-        setCurrentCharacter({...currentCharacter, currentHP: hpValue })
-        submitToDb(hpValue);
-    }
-    
-    const submitToDb = async (hp) => {
-        try {
-            const updateCharacterCurrentHP = {
-                currentHP: hp
-            }
-            await axios.put(`https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}`, updateCharacterCurrentHP, {headers: {"x-auth-token": localStorage.getItem('x-auth-token')}})
-        } catch (err) {
-            console.error(err)
-        }
-    } 
-
+  const calculateMaxHP = (character) => {
     return (
-        <div className="battle-stats-container">
-            <div className='first-row'>
-                <div className='battle-stat'>
-                    <p>{calculateEquippedAC(currentCharacter)}</p>
-                    <p title="Armor Class">AC</p>
-                </div>
-                <div className='battle-stat'>
-                    <p>{modMath(dexterity)}</p>
-                    <p title="Initiative Bonus">Initiative</p> 
-                </div>
-                <div className='battle-stat'>
-                    <p>{calculateSpeed(race , job)}ft</p>
-                    <p>Speed</p> 
-                </div>
-            </div>
-            <div className='second-row'>
-                <h4>Hit Points</h4>
-                <div className="hit-points">
-                    <div>
-                        <label>Current</label>
-                        <DebounceInput
-                            type="number"
-                            max={calculateMaxHP(currentCharacter) || 0}
-                            onChange={handleCurrentHpChange}
-                            placeholder="Current Hp"
-                            value={currentHitPoints || 0} />
-                    </div>
-                    <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">
-                        Max: <span>{ calculateMaxHP(currentCharacter) || 0}</span>
-                    </p>
-                </div>
-            </div>
-            <div className='third row'>
-                <p>Hit Dice:  1d{userClass.hit_die}</p>
+      (averagetHitDie(userClass.hit_die) + modMath(character.constitution)) *
+      level
+    );
+  };
 
-                <div className="death-saves">
-                    <label 
-                    title="If you're character's hit points are reduced to 0, you must roll 11 or higher on a d20 to succeed. If you roll a natural 20 you automatically get up with 1 hp">Successful Death Saves</label>
-                    <div>
-                        <input type="checkbox"/>
-                        <input type="checkbox"/>
-                        <input type="checkbox"/>
-                    </div>
-                    <label title="If you're character's hit poitns are reduced to 0 roll a d20. If you roll 10 or below you have failed 1 death save. If you roll a natural 1 you have failed two death saves">Failed Death Saves</label>
-                    <div>
-                        <input type="checkbox"/>
-                        <input type="checkbox"/>
-                        <input type="checkbox"/>
-                    </div>
-                </div>
-            </div>
+  const calculateSpeed = (race, job) => {
+    let speed;
+    let monkBonus;
+    let unarmoredMovement = filteredLevel.find(
+      (item) =>
+        item && item.class_specific && item.class_specific.unarmored_movement
+    );
+    if (unarmoredMovement) {
+      unarmoredMovement =
+        unarmoredMovement.class_specific.unarmored_movement || 0;
+    } else {
+      unarmoredMovement = 0;
+    }
+    if (race === "Gnome" || race === "Halfling") {
+      speed = 25;
+    } else {
+      speed = 30;
+    }
+    if (job === "Monk") {
+      monkBonus = unarmoredMovement;
+    }
+    return speed + (monkBonus || 0);
+  };
+
+  const handleCurrentHpChange = (e) => {
+    let hpValue = +e.target.value;
+    setCurrentCharacter({ ...currentCharacter, currentHP: hpValue });
+    submitToDb(hpValue);
+  };
+
+  const submitToDb = async (hp) => {
+    try {
+      const updateCharacterCurrentHP = {
+        currentHP: hp,
+      };
+      await axios.put(
+        `https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}`,
+        updateCharacterCurrentHP,
+        { headers: { "x-auth-token": localStorage.getItem("x-auth-token") } }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <div className="battle-stats-container">
+      <div className="first-row">
+        <div className="battle-stat">
+          <p>{calculateEquippedAC(currentCharacter)}</p>
+          <p title="Armor Class">AC</p>
         </div>
-    )
+        <div className="battle-stat">
+          <p>{modMath(dexterity)}</p>
+          <p title="Initiative Bonus">Initiative</p>
+        </div>
+        <div className="battle-stat">
+          <p>{calculateSpeed(race, job)}ft</p>
+          <p>Speed</p>
+        </div>
+      </div>
+      <div className="second-row">
+        <h4>Hit Points</h4>
+        <div className="hit-points">
+          <div>
+            <label>Current</label>
+            <DebounceInput
+              type="number"
+              max={calculateMaxHP(currentCharacter) || 0}
+              onChange={handleCurrentHpChange}
+              placeholder="Current Hp"
+              value={currentHitPoints || 0}
+            />
+          </div>
+          <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">
+            Max: <span>{calculateMaxHP(currentCharacter) || 0}</span>
+          </p>
+        </div>
+      </div>
+      <div className="third row">
+        <p>Hit Dice: 1d{userClass.hit_die}</p>
+
+        <div className="death-saves">
+          <label title="If you're character's hit points are reduced to 0, you must roll 11 or higher on a d20 to succeed. If you roll a natural 20 you automatically get up with 1 hp">
+            Successful Death Saves
+          </label>
+          <div>
+            <input type="checkbox" />
+            <input type="checkbox" />
+            <input type="checkbox" />
+          </div>
+          <label title="If you're character's hit poitns are reduced to 0 roll a d20. If you roll 10 or below you have failed 1 death save. If you roll a natural 1 you have failed two death saves">
+            Failed Death Saves
+          </label>
+          <div>
+            <input type="checkbox" />
+            <input type="checkbox" />
+            <input type="checkbox" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,28 +1,27 @@
-@import './scss/colors.scss';
-@import './scss/fonts.scss';
-@import './scss/elements.scss';
-@import './scss/navbar.scss';
-@import './scss/Modal.scss';
+@import "./scss/colors.scss";
+@import "./scss/fonts.scss";
+@import "./scss/elements.scss";
+@import "./scss/navbar.scss";
+@import "./scss/Modal.scss";
 
 // components
-@import './scss/class-icons.scss';
-@import './scss/Auth.scss';
-@import './scss/characterSheet.scss';
+@import "./scss/class-icons.scss";
+@import "./scss/Auth.scss";
+@import "./scss/characterSheet.scss";
 
 .App {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    h1{
-        color: $text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  h1 {
+    color: $text;
+  }
+  h3 {
+    color: $text;
+    span {
+      color: $secondary;
     }
-    h3{
-        color: $text;
-        span{
-            color: $secondary;
-        }
-    }
+  }
 }
-

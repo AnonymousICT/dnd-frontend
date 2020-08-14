@@ -1,31 +1,31 @@
-@import '../../scss/colors.scss';
+@import "../../scss/colors.scss";
 
 .equipment-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .equipment-filters {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
 }
 .equipment-filters > button {
-    flex: 1;
+  flex: 1;
 }
 
 .tbl-row:hover {
-    background-color: $secondary;
+  background-color: $secondary;
 }
 
 .table-container {
-    display: flex;
+  display: flex;
 }
 
 .specific-equipment {
-    background-color: #fefefe;
-    border: 1px solid #888;
-    width: 100%;
-    padding: 0 1em 1em;
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 100%;
+  padding: 0 1em 1em;
 }
