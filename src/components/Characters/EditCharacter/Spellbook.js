@@ -24,7 +24,7 @@ import { Context } from '../../../context/Context'
     const renderSpellList = () => {
         return (
             Object.keys(spellLabels).map((spellLabel, i) =>
-                <div key ={i} className={(!characterSpellSlots? 0 : characterSpellSlots[spellLabel] || 0) ? null : "disabled"}>
+                <div key ={i} className={(!characterSpellSlots ? 0 : characterSpellSlots[spellLabel] || 0) ? null : "disabled"}>
                     <label>
                         {spellLabels[spellLabel]}{!characterSpellSlots? 0 : characterSpellSlots[spellLabel] || 0}
                     </label>            
@@ -38,6 +38,7 @@ import { Context } from '../../../context/Context'
 
     return (
         <div className="spells-container">
+            <h2>Spells</h2>
             {renderSpellList()}
         </div>
     )

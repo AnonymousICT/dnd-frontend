@@ -81,9 +81,12 @@ export default function AllItems() {
     }
 
     return (
-        !currentCharacter.items ? <ul><li>Loading...</li></ul> : 
+        <div>
+            <h2>Equipment</h2>
+        { !currentCharacter.items ? <ul><li>Loading...</li></ul> : 
             <ul>
                 {currentCharacter.items.map((item, i) => renderEquipped(item, i))}
-            </ul>
+            </ul>}
+        </div>
     )
 }

@@ -1,10 +1,28 @@
 @import './colors.scss';
 
+main {
+    width:100%;
+    max-width: 280px;
+}
+
 .characters{
     display: flex;
     flex-direction: column;
 }
 .character-container {
+    display: grid;
+    grid-template-columns: repeat(5, 100%);
+    will-change: transform;
+    align-content: center;
+    overflow-x: auto;
+    scroll-snap-coordinate: 0 0;
+    scroll-snap-points-x: repeat(100%);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    & > * {
+        scroll-snap-align: start;
+    }
+
     .basic-info{
         h2{
             font-size: 20px;
@@ -15,7 +33,7 @@
     }
 
     .attribute-container {
-        
+        padding-top: 1em;
         .prof-bonus{
             margin-bottom: 1rem;
             span{
@@ -35,10 +53,10 @@
         }
     }
 
-    .skills-container {
+    .skills-save-container {
         display: flex;
         flex-direction: column;
-        .save-container {
+        .save-container, .skills-container {
             div {
                 margin-bottom: 8px;
                 input {
@@ -55,6 +73,7 @@
     }
 
     .battle-stats-container {
+        margin: 1em;
         border: 1px solid;
         .first-row {
             display: flex;
@@ -73,6 +92,12 @@
                     align-items: center;
                     justify-content: center;
                 }
+
+                p:last-child{
+                    font-size: 14px;
+                    margin-top: -14px;                    
+                }
+
                 &:nth-child(2) {
                     p:first-child{
                         padding: 1rem 1.5rem;

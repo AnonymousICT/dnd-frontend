@@ -4,7 +4,6 @@ import {Context} from '../../../context/Context'
 import axios from 'axios'
 import DebounceInput from 'react-debounce-input'
 
-
 export default function BattleStats({userClass, filteredLevel}) {
     const [currentHitPoints, setCurrentHitPoints] = useState(0)
     const { modMath } = useContext(AttributeContext)
@@ -59,9 +58,16 @@ export default function BattleStats({userClass, filteredLevel}) {
     const calculateSpeed = (race, job) => {
         let speed
         let monkBonus
-        if(race === "Gnome" || race ==="Halfling") { speed = 25}  
+        let unarmoredMovement = filteredLevel
+            .find((item) => item && item.class_specific && item.class_specific.unarmored_movement);
+        if(unarmoredMovement) {
+            unarmoredMovement = unarmoredMovement.class_specific.unarmored_movement || 0;
+        } else {
+            unarmoredMovement = 0;
+        }
+        if(race === "Gnome" || race ==="Halfling") { speed = 25 }  
         else { speed = 30 }
-        if(job === "Monk") { monkBonus = filteredLevel[0] ? filteredLevel[0].class_specific.unarmored_movement: 0 }  
+        if(job === "Monk") { monkBonus = unarmoredMovement }  
         return speed + (monkBonus || 0)
     }
 
@@ -103,7 +109,6 @@ export default function BattleStats({userClass, filteredLevel}) {
                 <div className="hit-points">
                     <div>
                         <label>Current</label>
-                        
                         <DebounceInput
                             type="number"
                             max={calculateMaxHP(currentCharacter) || 0}
@@ -112,10 +117,7 @@ export default function BattleStats({userClass, filteredLevel}) {
                             value={currentHitPoints || 0} />
                     </div>
                     <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">
-                        Max:
-                        <span>
-                            { calculateMaxHP(currentCharacter)}
-                        </span>
+                        Max: <span>{ calculateMaxHP(currentCharacter) || 0}</span>
                     </p>
                 </div>
             </div>

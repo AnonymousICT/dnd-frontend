@@ -6,7 +6,7 @@ export default function SelectSpellCaster() {
 
     const handleSelection = (e) => {
         if(e.target.value === "NoOp") {
-            setSelectCharacter(null)
+            setSelectCharacter('')
         } else {
             setSelectCharacter(e.target.value)
         }

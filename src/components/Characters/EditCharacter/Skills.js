@@ -1,15 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import {AttributeContext} from '../../../context/AttributeContext'
 import {Context} from '../../../context/Context'
-
-const saveArray = [
-    "STR",
-    "DEX",
-    "CON",
-    "INT",
-    "WIS",
-    "CHA",
-]
+import displayCheckboxes from './DisplayCheckBoxes'
 
 const skillArray = [
     "Athletics",
@@ -31,6 +23,7 @@ const skillArray = [
     "Performance",
     "Persuasion",
 ]
+
 
 export default function Skills({
     userClass:{saving_throws}, 
@@ -70,37 +63,17 @@ export default function Skills({
         Persuasion: "CHA",
     }
 
-    const savingThrows = !saving_throws ? []: saving_throws.map(save => save.name)
-
-    const getValue = (modifiers, item) => attributeValue[modifiers ? modifiers[item] : item];
-
-    const displayCheckboxes = (initArray, valuesArray, modifiers) => initArray.map( 
-        (label, i) => {
-            if(valuesArray.filter((item) => label === item ).length === 0) {
-                return (
-                    <div key={i}>
-                        <input type="checkbox" readOnly disabled/>
-                        <label>{label} {modMath(getValue(modifiers, label))}</label>
-                    </div>
-                ) 
-            } else {
-                return (
-                <div className='checked' key={i}>
-                        <input type="checkbox" readOnly defaultChecked onClick={(e) => e.preventDefault()}/>
-                        <label>{label} <span>{modMath(getValue(modifiers, label)) + (filteredLevel[0] || []).prof_bonus}</span></label>
-                    </div>
-                )
-            }
-        }
-    )
-
     return (
-        <div className="skills-container">
-            <h2>Saving Throws</h2>
-            <div className="save-container">
-                {displayCheckboxes(saveArray, savingThrows, null)}
+        <div className="skills-save-container">
+            <div className='skills-container'>
                 <h2>Skills</h2>
-                {displayCheckboxes(skillArray, (currentCharacter.profChoice || []).map(choice => choice.replace("Skill: ", "")), skillModifiers)}
+                {displayCheckboxes(
+                    skillArray, 
+                    (currentCharacter.profChoice || []).map(choice => choice.replace("Skill: ", "")), 
+                    skillModifiers, 
+                    filteredLevel, 
+                    attributeValue, 
+                    modMath)}
             </div>
         </div>
     )

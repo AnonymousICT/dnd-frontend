@@ -4,7 +4,6 @@ import {Context} from '../../../context/Context'
 
 
 export default function Attributes({filteredLevel}) {
-    
     const {currentCharacter} = useContext(Context);
 
     const {
@@ -29,10 +28,14 @@ export default function Attributes({filteredLevel}) {
         });
     },[currentCharacter, setAttributeValue]);
 
+    const profBonus = () => {
+        return (filteredLevel.find((item) => item.prof_bonus) || {prof_bonus: 0}).prof_bonus;
+    }
+
     return (
         <div className="attribute-container">
             <div className="prof-bonus">
-                Proficiency Bonus: <span>{(filteredLevel[0] || []).prof_bonus}</span>
+                Proficiency Bonus: <span>{profBonus()}</span>
             </div>
             {allAttributes.sort(sortFunction).map((attribute, i) =>{
                 return (

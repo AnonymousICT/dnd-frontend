@@ -4,6 +4,7 @@ import Axios from 'axios'
 
 import BasicInfo from './BasicInfo'
 import Attributes from './Attributes'
+import Saves from './Saves'
 import Skills from './Skills'
 import BattleStats from './BattleStats'
 import AllItems from './AllItems'
@@ -54,13 +55,21 @@ export default function EditCharacter() {
 
     return (
         <div className="character-container">
-            <BasicInfo />
-            <Attributes filteredLevel={filteredLevel}/>
+            <div>
+                <BasicInfo />
+                <BattleStats 
+                    userClass={userClass}
+                    filteredLevel={filteredLevel}
+                />
+            </div>
+            <div>
+                <Attributes filteredLevel={filteredLevel}/>
+                <Saves
+                    userClass={userClass}
+                    filteredLevel={filteredLevel}
+                />
+            </div>
             <Skills 
-                userClass={userClass}
-                filteredLevel={filteredLevel}
-            />
-            <BattleStats 
                 userClass={userClass}
                 filteredLevel={filteredLevel}
             />
