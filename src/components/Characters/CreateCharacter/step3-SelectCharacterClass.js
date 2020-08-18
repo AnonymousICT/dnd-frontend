@@ -1,19 +1,69 @@
-import React, { useContext } from "react";
-import { Context } from "../../../context/Context";
-import { ResourceContext } from "../../../context/ResourceContext";
+import React, { useState, useEffect } from "react";
 import { renderClassLevel } from "./renderClassLevels";
 import { validCells } from "./validCells";
+import { defaultValues } from "../../../context/DefaultValues";
+import {
+  fetchClassData,
+  fetchSpecificClass,
+  fetchClassLeveling,
+} from "../../../api/ClassAPI";
 
-export default function SelectCharacterClass() {
-  const {
-    characterClass,
-    setCharacterClass,
-    characterLevel,
-    isChecked,
-    setIsChecked,
-  } = useContext(Context);
+export default function SelectCharacterClass({
+  newCharacter,
+  setNewCharacter,
+  setValid,
+}) {
+  const [characterClass, setCharacterClass] = useState("");
+  const [allClasses, setAllClasses] = useState([]);
+  const [classData, setClassData] = useState(defaultValues.classData);
+  const [classLevels, setClassLevels] = useState([]);
+  const [isChecked, setIsChecked] = useState({});
 
-  const { allClasses, classData, classLevels } = useContext(ResourceContext);
+  useEffect(() => {
+    const fetchedAllClasses = async () => {
+      setAllClasses(await fetchClassData());
+    };
+    fetchedAllClasses();
+  }, []);
+
+  useEffect(() => {
+    const fetchedSpecificClassData = async () => {
+      setClassData(await fetchSpecificClass(characterClass));
+    };
+    fetchedSpecificClassData();
+  }, [characterClass]);
+
+  useEffect(() => {
+    const fetchedLevelsData = async () => {
+      setClassLevels(await fetchClassLeveling(characterClass));
+    };
+    fetchedLevelsData();
+  }, [characterClass]);
+
+  useEffect(() => {
+    setNewCharacter((previousState) => {
+      return {
+        ...previousState,
+        job: classData.name,
+        profChoice: Object.keys(isChecked).map((propName) =>
+          isChecked[propName].key.replace("Skill: ", "")
+        ),
+      };
+    });
+  }, [isChecked, classData, setNewCharacter]);
+
+  console.log(newCharacter);
+
+  useEffect(() => {
+    const requiredCount = (classData.proficiency_choices || []).reduce(
+      (count, choice) => {
+        return count + choice.choose;
+      },
+      0
+    );
+    setValid(classData && (newCharacter.profChoice || []).length === requiredCount);
+  }, [classData, newCharacter, setValid]);
+
   const {
     name,
     hit_die,
@@ -24,16 +74,26 @@ export default function SelectCharacterClass() {
   } = classData;
 
   const handleChecks = (e) => {
-    let group = e.target.getAttribute("data-group");
-    let selectedCount = Object.keys(isChecked).filter(
-      (key) => isChecked[key].group === group && isChecked[key].checked
-    ).length;
-    let choiceCount = e.target.getAttribute("data-count");
-    let key = e.target.getAttribute("value");
-    if (isChecked[e.target.name] || selectedCount < choiceCount) {
+    const group = e.target.getAttribute("data-group");
+    const choiceCount = e.target.getAttribute("data-count");
+    const key = e.target.getAttribute("value");
+    const currentCount = Object.keys(isChecked)
+      .map((item) => isChecked[item])
+      .filter((check) => check.group === group && check.checked).length;
+
+    const currentCheckbox = isChecked[e.target.name] || {
+      checked: false,
+      count: 0,
+    };
+
+    if (currentCheckbox.checked || currentCount < choiceCount) {
       setIsChecked({
         ...isChecked,
-        [e.target.name]: { checked: e.target.checked, group: group, key: key },
+        [e.target.name]: {
+          checked: !currentCheckbox.checked,
+          group: group,
+          key: key,
+        },
       });
     } else {
       e.preventDefault();
@@ -41,11 +101,6 @@ export default function SelectCharacterClass() {
   };
 
   let headers = validCells;
-
-  if (!classLevels) {
-  } else {
-    window.classLevels = classLevels;
-  }
 
   return (
     <div className="select-class-container">
@@ -63,101 +118,128 @@ export default function SelectCharacterClass() {
           </option>
         ))}
       </select>
+      <div className="class-info-wrapper">
+        <div className="class-info-container">
+          <h1>{name}</h1>
 
-      <div className="class-info-container">
-        <h1>{name}</h1>
-        <p>{!hit_die ? null : `1d${hit_die}`}</p>
-        <ul className="class-saving-throws">
-          {!saving_throws
+          {!hit_die ? null : (
+            <>
+              <h3 title="the value that determines how many hit points you will gain per level up">
+                Hit Die
+              </h3>
+              <p>1d{hit_die} </p>
+            </>
+          )}
+
+          <ul className="class-saving-throws">
+            {!saving_throws ? null : (
+              <>
+                <h3>Saving Throws</h3>
+                {saving_throws.map((index) => (
+                  <li key={"st-" + index.name}>{index.name}</li>
+                ))}
+              </>
+            )}
+          </ul>
+
+          <ul className="class-proficiences">
+            {!proficiencies ? null : (
+              <>
+                <h3>Class Proficiences</h3>
+                {proficiencies.map((index) => (
+                  <li key={"cp-" + index.name}>{index.name}</li>
+                ))}
+              </>
+            )}
+          </ul>
+
+          {!proficiency_choices
             ? null
-            : saving_throws.map((index) => (
-                <li key={"st-" + index.name}>{index.name}</li>
-              ))}
-        </ul>
-        <ul className="class-proficiences">
-          {!proficiencies
-            ? null
-            : proficiencies.map((index) => (
-                <li key={"cp-" + index.name}>{index.name}</li>
-              ))}
-        </ul>
+            : proficiency_choices.map((choiceObj, choiceIndex) => {
+                return (
+                  <div
+                    className="border choices"
+                    data-key={choiceObj.choose}
+                    key={choiceIndex}
+                  >
+                    <h3>Choose {choiceObj.choose} from the list</h3>
+                    <br />
+                    {choiceObj.from.map((skill, i) => {
+                      return (
+                        <div key={i}>
+                          <label key={choiceIndex + "-" + i + "label"}>
+                            {skill.name}
+                          </label>
+                          <input
+                            type="checkbox"
+                            className="prof-choice"
+                            onChange={handleChecks}
+                            name={"proficiencies" + choiceIndex + "-" + i}
+                            data-count={choiceObj.choose}
+                            data-group={"group" + choiceIndex}
+                            checked={
+                              isChecked["proficiencies" + choiceIndex + "-" + i]
+                                ? isChecked[
+                                    "proficiencies" + choiceIndex + "-" + i
+                                  ].checked
+                                : false
+                            }
+                            value={skill.name}
+                            key={choiceIndex + "-" + i}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
 
-        {!proficiency_choices
-          ? null
-          : proficiency_choices.map((choiceObj, choiceIndex) => {
-              return (
-                <div
-                  className="border choices"
-                  data-key={choiceObj.choose}
-                  key={choiceIndex}
-                >
-                  Choose {choiceObj.choose} from the list
-                  <br />
-                  {choiceObj.from.map((skill, i) => {
-                    return (
-                      <div key={i}>
-                        <label key={choiceIndex + "-" + i + "label"}>
-                          {skill.name}
-                        </label>
-                        <input
-                          type="checkbox"
-                          className="prof-choice"
-                          onChange={handleChecks}
-                          name={"proficiencies" + choiceIndex + "-" + i}
-                          data-count={choiceObj.choose}
-                          data-group={"group" + choiceIndex}
-                          checked={
-                            isChecked["proficiencies" + choiceIndex + "-" + i]
-                              ? isChecked[
-                                  "proficiencies" + choiceIndex + "-" + i
-                                ].checked
-                              : false
-                          }
-                          value={skill.name}
-                          key={choiceIndex + "-" + i}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
+          {!subclasses ? null : (
+            <>
+              <h3>Available sub-classes</h3>
+              <p>{subclasses.map((subClass) => subClass.name)}</p>
+            </>
+          )}
+        </div>
 
-        {!subclasses ? null : (
-          <p>
-            Available sub-classes: {subclasses.map((subClass) => subClass.name)}
-          </p>
+        {!classLevels ? null : (
+          <div className="class-levels-container">
+            <table>
+              <thead>
+                <tr>
+                  {headers.map((header, i) => (
+                    <th className={header.key} key={i}>
+                      {header.displayText}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {classLevels
+                  .reduce((obj, item) => {
+                    return item.level !== obj.length
+                      ? [
+                          ...obj,
+                          classLevels.filter((cl) => cl.level === item.level),
+                        ]
+                      : obj;
+                  }, [])
+                  .map((classLevel) => (
+                    <tr key={"class-row" + classLevel[0].level}>
+                      {headers.map((header, id) => (
+                        <td key={"class-cell" + id}>
+                          {classLevel
+                            ? renderClassLevel(classLevel, header.key)
+                            : null}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
-
-      {!classLevels ? null : (
-        <div className="class-levels-container">
-          <table>
-            <thead>
-              <tr>
-                {headers.map((header, i) => (
-                  <th className={header} key={i}>
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {classLevels
-                .filter((cl) => cl.level <= characterLevel)
-                .map((item, levelIndex) => (
-                  <tr key={"class-row" + levelIndex}>
-                    {headers.map((header, id) => (
-                      <td key={"class-cell" + id}>
-                        {renderClassLevel(item[header], header)}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      )}
     </div>
   );
 }

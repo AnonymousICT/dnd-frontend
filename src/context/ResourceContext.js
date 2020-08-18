@@ -1,13 +1,5 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { fetchSpellData, fetchSpecificSpell } from "../api/SpellAPI";
-
-import {
-  fetchClassData,
-  fetchSpecificClass,
-  fetchClassLeveling,
-} from "../api/ClassAPI";
-
-import { fetchRaceData, fetchSpecificRace } from "../api/RaceAPI";
 
 import {
   fetchEquipmentData,
@@ -17,13 +9,11 @@ import {
 } from "../api/EquipmentAPI";
 
 import { defaultValues } from "./DefaultValues";
-import { Context } from "./Context";
 
 const ResourceContext = createContext();
 
 function ResourceContextProvider({ children }) {
   //the user's character class
-  const { characterClass, characterRace } = useContext(Context);
   const [spellSelection, setSpellSelection] = useState("");
   const [equipmentSelection, setEquipmentSelection] = useState("");
 
@@ -46,51 +36,6 @@ function ResourceContextProvider({ children }) {
     };
     fetchedSpecificSpellData(spellSelection);
   }, [spellSelection]);
-
-  /* CLASS API CALLS*/
-  const [allClasses, setAllClasses] = useState([]);
-  const [classData, setClassData] = useState(defaultValues.classData);
-  const [classLevels, setClassLevels] = useState([]);
-
-  useEffect(() => {
-    const fetchedAllClasses = async () => {
-      setAllClasses(await fetchClassData());
-    };
-    fetchedAllClasses();
-  }, []);
-
-  useEffect(() => {
-    const fetchedSpecificClassData = async () => {
-      setClassData(await fetchSpecificClass(characterClass));
-    };
-    fetchedSpecificClassData();
-  }, [characterClass]);
-
-  useEffect(() => {
-    const fetchedLevelsData = async () => {
-      setClassLevels(await fetchClassLeveling(characterClass));
-    };
-    fetchedLevelsData();
-  }, [characterClass]);
-
-  /* RACE API CALLS*/
-  // const [allRaces, setAllRaces] = useState([]);
-  // const [raceData, setRaceData] = useState(defaultValues.raceData);
-
-  // useEffect(() => {
-  //   const fetchedRaceData = async () => {
-  //     setAllRaces(await fetchRaceData());
-  //   };
-  //   fetchedRaceData();
-  // }, []);
-
-  // // fetch a specific Race
-  // useEffect(() => {
-  //   const fetchedSpecificRace = async () => {
-  //     setRaceData(await fetchSpecificRace(characterRace));
-  //   };
-  //   fetchedSpecificRace();
-  // }, [characterRace]);
 
   /* EQUIPMENT API CALLS*/
   const [allEquipment, setAllEquipment] = useState([]);
@@ -147,12 +92,6 @@ function ResourceContextProvider({ children }) {
         setEquipmentSelection,
         spellSelection,
         setSpellSelection,
-        allClasses,
-        setAllClasses,
-        classData,
-        setClassData,
-        classLevels,
-        setClassLevels,
         allEquipment,
         equipmentCategories,
         equipmentCategory,

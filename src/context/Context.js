@@ -13,14 +13,7 @@ function ContextProvider({ children }) {
   const [currentCharacter, setCurrentCharacter] = useState(
     defaultValues.currentCharacter
   );
-  const [characterClass, setCharacterClass] = useState("");
-  
-
   const [characterId, setCharacterId] = useState("");
-  const [isChecked, setIsChecked] = useState(
-    defaultValues.isChecked(defaultValues.classData)
-  );
-
   const [allCharacters, setAllCharacters] = useState([]);
   const [fetchNewData, setFetchNewData] = useState(false);
 
@@ -52,19 +45,15 @@ function ContextProvider({ children }) {
   return (
     <Context.Provider
       value={{
+        auth,
         email,
         setEmail,
         password,
         setPassword,
         userData,
         setUserData,
-        characterClass,
-        setCharacterClass,
-
         AttributeData,
         setAttributeData,
-        isChecked,
-        setIsChecked,
         characterId,
         setCharacterId,
         allCharacters,

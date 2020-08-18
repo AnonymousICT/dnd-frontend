@@ -26,4 +26,10 @@
         padding: .7em;
         margin: 1em;
     }
+
+    .select-class-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

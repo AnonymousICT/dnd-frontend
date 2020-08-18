@@ -107,9 +107,9 @@ export default function CreateCharacter() {
   return (
     <div className="character-create-form">
       <h3>New Character</h3>
+      {console.log(validForm)}
       {renderPage()}
       <div className="form-page-buttons">
-        {console.log(newCharacter)}
         {formPage !== 1 ? <button onClick={prevStep}>Go Back</button> : null}
         {formPage !== 5 && validForm[formPage] ? (
           <button onClick={nextStep}>Next</button>

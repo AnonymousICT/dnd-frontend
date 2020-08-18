@@ -3,7 +3,7 @@ import lodash from "lodash";
 import { validCells } from "./validCells";
 
 export const renderClassLevel = (obj, key) => {
-  if (!validCells.filter((cell) => cell === key).length) {
+  if (!validCells.filter((cell) => cell.key === key).length) {
     return null;
   }
 
@@ -73,15 +73,23 @@ export const renderClassLevel = (obj, key) => {
       </div>
     ),
   };
+
+  const renderSubItem = (childObj, key) => (
+    <div data-key={key} key={key}>
+      {classLabels[key] || key}: {childObj[key]}
+    </div>
+  )
+  
+  const hasOverrideFunction = (key) =>
+    Object.keys(overrideFunctions).filter((funcName) => funcName === key)
+      .length;
+  
   //childObj is the node we're looking at
   const renderNestedObject = (childObj) => {
     //we're looking for either martial arts or sneak attack
-    let hasOverrideFunction = (key) =>
-      Object.keys(overrideFunctions).filter((funcName) => funcName === key)
-        .length;
     //convert the childobj into an array of its keys and then we map over it
     return Object.keys(childObj).map((key) =>
-      //key of childObj that we're examining an object?
+      //we're evaluating the key to see if it's an object
       typeof childObj[key] === "object" ? (
         //is it either martial arts or sneak attack?
         hasOverrideFunction(key) ? (
@@ -92,45 +100,71 @@ export const renderClassLevel = (obj, key) => {
         )
       ) : (
         //otherwise it's a literal and can be easily rendered. aka it's chill dude
-        <div data-key={key} key={key}>
-          {classLabels[key] || key}: {childObj[key]}
-        </div>
+        renderSubItem(childObj, key)
       )
     );
   };
 
+  const reduceByKey = (obj, key, value) => {
+    return obj ? obj
+      .reduce((features, item) => {
+        return item[key]
+          ? [...features, item[key]]
+          : Array.isArray(item)
+          ? [...features, ...item]
+          : features;
+      }, [])
+      .map((f) => (value ? f[value] : f))
+      : null;
+  };
+
   switch (key) {
     case "subclass":
-      renderString = <span data-key="subclass">{obj.name}</span>;
+      renderString = (
+        <span data-key="subclass">
+          {[ ...new Set(reduceByKey(obj, key, "name"))].join(", ")}
+        </span>
+      );
       break;
     case "level":
-      renderString = <h3 data-key="level">{obj}</h3>;
+      renderString = <h3 data-key="level">
+          {[ ...new Set(reduceByKey(obj, key))].join(", ")}
+        </h3>;
       break;
     case "ability_score_bonuses":
-      renderString = <span data-key="ability_score_bonuses">{obj}</span>;
+      renderString = (
+        <span data-key="ability_score_bonuses">
+          {[ ...new Set(reduceByKey(obj, key))].join(", ")}
+        </span>
+      );
       break;
     case "features":
       renderString = (
         <span data-key="features">
-          {obj.map((feature) => feature.name).join(", ")}
+          {reduceByKey(reduceByKey(obj, key), key, "name").join(", ")}
         </span>
       );
       break;
     case "feature_choices":
       renderString = (
         <span data-key="feature choices">
-          {obj.map((feature) => feature.name).join(", ")}
+          {reduceByKey(reduceByKey(obj, key), key, "name").join(", ")}
         </span>
       );
       break;
     case "class_specific":
-      renderString = <span data-key={key}>{renderNestedObject(obj)}</span>;
+      renderString = <span data-cell-name={key}> </span>;
+      renderString = (
+        <span data-key={key}>
+          {renderNestedObject([ ...new Set(reduceByKey(obj, key))][0])}
+        </span>
+      );
       break;
     case "prof_bonus":
-      renderString = <span data-key="prof_bonus">{obj}</span>;
+      renderString = <span data-key="prof_bonus">{[ ...new Set(reduceByKey(obj, key))].join(", ")}</span>;
       break;
     case "spellcasting":
-      renderString = <span data-key={key}>{renderNestedObject(obj)}</span>;
+      renderString = <span data-cell-name={key}> </span>; // <span data-key={key}>{renderNestedObject(obj)}</span>;
       break;
     default:
       renderString = <span data-key={key}>{JSON.stringify(obj)}</span>;

@@ -82,7 +82,7 @@ export const defaultValues = {
     hit_die: 1,
     proficiency_choices: [
       {
-        choose: 1,
+        choose: 99,
         type: "proficiencies",
         from: [
           {
