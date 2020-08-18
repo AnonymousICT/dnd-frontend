@@ -6,6 +6,13 @@ body {
   background: $main-background;
   color: $text;
   font-family: Roboto;
+  padding-bottom: 3.2em;
+
+  main {
+    width: 100%;
+    max-width: 380px;
+  }
+ 
 }
 
 ul {
@@ -33,6 +40,9 @@ a {
   }
 }
 
-.tabulator {
-  text-align: center;
+footer {
+  position: fixed;
+  bottom: -7px;
+  background-color: $main-background;
+  width: 100%;
 }

@@ -1,14 +1,23 @@
+@import '../scss/colors.scss';
+
 .auth-form-container {
   margin-top: 1em;
   display: flex;
-  height: 33vh;
+  // height: 33vh;
   border: 1px solid black;
-  width: 70vw;
   box-shadow: 0px 0px 10px gray;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  background: $secondary;
+  background: radial-gradient(
+    farthest-side at 0px 30px,
+    $secondary 40%,
+    $secondary-gradient 120%
+  );
+
   form {
+    padding: 1em;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -17,6 +26,13 @@
     text-align: center;
     input {
       margin-bottom: 1em;
+      border: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    a {
+      padding-top: 2em;
+      color: $text;
+      mix-blend-mode: difference;
     }
   }
 }

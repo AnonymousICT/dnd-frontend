@@ -30,9 +30,8 @@ export default function AllEquipment({ setShowModal }) {
               onClick={(e) => setEquipmentSelection(e.target.value)}
               value={category[1]}
               key={category[0]}
-            >
-              {category[0]}
-            </button>
+              className={`zaho ${category[2]}`}
+            />
           ))
         )}
       </div>

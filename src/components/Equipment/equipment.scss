@@ -10,9 +10,8 @@
   display: flex;
   flex-wrap: wrap;
   width: 80%;
-}
-.equipment-filters > button {
-  flex: 1;
+  justify-content: center;
+  gap: 2px;
 }
 
 .tbl-row:hover {
@@ -21,11 +20,21 @@
 
 .table-container {
   display: flex;
+  .MuiTypography-body2, .MuiTablePagination-root {
+    font-size: 12px;
+  }
+  .MuiTablePagination-selectRoot {
+    margin-right: 1em;
+  }
 }
 
 .specific-equipment {
   background-color: #fefefe;
   border: 1px solid #888;
   width: 100%;
-  padding: 0 1em 1em;
+
+  & > div {
+    padding: 1em;
+  }
 }
+

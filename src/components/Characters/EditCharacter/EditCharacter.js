@@ -10,6 +10,15 @@ import BattleStats from "./BattleStats";
 import AllItems from "./AllItems";
 import Spellbook from "./Spellbook";
 
+const pageButtons = [
+  { name: "character", title: "Character Summary", icon: "👤" },
+  { name: "attributes", title: "Attributes and Saving Throws", icon: "💪" },
+  { name: "skills", title: "Skills", icon: "🎭" },
+  { name: "languages", title: "Languages", icon: "🗣️" },
+  { name: "equipment", title: "Equipment", icon: "⚔️" },
+  { name: "spells", title: "Spells", icon: "🔮" },
+];
+
 export default function EditCharacter() {
   const { currentCharacter, setCurrentCharacter, nonSpellCaster } = useContext(
     Context
@@ -72,8 +81,9 @@ export default function EditCharacter() {
     input.focus();
   };
 
-  const handleSlideMove = (e) => {
-    moveSlider(e.currentTarget.className);
+  const handleSlideMove = (name) => {
+    console.log(name);
+    moveSlider(name);
   };
 
   const handleKeyDown = (e) => {
@@ -100,36 +110,28 @@ export default function EditCharacter() {
     }
 
     switch (className) {
-      case "nav previous":
+      case "previous":
         scrollValue = element.offsetWidth * (pager - 1);
-        setPager(pager - 1);
         break;
-      case "nav next":
+      case "next":
         scrollValue = element.offsetWidth * (pager + 1);
-        setPager(pager + 1);
         break;
       case "attributes":
         scrollValue = element.offsetWidth;
-        setPager(1);
         break;
       case "skills":
         scrollValue = element.offsetWidth * 2;
-        setPager(2);
         break;
       case "languages":
         scrollValue = element.offsetWidth * 3;
-        setPager(3);
         break;
       case "equipment":
         scrollValue = element.offsetWidth * 4;
-        setPager(4);
         break;
       case "spells":
         scrollValue = element.offsetWidth * 5;
-        setPager(5);
         break;
       default:
-        setPager(0);
         scrollValue = 0;
     }
 
@@ -140,6 +142,12 @@ export default function EditCharacter() {
     focusSlideCarousel();
   };
 
+  const handleScroll = () => {
+    const element = document.querySelector(".character-container");
+    const page = Math.round(element.scrollLeft / element.offsetWidth);
+    setPager(page);
+  };
+
   return (
     <div className="slider-container">
       <div
@@ -147,6 +155,7 @@ export default function EditCharacter() {
         className="character-container"
         onKeyDown={handleKeyDown}
         onKeyUp={(e) => e.preventDefault()}
+        onScroll={handleScroll}
       >
         <div>
           <BasicInfo />
@@ -171,7 +180,7 @@ export default function EditCharacter() {
       <button
         className="nav previous"
         disabled={pager === 0}
-        onClick={handleSlideMove}
+        onClick={() => handleSlideMove("previous")}
       >
         ➤
       </button>
@@ -180,67 +189,26 @@ export default function EditCharacter() {
         disabled={
           pager === (nonSpellCaster.includes(currentCharacter.job) ? 4 : 5)
         }
-        onClick={handleSlideMove}
+        onClick={() => handleSlideMove("next")}
       >
         ➤
       </button>
       <div className="page-buttons">
-        <button
-          className={`character${pager === 0 ? " active" : ""}`}
-          title="Character Summary"
-          onClick={handleSlideMove}
-        >
-          <span role="img" aria-label="character">
-            👤
-          </span>
-        </button>
-        <button
-          className={`attributes${pager === 1 ? " active" : ""}`}
-          title="Attributes and Saving Throws"
-          onClick={handleSlideMove}
-        >
-          <span role="img" aria-label="attributes">
-            💪
-          </span>
-        </button>
-        <button
-          className={`skills${pager === 2 ? " active" : ""}`}
-          title="Skills"
-          onClick={handleSlideMove}
-        >
-          <span role="img" aria-label="skills">
-            🎭
-          </span>
-        </button>
-        <button
-          className={`languages${pager === 3 ? " active" : ""}`}
-          title="Languages"
-          onClick={handleSlideMove}
-        >
-          <span role="img" aria-label="languages">
-            🗣️
-          </span>
-        </button>
-        <button
-          className={`equipment${pager === 4 ? " active" : ""}`}
-          title="Equipment"
-          onClick={handleSlideMove}
-        >
-          <span role="img" aria-label="equipment">
-            ⚔️
-          </span>
-        </button>
-        {!nonSpellCaster.includes(currentCharacter.job) ? (
-          <button
-            className={`spells${pager === 5 ? " active" : ""}`}
-            title="Spells"
-            onClick={handleSlideMove}
-          >
-            <span role="img" aria-label="spells">
-              🔮
-            </span>
-          </button>
-        ) : null}
+        {pageButtons.map((page, i) =>
+          !nonSpellCaster.includes(currentCharacter.job) ||
+          page.name !== "spells" ? (
+            <button
+              key={page.name}
+              className={`${page.name} ${pager === i ? " active" : ""}`}
+              title={page.title}
+              onClick={() => handleSlideMove(page.name)}
+            >
+              <span role="img" aria-label={page.name}>
+                {page.icon}
+              </span>
+            </button>
+          ) : null
+        )}
       </div>
     </div>
   );

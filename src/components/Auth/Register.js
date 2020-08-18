@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../../context/Context";
+import Button from "@material-ui/core/Button";
 
 export default function Register() {
   const { email, setEmail, password, setPassword } = useContext(Context);
@@ -37,19 +38,19 @@ export default function Register() {
       <form className="registration form" onSubmit={handleUserRegistration}>
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
-          placeholder="type password again"
+          placeholder="Type Password Again"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
@@ -58,8 +59,13 @@ export default function Register() {
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
         />
-        <input type="submit" value="Register New Account" />
-        <Link to="/login"> Already have an account? Click here to Login</Link>
+        <Button variant="contained" type="submit" color="secondary">
+          Register New Account
+        </Button>
+        <Link to="/login">
+          {" "}
+          Already have an account? <br /> Click here to Login
+        </Link>
       </form>
     </div>
   );

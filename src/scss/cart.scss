@@ -1,0 +1,24 @@
+@import '../scss/colors.scss';
+
+.cart {
+    position: sticky;
+    top: 0;
+    padding:.2em;
+    width: 100%;
+    background-color: $main-background;
+    z-index: 100;
+    & > div {
+        padding: 1em 0 .5em 0;
+    }
+
+    .character-cart {
+        div {
+            line-height: 2;
+
+            li, button {
+                display: inline;
+                margin-left: .5em;
+            }
+    }
+    }
+}

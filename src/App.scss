@@ -3,11 +3,13 @@
 @import "./scss/elements.scss";
 @import "./scss/navbar.scss";
 @import "./scss/Modal.scss";
+@import "./scss/sprites.scss";
 
 // components
 @import "./scss/class-icons.scss";
 @import "./scss/Auth.scss";
 @import "./scss/characterSheet.scss";
+@import "./scss/cart.scss";
 
 .App {
   display: flex;

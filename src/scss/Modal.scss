@@ -1,7 +1,7 @@
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 200; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -20,7 +20,7 @@
     display: block;
     .content {
       margin: 15% auto;
-      padding: 2em;
+      padding: 1.2em;
       div {
         margin: auto;
         max-width: 650px;

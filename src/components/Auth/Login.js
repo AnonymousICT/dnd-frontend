@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../../context/Context";
 import { fetchUsersCharacters } from "../../api/userAPI";
+import Button from "@material-ui/core/Button";
 
 export default function Login() {
   const queryStrings = new URLSearchParams(window.location.search);
@@ -54,10 +55,12 @@ export default function Login() {
           type="password"
           placeholder="password"
         />
-        <input type="submit" value="Login" />
+        <Button variant="contained" type="submit" color="secondary">
+          Login
+        </Button>
         <Link to="/register">
           {" "}
-          Don't have an account? Sign up for one here!
+          Don't have an account? <br /> Sign up for one here!
         </Link>
       </form>
     </div>

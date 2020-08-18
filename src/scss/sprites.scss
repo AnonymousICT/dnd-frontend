@@ -1,0 +1,164 @@
+$row1: -223.3px;
+$row2: -278.3px;
+$row3: -333.1px;
+$row4: -388.1px;
+$row5: -442.9px;
+$row6: -497.7px;
+$row7: -552.9px;
+$row8: -607.6px;
+$row9: -662.5px;
+$row10: -717.4px;
+$column1: -12.4px;
+$column2: -67.4px;
+$column3: -122.4px;
+$column4: -176.8px;
+$column5: -231.2px;
+$column6: -286px;
+$column7: -340.8px;
+$column8: -395.6px;
+$column9: -450.2px;
+$column10: -504.9px;
+
+$tools-row-shift: 13.9px;
+$magic-item-row-shift: 75.2px;
+
+.zaho {
+    width:50px;
+    height:50px;
+    padding: 0;            
+    background: url('/assets/icons/weapons-and-armor.jpg') no-repeat;
+    background-size: 565px;
+
+    &.adventuring-gear{
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        background-position-x: $column9;
+        background-position-y: calc(#{$row10} - #{$tools-row-shift});
+    }
+    &.arcane-foci{
+        background-position-x: $column4;
+        background-position-y: $row6;
+    }
+    &.armor{
+        background-position-x: $column7;
+        background-position-y: $row3;
+    }
+    &.artisans-tools{
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+    
+        background-position-x: $column1;
+        background-position-y: calc(#{$row2} - #{$tools-row-shift});
+    }
+    &.druidic-foci{
+        background: url('/assets/icons/magic-items.jpg') no-repeat;
+        background-size: 565px;
+
+        background-position-x: $column3;
+        background-position-y: calc(#{$row5} - #{$magic-item-row-shift});
+    }
+    &.equipment-packs{
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+
+        background-position-x: $column7;
+        background-position-y: calc(#{$row10} - #{$tools-row-shift});
+    }
+    &.gaming-sets{
+        background: url('/assets/icons/magic-items.jpg') no-repeat;
+        background-size: 565px;
+    
+        background-position-x: $column1;
+        background-position-y: calc(#{$row9} - #{$magic-item-row-shift});
+    }
+    &.heavy-armor{
+        background-position-x: $column10;
+        background-position-y: $row5;
+    }
+    &.holy-symbols{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.kits{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.land-vehicles{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.light-armor{
+        background-position-x: $column2;
+        background-position-y: $row5;
+    }
+    &.martial-melee-weapons{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.martial-ranged-weapons{
+        background-position-x: $column10;
+        background-position-y: $row6;
+    }
+    &.martial-weapons{
+        background-position-x: $column1;
+        background-position-y: $row2;
+    }
+    &.medium-armor{
+        background-position-x: $column7;
+        background-position-y: $row5;
+    }
+    &.mounts-and-other-animals{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.mounts-and-vehicles{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.musical-instruments{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.other-tools{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.shields{
+        background-position-x: $column8;
+        background-position-y: $row3;
+    }
+    &.simple-melee-weapons{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.simple-ranged-weapons{
+        background-position-x: $column8;
+        background-position-y: $row6;
+    }
+    &.simple-weapons{
+        background-position-x: $column9;
+        background-position-y: $row1;
+    }
+    &.standard-gear{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.tack-harness-and-drawn-vehicles{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.tools{
+        background-position-x: $column3;
+        background-position-y: $row3;
+    }
+    &.waterborne-vehicles{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+    &.weapon{
+        background-position-x: $column1;
+        background-position-y: $row1;
+    }
+
+}
+

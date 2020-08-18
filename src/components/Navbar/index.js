@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link, useHistory } from "react-router-dom";
+import {Context} from '../../context/Context'
 
 export default function Navbar() {
+  const {setAllCharacters}= useContext(Context)
   const history = useHistory();
+
+  const loggedIn = localStorage.getItem('x-auth-token')
 
   const logout = () => {
     localStorage.removeItem("x-auth-token");
     localStorage.removeItem("displayName");
     localStorage.removeItem("userId");
     history.push("/login");
+    setAllCharacters([])
   };
 
   return (
@@ -18,19 +23,24 @@ export default function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li className="navigation-item">
-          <Link to="/spells">Spell List</Link>
+          <Link to="/spells">Spells</Link>
         </li>
         <li className="navigation-item">
           <Link to="/equipment">Equipment</Link>
         </li>
-        <li className="navigation-item">
-          <Link to="/characters">Characters</Link>
-        </li>
-        <li className="navigation-item">
-          <Link to="/" onClick={logout}>
-            Logout
-          </Link>
-        </li>
+        {loggedIn ?
+          <>
+          <li className="navigation-item">
+            <Link to="/characters">Characters</Link>
+          </li>
+          <li className="navigation-item">
+            <Link to="/" onClick={logout}>
+              Logout
+            </Link>
+          </li> </> : <Link to="/login" onClick={logout}>
+              Login
+            </Link>
+        }
       </ul>
     </nav>
   );

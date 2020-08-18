@@ -9,11 +9,25 @@ import CreateCharacter from "./components/Characters/CreateCharacter/CreateChara
 import EditCharacter from "./components/Characters/EditCharacter/EditCharacter";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
 import "./App.scss";
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#eaa260',
+    },
+    secondary: {
+      main: '#31a065',
+    },
+  },
+});
+
 export default function App() {
   return (
+    <ThemeProvider theme={theme}>
+
     <div className="App">
       <header>
         <h1>D&D CG</h1>
@@ -59,5 +73,6 @@ export default function App() {
         </p>
       </footer>
     </div>
+    </ThemeProvider>
   );
 }

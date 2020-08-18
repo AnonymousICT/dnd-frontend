@@ -22,7 +22,7 @@ export const fetchEquipmentCategories = async () => {
       data: { results },
     } = await axios.get(url);
     return results.map((item) => {
-      return [item.name, item.url];
+      return [item.name, item.url, item.index];
     });
   } catch (error) {
     return error;
