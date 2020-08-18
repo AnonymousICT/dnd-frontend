@@ -13,12 +13,8 @@ function ContextProvider({ children }) {
   const [currentCharacter, setCurrentCharacter] = useState(
     defaultValues.currentCharacter
   );
-  const [characterName, setCharacterName] = useState("");
-  const [characterLevel, setCharacterLevel] = useState(1);
   const [characterClass, setCharacterClass] = useState("");
-  const [characterRace, setCharacterRace] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [selectedTrait, setSelectedTrait] = useState("");
+  
 
   const [characterId, setCharacterId] = useState("");
   const [isChecked, setIsChecked] = useState(
@@ -62,19 +58,9 @@ function ContextProvider({ children }) {
         setPassword,
         userData,
         setUserData,
-        characterName,
-        setCharacterName,
-        characterLevel,
-        setCharacterLevel,
         characterClass,
         setCharacterClass,
 
-        characterRace,
-        setCharacterRace,
-        selectedLanguage,
-        setSelectedLanguage,
-        selectedTrait,
-        setSelectedTrait,
         AttributeData,
         setAttributeData,
         isChecked,

@@ -1,16 +1,27 @@
-import React, { useEffect, useContext } from "react";
-import { Context } from "../../../context/Context";
-import { ResourceContext } from "../../../context/ResourceContext";
+import React, { useState, useEffect } from "react";
+import { fetchRaceData, fetchSpecificRace } from "../../../api/RaceAPI";
+import { defaultValues } from "../../../context/DefaultValues";
 
-export default function RaceSelector() {
-  const {
-    characterRace,
-    setCharacterRace,
-    setSelectedLanguage,
-    setSelectedTrait,
-  } = useContext(Context);
+export default function RaceSelector({ setNewCharacter, setValid }) {
+  const [characterRace, setCharacterRace] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedTrait, setSelectedTrait] = useState("");
+  const [allRaces, setAllRaces] = useState([]);
+  const [raceData, setRaceData] = useState(defaultValues.raceData);
 
-  const { allRaces, raceData } = useContext(ResourceContext);
+  useEffect(() => {
+    const fetchedRaceData = async () => {
+      setAllRaces(await fetchRaceData());
+    };
+    fetchedRaceData();
+  }, []);
+
+  useEffect(() => {
+    const fetchedSpecificRace = async () => {
+      setRaceData(await fetchSpecificRace(characterRace));
+    };
+    fetchedSpecificRace();
+  }, [characterRace]);
 
   const {
     name,
@@ -30,10 +41,26 @@ export default function RaceSelector() {
   } = raceData;
 
   useEffect(() => {
-    setCharacterRace("");
     setSelectedLanguage("");
     setSelectedTrait("");
-  }, [setCharacterRace, setSelectedLanguage, setSelectedTrait]);
+  }, [characterRace, setSelectedLanguage, setSelectedTrait]);
+
+  useEffect(() => {
+    setNewCharacter((previousState) => {
+      return {
+        ...previousState,
+        race: raceData.name,
+        languageChoice: selectedLanguage,
+        traitChoice: selectedTrait,
+        speed: raceData.speed,
+        raceData: raceData,
+      };
+    });
+  }, [raceData, selectedTrait, selectedLanguage, setNewCharacter]);
+
+  useEffect(() => {
+    setValid(characterRace.length > 0);
+  }, [characterRace, setValid]);
 
   return (
     <div className="select-race-container">

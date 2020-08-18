@@ -74,23 +74,23 @@ function ResourceContextProvider({ children }) {
   }, [characterClass]);
 
   /* RACE API CALLS*/
-  const [allRaces, setAllRaces] = useState([]);
-  const [raceData, setRaceData] = useState(defaultValues.raceData);
+  // const [allRaces, setAllRaces] = useState([]);
+  // const [raceData, setRaceData] = useState(defaultValues.raceData);
 
-  useEffect(() => {
-    const fetchedRaceData = async () => {
-      setAllRaces(await fetchRaceData());
-    };
-    fetchedRaceData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchedRaceData = async () => {
+  //     setAllRaces(await fetchRaceData());
+  //   };
+  //   fetchedRaceData();
+  // }, []);
 
-  // fetch a specific Race
-  useEffect(() => {
-    const fetchedSpecificRace = async () => {
-      setRaceData(await fetchSpecificRace(characterRace));
-    };
-    fetchedSpecificRace();
-  }, [characterRace]);
+  // // fetch a specific Race
+  // useEffect(() => {
+  //   const fetchedSpecificRace = async () => {
+  //     setRaceData(await fetchSpecificRace(characterRace));
+  //   };
+  //   fetchedSpecificRace();
+  // }, [characterRace]);
 
   /* EQUIPMENT API CALLS*/
   const [allEquipment, setAllEquipment] = useState([]);
@@ -149,14 +149,10 @@ function ResourceContextProvider({ children }) {
         setSpellSelection,
         allClasses,
         setAllClasses,
-        allRaces,
-        setAllRaces,
         classData,
         setClassData,
         classLevels,
         setClassLevels,
-        raceData,
-        setRaceData,
         allEquipment,
         equipmentCategories,
         equipmentCategory,
