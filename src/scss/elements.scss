@@ -9,10 +9,12 @@ body {
   padding-bottom: 3.2em;
 
   main {
-    width: 100%;
     max-width: 380px;
   }
- 
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  }
 }
 
 ul {

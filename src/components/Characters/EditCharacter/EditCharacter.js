@@ -82,7 +82,6 @@ export default function EditCharacter() {
   };
 
   const handleSlideMove = (name) => {
-    console.log(name);
     moveSlider(name);
   };
 
@@ -174,7 +173,7 @@ export default function EditCharacter() {
         {!nonSpellCaster.includes(currentCharacter.job) ? (
           <Spellbook filteredLevel={filteredLevel} />
         ) : (
-          <h2>No Spells Dummy</h2>
+          <h2 className="hidden">No Spells Dummy</h2>
         )}
       </div>
       <button

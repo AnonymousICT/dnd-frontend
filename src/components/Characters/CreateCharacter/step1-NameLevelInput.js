@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../../context/Context";
 
-export default function NameLevelInput({ nextStep }) {
+export default function NameLevelInput() {
   const {
     characterName,
     setCharacterName,
@@ -10,13 +10,15 @@ export default function NameLevelInput({ nextStep }) {
   } = useContext(Context);
 
   return (
-    <div>
+    <div className="character-name">
+      <label>Name</label>
       <input
         type="string"
         value={characterName}
         onChange={(e) => setCharacterName(e.target.value)}
         placeholder="Character Name"
       />
+      <label>Level</label>
       <input
         type="number"
         value={characterLevel}
@@ -25,15 +27,6 @@ export default function NameLevelInput({ nextStep }) {
         min="1"
         max="20"
       />
-      {characterName.length <= 0 ? (
-        <button disabled className="next" onClick={nextStep}>
-          Next
-        </button>
-      ) : (
-        <button className="next" onClick={nextStep}>
-          Next
-        </button>
-      )}
     </div>
   );
 }

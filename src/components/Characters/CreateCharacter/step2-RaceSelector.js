@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Context } from "../../../context/Context";
 import { ResourceContext } from "../../../context/ResourceContext";
 
-export default function RaceSelector({ nextStep, prevStep }) {
+export default function RaceSelector() {
   const {
     characterRace,
     setCharacterRace,
@@ -131,15 +131,6 @@ export default function RaceSelector({ nextStep, prevStep }) {
           </section>
         )}
       </div>
-      <button onClick={prevStep}>Go Back</button>
-
-      {!characterRace ? (
-        <button disabled onClick={nextStep}>
-          Next
-        </button>
-      ) : (
-        <button onClick={nextStep}>Next</button>
-      )}
     </div>
   );
 }

@@ -10,13 +10,9 @@
 @import "./scss/Auth.scss";
 @import "./scss/characterSheet.scss";
 @import "./scss/cart.scss";
+@import "./scss//createCharacter.scss";
 
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   h1 {
     color: $text;
   }

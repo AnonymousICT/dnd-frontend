@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AttributeContext } from "../../../context/AttributeContext";
 
-export default function AttributeEntry({ nextStep, prevStep }) {
+export default function AttributeEntry() {
   const {
     allAttributes,
     AttributeData,
@@ -59,8 +59,6 @@ export default function AttributeEntry({ nextStep, prevStep }) {
           </div>
         );
       })}
-      <button onClick={prevStep}>Go Back</button>
-      <button onClick={nextStep}>Next</button>
     </div>
   );
 }

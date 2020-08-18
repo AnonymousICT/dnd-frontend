@@ -5,7 +5,7 @@ import { Context } from "../../../context/Context";
 import { ResourceContext } from "../../../context/ResourceContext";
 import { AttributeContext } from "../../../context/AttributeContext";
 
-export default function Confirm({ prevStep }) {
+export default function Confirm() {
   const [choicesArray, setChoicesArray] = useState([]);
   const history = useHistory();
 
@@ -43,34 +43,34 @@ export default function Confirm({ prevStep }) {
     (key) => (attributeTotal[key] += racialBonus(key))
   );
 
-  const handleCharacterSubmit = async (e) => {
-    try {
-      const newCharacter = {
-        userId,
-        name: characterName,
-        level: characterLevel,
-        race: raceData.name,
-        languageChoice: selectedLanguage,
-        traitChoice: selectedTrait,
-        profChoice: choicesArray,
-        job: classData.name,
-        strength: attributeTotal.STR,
-        dexterity: attributeTotal.DEX,
-        constitution: attributeTotal.CON,
-        intelligence: attributeTotal.INT,
-        wisdom: attributeTotal.WIS,
-        charisma: attributeTotal.CHA,
-      };
-      await axios.post(
-        `https://dnd-backend-node.herokuapp.com/characters/new`,
-        newCharacter
-      );
-      history.push("/characters?created");
-      updateAllCharacters();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const handleCharacterSubmit = async (e) => {
+  //   try {
+  //     const newCharacter = {
+  //       userId,
+  //       name: characterName,
+  //       level: characterLevel,
+  //       race: raceData.name,
+  //       languageChoice: selectedLanguage,
+  //       traitChoice: selectedTrait,
+  //       profChoice: choicesArray,
+  //       job: classData.name,
+  //       strength: attributeTotal.STR,
+  //       dexterity: attributeTotal.DEX,
+  //       constitution: attributeTotal.CON,
+  //       intelligence: attributeTotal.INT,
+  //       wisdom: attributeTotal.WIS,
+  //       charisma: attributeTotal.CHA,
+  //     };
+  //     await axios.post(
+  //       `https://dnd-backend-node.herokuapp.com/characters/new`,
+  //       newCharacter
+  //     );
+  //     history.push("/characters?created");
+  //     updateAllCharacters();
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className="confirm-container">
@@ -99,8 +99,6 @@ export default function Confirm({ prevStep }) {
             .join(", ")}
         </li>
       </ul>
-      <button onClick={prevStep}>Go Back</button>
-      <button onClick={handleCharacterSubmit}>Submit</button>
     </div>
   );
 }

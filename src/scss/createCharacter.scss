@@ -1,0 +1,29 @@
+@import "../scss/colors.scss";
+
+.character-create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .character-name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+       
+    }
+    .select-race-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        select{
+            margin-bottom: 1em;
+        }
+    }
+    .race-info {
+        border: 1px solid black;
+        background-color: white;
+        box-shadow: 0 0 5px;
+        padding: .7em;
+        margin: 1em;
+    }
+}

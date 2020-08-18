@@ -4,7 +4,7 @@ import { ResourceContext } from "../../../context/ResourceContext";
 import { renderClassLevel } from "./renderClassLevels";
 import { validCells } from "./validCells";
 
-export default function SelectCharacterClass({ nextStep, prevStep }) {
+export default function SelectCharacterClass() {
   const {
     characterClass,
     setCharacterClass,
@@ -158,8 +158,6 @@ export default function SelectCharacterClass({ nextStep, prevStep }) {
           </table>
         </div>
       )}
-      <button onClick={prevStep}>Go Back</button>
-      <button onClick={nextStep}>Next</button>
     </div>
   );
 }
