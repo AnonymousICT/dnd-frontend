@@ -1,13 +1,21 @@
-import React, { useContext } from "react";
-import { Context } from "../../../context/Context";
+import React, { useState, useEffect } from "react";
 
-export default function NameLevelInput() {
-  const {
-    characterName,
-    setCharacterName,
-    characterLevel,
-    setCharacterLevel,
-  } = useContext(Context);
+export default function NameLevelInput({
+  setNewCharacter,
+  setValid,
+}) {
+  const [characterName, setCharacterName] = useState("");
+  const [characterLevel, setCharacterLevel] = useState(1);
+
+  useEffect(() => {
+    setValid(characterName.length > 0);
+  }, [characterName, setValid]);
+
+  useEffect(() => {
+    setNewCharacter(previousState => {
+      return {...previousState, name: characterName, level: +characterLevel}
+    });
+  }, [characterName, characterLevel, setNewCharacter]);
 
   return (
     <div className="character-name">

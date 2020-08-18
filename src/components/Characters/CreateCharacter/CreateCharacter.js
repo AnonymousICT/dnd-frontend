@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { Context } from "../../../context/Context";
-import { ResourceContext } from "../../../context/ResourceContext";
-import { AttributeContext } from "../../../context/AttributeContext";
 import { useHistory } from "react-router-dom";
 import NameLevelInput from "./step1-NameLevelInput";
 import RaceSelector from "./step2-RaceSelector";
@@ -14,8 +12,9 @@ export default function CreateCharacter() {
   const [formPage, setFormPage] = useState(1);
   const [newCharacter, setNewCharacter] = useState({});
   const [validForm, setValidForm] = useState({});
+  const [userId, setUserId] = useState("");
 
-  const {updateAllCharacters} = useContext(Context);
+  const { updateAllCharacters } = useContext(Context);
 
   const nextStep = () => {
     setFormPage(formPage + 1);
@@ -25,22 +24,25 @@ export default function CreateCharacter() {
     setFormPage(formPage - 1);
   };
 
-  //const [choicesArray, setChoicesArray] = useState([]);
   const history = useHistory();
+  useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+  }, []);
 
-  const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    setNewCharacter((previousState) => {
+      return { ...previousState, _id: userId };
+    });
+  }, [userId]);
 
-  // useEffect(() => {
-  //   setChoicesArray(
-  //     Object.keys(isChecked)
-  //       .filter((el) => el !== (null || undefined))
-  //       .map((key) => isChecked[key].key)
-  //   );
-  // }, [isChecked]);
-
-  // Object.keys(attributeTotal).forEach(
-  //   (key) => (attributeTotal[key] += racialBonus(key))
-  // );
+  const setValid = useCallback(
+    (valid) => {
+      setValidForm((previousState) => {
+        return { ...previousState, [formPage]: valid };
+      });
+    },
+    [setValidForm, formPage]
+  );
 
   const handleCharacterSubmit = async (e) => {
     try {
@@ -58,15 +60,45 @@ export default function CreateCharacter() {
   const renderPage = () => {
     switch (formPage) {
       case 1:
-        return <NameLevelInput newCharacter={newCharacter} setNewCharacter={setNewCharacter} setValid={setValidForm} />;
+        return (
+          <NameLevelInput
+            newCharacter={newCharacter}
+            setNewCharacter={setNewCharacter}
+            setValid={setValid}
+          />
+        );
       case 2:
-        return <RaceSelector newCharacter={newCharacter} setNewCharacter={setNewCharacter} setValid={setValidForm} />;
+        return (
+          <RaceSelector
+            newCharacter={newCharacter}
+            setNewCharacter={setNewCharacter}
+            setValid={setValid}
+          />
+        );
       case 3:
-        return <SelectCharacterClass newCharacter={newCharacter} setNewCharacter={setNewCharacter} setValid={setValidForm} />;
+        return (
+          <SelectCharacterClass
+            newCharacter={newCharacter}
+            setNewCharacter={setNewCharacter}
+            setValid={setValid}
+          />
+        );
       case 4:
-        return <AttributeEntry newCharacter={newCharacter} setNewCharacter={setNewCharacter} setValid={setValidForm} />;
+        return (
+          <AttributeEntry
+            newCharacter={newCharacter}
+            setNewCharacter={setNewCharacter}
+            setValid={setValid}
+          />
+        );
       case 5:
-        return <Confirm newCharacter={newCharacter} setNewCharacter={setNewCharacter} setValid={setValidForm} />;
+        return (
+          <Confirm
+            newCharacter={newCharacter}
+            setNewCharacter={setNewCharacter}
+            setValid={setValid}
+          />
+        );
       default:
         console.log("this is a multi-step form");
     }
@@ -77,21 +109,14 @@ export default function CreateCharacter() {
       <h3>New Character</h3>
       {renderPage()}
       <div className="form-page-buttons">
-        {formPage !== 1 ? 
-          <button onClick={prevStep}>
-            Go Back
-          </button> : null
-        }
-        {formPage !== 5 ?
-          <button onClick={nextStep} >
-            Next
-          </button> : null
-        }
-        {formPage === 5 ?
-          <button onClick={handleCharacterSubmit} >
-            Submit
-          </button> : null
-        }
+        {console.log(newCharacter)}
+        {formPage !== 1 ? <button onClick={prevStep}>Go Back</button> : null}
+        {formPage !== 5 && validForm[formPage] ? (
+          <button onClick={nextStep}>Next</button>
+        ) : null}
+        {formPage === 5 && validForm[formPage] ? (
+          <button onClick={handleCharacterSubmit}>Submit</button>
+        ) : null}
       </div>
     </div>
   );
