@@ -2,7 +2,7 @@ export const modMath = (score) => {
     return Math.round((score - 1) / 2 - 4.9);
 };
 
-const attributeSort = {
+export const attributeSort = {
     STR: { sortOrder: 0, translation: "strength" },
     DEX: { sortOrder: 1, translation: "dexterity" },
     CON: { sortOrder: 2, translation: "constitution" },

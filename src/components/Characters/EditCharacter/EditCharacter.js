@@ -4,11 +4,11 @@ import Axios from "axios";
 
 import BasicInfo from "./BasicInfo";
 import Attributes from "./Attributes";
-import Saves from "./Saves";
-import Skills from "./Skills";
+// import Saves from "./Saves";
+// import Skills from "./Skills";
 import BattleStats from "./BattleStats";
-import AllItems from "./AllItems";
-import Spellbook from "./Spellbook";
+// import AllItems from "./AllItems";
+// import Spellbook from "./Spellbook";
 
 const pageButtons = [
   { name: "character", title: "Character Summary", icon: "👤" },
@@ -24,8 +24,6 @@ export default function EditCharacter() {
     Context
   );
 
-  const [userClass, setUserClass] = useState([]);
-  const [classLevels, setClasslevels] = useState([]);
   const [pager, setPager] = useState(0);
   const characterId =
     window.location.href.split("/").pop() ||
@@ -43,34 +41,6 @@ export default function EditCharacter() {
     };
     fetchCharacter();
   }, [characterId, setCurrentCharacter]);
-
-  const { job, languageChoice, traitChoice } = currentCharacter;
-
-  useEffect(() => {
-    const usersClassData = async () => {
-      if (job.toLowerCase() !== "stand user") {
-        const url = `https://www.dnd5eapi.co/api/classes/${job.toLowerCase()}`;
-        const { data } = await Axios.get(url);
-        setUserClass(data);
-      }
-    };
-    usersClassData();
-  }, [job]);
-
-  useEffect(() => {
-    const usersLevelData = async () => {
-      if (job.toLowerCase() !== "stand user") {
-        const url = `https://www.dnd5eapi.co/api/classes/${job.toLowerCase()}/levels`;
-        const { data } = await Axios.get(url);
-        setClasslevels(data);
-      }
-    };
-    usersLevelData();
-  }, [job]);
-
-  const filteredLevel = classLevels.filter((level) => {
-    return level.level === currentCharacter.level;
-  });
 
   useEffect(() => {
     focusSlideCarousel();
@@ -158,23 +128,23 @@ export default function EditCharacter() {
       >
         <div>
           <BasicInfo />
-          <BattleStats userClass={userClass} filteredLevel={filteredLevel} />
+          <BattleStats
+            currentCharacter={currentCharacter}
+            setCurrentCharacter={setCurrentCharacter}
+          />
         </div>
         <div>
-          <Attributes filteredLevel={filteredLevel} />
-          <Saves userClass={userClass} filteredLevel={filteredLevel} />
+          <Attributes currentCharacter={currentCharacter} />
+          {/* <Saves userClass={userClass} /> */}
         </div>
-        <Skills userClass={userClass} filteredLevel={filteredLevel} />
-        <div>
-          {!languageChoice ? null : languageChoice}
-          {!traitChoice ? null : traitChoice}
-        </div>
-        <AllItems />
-        {!nonSpellCaster.includes(currentCharacter.job) ? (
-          <Spellbook filteredLevel={filteredLevel} />
+        {/* <Skills userClass={userClass} /> */}
+        <div></div>
+        {/* <AllItems /> */}
+        {/* {!nonSpellCaster.includes(currentCharacter.job) ? (
+          <Spellbook />
         ) : (
           <h2 className="hidden">No Spells Dummy</h2>
-        )}
+        )} */}
       </div>
       <button
         className="nav previous"

@@ -1,22 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { modMath } from "../../Utilities/AttributeUtilities";
-import { Context } from "../../../context/Context";
 import axios from "axios";
 import DebounceInput from "react-debounce-input";
 
-export default function BattleStats({ userClass, filteredLevel }) {
+export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
   const [currentHitPoints, setCurrentHitPoints] = useState(0);
-  const { currentCharacter, setCurrentCharacter } = useContext(Context);
-  const {
-    dexterity,
-    constitution,
-    level,
-    wisdom,
-    job,
-    race,
-  } = currentCharacter;
-  let { currentHP } = currentCharacter;
+  const { dexterity, constitution, level, wisdom, job } = currentCharacter;
 
+  let { currentHP } = currentCharacter;
   useEffect(() => {
     setCurrentHitPoints(currentHP);
   }, [currentHP]);
@@ -58,41 +49,21 @@ export default function BattleStats({ userClass, filteredLevel }) {
     }
   };
 
-  const averagetHitDie = (hitDie) => {
-    return hitDie / 2 + 1;
-  };
-
-  const calculateMaxHP = (character) => {
-    return (
-      (averagetHitDie(userClass.hit_die) + modMath(character.constitution)) *
-      level
-    );
-  };
-
-  const calculateSpeed = (race, job) => {
-    let speed;
-    let monkBonus;
-    let unarmoredMovement = filteredLevel.find(
-      (item) =>
-        item && item.class_specific && item.class_specific.unarmored_movement
-    );
-    if (unarmoredMovement) {
-      unarmoredMovement =
-        unarmoredMovement.class_specific.unarmored_movement || 0;
+  const calculateSpeed = (character, job) => {
+    if (job === "Monk" && character.level > 1 && character.level <= 5) {
+      return character.speed + 10;
+    } else if (job === "Monk" && character.level <= 9) {
+      return character.speed + 15;
+    } else if (job === "Monk" && character.level <= 13) {
+      return character.speed + 20;
+    } else if (job === "Monk" && character.level <= 17) {
+      return character.speed + 25;
+    } else if (job === "Monk" && character.level > 17) {
+      return character.speed + 30;
     } else {
-      unarmoredMovement = 0;
+      return character.speed;
     }
-    if (race === "Gnome" || race === "Halfling") {
-      speed = 25;
-    } else {
-      speed = 30;
-    }
-    if (job === "Monk") {
-      monkBonus = unarmoredMovement;
-    }
-    return speed + (monkBonus || 0);
   };
-
   const handleCurrentHpChange = (e) => {
     let hpValue = +e.target.value;
     setCurrentCharacter({ ...currentCharacter, currentHP: hpValue });
@@ -114,6 +85,22 @@ export default function BattleStats({ userClass, filteredLevel }) {
     }
   };
 
+  const averagetHitDie = (hitDie) => {
+    return hitDie / 2 + 1;
+  };
+
+  const getClassData = (character) => {
+    return (currentCharacter && currentCharacter.classData) || { hit_die: 0 };
+  };
+
+  const calculateMaxHP = () => {
+    return (
+      (averagetHitDie(getClassData(currentCharacter).hit_die) +
+        modMath(constitution)) *
+      level
+    );
+  };
+
   return (
     <div className="battle-stats-container">
       <div className="first-row">
@@ -126,7 +113,7 @@ export default function BattleStats({ userClass, filteredLevel }) {
           <p title="Initiative Bonus">Initiative</p>
         </div>
         <div className="battle-stat">
-          <p>{calculateSpeed(race, job)}ft</p>
+          <p>{calculateSpeed(currentCharacter, job)}ft</p>
           <p>Speed</p>
         </div>
       </div>
@@ -144,12 +131,12 @@ export default function BattleStats({ userClass, filteredLevel }) {
             />
           </div>
           <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">
-            Max: <span>{calculateMaxHP(currentCharacter) || 0}</span>
+            Max: <span>{calculateMaxHP()}</span>
           </p>
         </div>
       </div>
       <div className="third row">
-        <p>Hit Dice: 1d{userClass.hit_die}</p>
+        <p>Hit Dice: 1d{getClassData(currentCharacter).hit_die}</p>
 
         <div className="death-saves">
           <label title="If you're character's hit points are reduced to 0, you must roll 11 or higher on a d20 to succeed. If you roll a natural 20 you automatically get up with 1 hp">

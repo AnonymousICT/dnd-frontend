@@ -9,7 +9,7 @@ export const fetchUsersCharacters = async (user) => {
         "x-auth-user": user.id,
       },
     });
-    console.log("api", data);
+
     return data;
   } catch (error) {
     return error;

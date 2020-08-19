@@ -45,13 +45,13 @@ export default function SelectCharacterClass({
             return {
                 ...previousState,
                 job: classData.name,
-                classData:classData,
+                classData: {...classData, classlevels: classLevels },
                 profChoice: Object.keys(isChecked).map((propName) =>
                     isChecked[propName].key.replace("Skill: ", "")
                 ),
             };
         });
-    }, [isChecked, classData, setNewCharacter]);
+    }, [isChecked, classData, setNewCharacter, classLevels]);
 
     useEffect(() => {
         const requiredCount = (classData.proficiency_choices || []).reduce(
