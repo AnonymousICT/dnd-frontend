@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../../context/Context";
-import { fetchUsersCharacters } from "../../api/userAPI";
 import Button from "@material-ui/core/Button";
 
 export default function Login() {
@@ -14,7 +13,6 @@ export default function Login() {
     setEmail,
     password,
     setPassword,
-    setAllCharacters,
   } = useContext(Context);
   const history = useHistory();
 
@@ -26,12 +24,11 @@ export default function Login() {
         "https://dnd-backend-node.herokuapp.com/users/login",
         loginUser
       );
-      setUserData({ token: loginRes.data.token, user: loginRes.data.user });
+      setUserData({ user: {...loginRes.data.user, auth: loginRes.data.token} });
       localStorage.setItem("x-auth-token", loginRes.data.token);
       localStorage.setItem("userId", loginRes.data.user.id);
       localStorage.setItem("displayName", loginRes.data.user.displayName);
-      setAllCharacters(await fetchUsersCharacters());
-      history.push("/characters");
+      history.push("/");
     } catch (err) {
       console.error(err);
     }

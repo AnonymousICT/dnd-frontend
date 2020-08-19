@@ -1,64 +1,94 @@
-import React, { useContext } from "react";
-import { AttributeContext } from "../../../context/AttributeContext";
-
-export default function AttributeEntry() {
-  const {
-    allAttributes,
-    AttributeData,
-    setHoveredAttribute,
-    attributeValue,
+import React, { useState, useEffect } from "react";
+import { defaultValues } from "../../../context/DefaultValues";
+import { fetchAbilityScores } from "../../../api/AbilityScoreAPI";
+import {
+    modMath,
     sortFunction,
-    handleAttributeValueChange,
-    displayAttributeModifer,
     racialBonus,
-  } = useContext(AttributeContext);
+    combineAttributeAndRacialBonus,
+} from "../../Utilities/AttributeUtilities";
 
-  const onMouseEnter = (e) => {
-    setHoveredAttribute(e.target.getAttribute("value"));
-  };
-  const attributeTotal = { ...attributeValue };
+export default function AttributeEntry({
+    newCharacter,
+    setNewCharacter,
+    setValid,
+}) {
+    const [allAttributes, setAttributes] = useState(
+        defaultValues.allAttributes
+    );
+    const [attributeValue, setAttributeValue] = useState(
+        defaultValues.attributeValue(allAttributes)
+    );
 
-  Object.keys(attributeTotal).forEach(
-    (key) => (attributeTotal[key] += racialBonus(key))
-  );
+    const handleAttributeValueChange = async (attribute) => {
+        const attributes = { ...attributeValue, ...attribute };
+        setAttributeValue(attributes);
+    };
+    
+    useEffect(() => {
+        const fetchedData = async () => {
+            setAttributes(await fetchAbilityScores());
+        };
+        fetchedData();
+    }, []);
 
-  return (
-    <div className="attribute-entry">
-      <h3>Enter your Attributes below</h3>
-      {!AttributeData ? null : (
-        <div className="hover-div">{AttributeData.desc}</div>
-      )}
-      {allAttributes.sort(sortFunction).map((attribute, i) => {
-        return (
-          <div className="attribute" key={i}>
-            <label onMouseEnter={onMouseEnter} value={attribute[1]} key={i}>
-              {attribute[0]}
-            </label>
-            <input
-              type="number"
-              min="3"
-              max="18"
-              placeholder="10"
-              name={attribute[0]}
-              value={attributeValue[attribute[0]]}
-              onChange={(e) =>
-                handleAttributeValueChange({ [e.target.name]: +e.target.value })
-              }
-            />
-            <label name={`${attribute[0]} total`}>
-              {attributeTotal[attribute[0]]} Total
-            </label>
+    useEffect(()=>{
+      setNewCharacter((previousState)=>{
+        return {
+          ...previousState,
+          strength: combineAttributeAndRacialBonus("STR", previousState.raceData, attributeValue),
+          dexterity: combineAttributeAndRacialBonus("DEX", previousState.raceData, attributeValue),
+          constitution: combineAttributeAndRacialBonus("CON", previousState.raceData, attributeValue),
+          intelligence: combineAttributeAndRacialBonus("INT", previousState.raceData, attributeValue),
+          wisdom: combineAttributeAndRacialBonus("WIS", previousState.raceData, attributeValue),
+          charisma: combineAttributeAndRacialBonus("CHA", previousState.raceData, attributeValue),
+        }
+      })
+    },[setNewCharacter, attributeValue])
 
-            <label name={`${attribute[0]} modifier`}>
-              {displayAttributeModifer(attributeTotal[attribute[0]])} Modifier
-            </label>
+    useEffect(() => {
+      setValid(true);
+    },[setValid]);
 
-            <label name={`${attribute[0]} racial bonuses`}>{`${racialBonus(
-              attribute[0]
-            )} racial bonuses`}</label>
-          </div>
-        );
-      })}
-    </div>
-  );
+    return (
+        <div className="attribute-entry">
+            <h3>Enter your Attributes below</h3>
+            {allAttributes.sort(sortFunction).map((attribute, i) => {
+                return (
+                    <div className="attribute" key={i}>
+                        <label value={attribute[1]} key={i}>
+                            {attribute[0]}
+                        </label>
+                        <input
+                            type="number"
+                            min="3"
+                            max="18"
+                            placeholder="10"
+                            name={attribute[0] || ""}
+                            value={attributeValue[attribute[0]] || 10}
+                            onChange={(e) =>
+                                handleAttributeValueChange({
+                                    [e.target.name]: +e.target.value,
+                                })
+                            }
+                        />
+                        <label name={`${attribute[0]} total`}>
+                            {combineAttributeAndRacialBonus(attribute[0], newCharacter.raceData, attributeValue)} Total
+                        </label>
+
+                        <label name={`${attribute[0]} modifier`}>
+                            {modMath(combineAttributeAndRacialBonus(attribute[0], newCharacter.raceData, attributeValue))} Modifier
+                        </label>
+
+                        <label
+                            name={`${attribute[0]} racial bonuses`}
+                        >{`${racialBonus(
+                            attribute[0],
+                            newCharacter.raceData
+                        )} racial bonuses`}</label>
+                    </div>
+                );
+            })}
+        </div>
+    );
 }

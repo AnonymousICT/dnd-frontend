@@ -3,17 +3,18 @@ import { Link, useHistory } from "react-router-dom";
 import {Context} from '../../context/Context'
 
 export default function Navbar() {
-  const {setAllCharacters}= useContext(Context)
+  const {setAllCharacters, userData, setUserData}= useContext(Context)
   const history = useHistory();
 
-  const loggedIn = localStorage.getItem('x-auth-token')
+  const loggedIn = (userData.user || {auth: null}).auth;
 
   const logout = () => {
     localStorage.removeItem("x-auth-token");
     localStorage.removeItem("displayName");
     localStorage.removeItem("userId");
+    setUserData({});
     history.push("/login");
-    setAllCharacters([])
+    setAllCharacters([]);
   };
 
   return (

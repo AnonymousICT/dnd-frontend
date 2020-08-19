@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AttributeContext } from "../../../context/AttributeContext";
+import { modMath } from "../../Utilities/AttributeUtilities";
 import { Context } from "../../../context/Context";
 import axios from "axios";
 import DebounceInput from "react-debounce-input";
 
 export default function BattleStats({ userClass, filteredLevel }) {
   const [currentHitPoints, setCurrentHitPoints] = useState(0);
-  const { modMath } = useContext(AttributeContext);
   const { currentCharacter, setCurrentCharacter } = useContext(Context);
   const {
     dexterity,

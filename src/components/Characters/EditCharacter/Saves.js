@@ -1,14 +1,11 @@
 import React, { useEffect, useContext } from "react";
-import { AttributeContext } from "../../../context/AttributeContext";
+import { modMath } from "../../Utilities/AttributeUtilities";
 import { Context } from "../../../context/Context";
 import displayCheckboxes from "./DisplayCheckBoxes";
 
 const saveArray = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
 
 export default function Saves({ userClass: { saving_throws }, filteredLevel }) {
-  const { attributeValue, modMath, setAttributeValue } = useContext(
-    AttributeContext
-  );
   const { currentCharacter } = useContext(Context);
 
   useEffect(() => {

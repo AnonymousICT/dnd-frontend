@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 
 import { ContextProvider } from "./context/Context";
 import { ResourceContextProvider } from "./context/ResourceContext";
-import { AttributeContextProvider } from "./context/AttributeContext";
 
 import App from "./App";
 
@@ -14,11 +13,9 @@ dotenv.config();
 ReactDOM.render(
   <ContextProvider>
     <ResourceContextProvider>
-      <AttributeContextProvider>
-        <Router>
-          <App />
-        </Router>
-      </AttributeContextProvider>
+      <Router>
+        <App />
+      </Router>
     </ResourceContextProvider>
   </ContextProvider>,
   document.getElementById("root")

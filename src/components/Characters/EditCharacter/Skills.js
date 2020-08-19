@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { AttributeContext } from "../../../context/AttributeContext";
+import { modMath } from "../../Utilities/AttributeUtilities";
 import { Context } from "../../../context/Context";
 import displayCheckboxes from "./DisplayCheckBoxes";
 
@@ -28,9 +28,6 @@ export default function Skills({
   userClass: { saving_throws },
   filteredLevel,
 }) {
-  const { attributeValue, modMath, setAttributeValue } = useContext(
-    AttributeContext
-  );
   const { currentCharacter } = useContext(Context);
 
   useEffect(() => {
