@@ -25,6 +25,7 @@ function ContextProvider({ children }) {
   //for spells
   const [characterSpells, setCharacterSpells] = useState([]);
 
+  //TOMove this out of context and
   const nonSpellCaster = ["Barbarian", "Fighter", "Monk", "Rogue"];
 
   const [modalOpen, setModalOpen] = useState(false);
