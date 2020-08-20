@@ -1,41 +1,47 @@
-import React, { useEffect, useContext } from "react";
-import { modMath } from "../../Utilities/AttributeUtilities";
-import { Context } from "../../../context/Context";
-import displayCheckboxes from "./DisplayCheckBoxes";
+import React, { useEffect } from "react";
+import { modMath, attributeSort } from "../../Utilities/AttributeUtilities";
 
-const saveArray = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
+export default function Saves({
+    currentCharacter,
+    attributeValue,
+    setAttributeValue,
+    getAttributeValue,
+    profBonus,
+}) {
+    useEffect(() => {
+        setAttributeValue({
+            STR: currentCharacter.strength,
+            DEX: currentCharacter.dexterity,
+            CON: currentCharacter.constitution,
+            INT: currentCharacter.intelligence,
+            WIS: currentCharacter.wisdom,
+            CHA: currentCharacter.charisma,
+        });
+    }, [currentCharacter, setAttributeValue]);
 
-export default function Saves({ userClass: { saving_throws }, filteredLevel }) {
-  const { currentCharacter } = useContext(Context);
+    const sortFunction = (a, b) =>
+        attributeSort[a].sortOrder - attributeSort[b].sortOrder;
 
-  useEffect(() => {
-    setAttributeValue({
-      STR: currentCharacter.strength,
-      DEX: currentCharacter.dexterity,
-      CON: currentCharacter.constitution,
-      INT: currentCharacter.intelligence,
-      WIS: currentCharacter.wisdom,
-      CHA: currentCharacter.charisma,
-    });
-  }, [currentCharacter, setAttributeValue]);
+    console.log(Object.keys(attributeValue).sort(sortFunction));
+    console.log(attributeValue);
 
-  const savingThrows = !saving_throws
-    ? []
-    : saving_throws.map((save) => save.name);
-
-  return (
-    <div className="skills-save-container">
-      <div className="save-container">
-        <h2>Saving Throws</h2>
-        {displayCheckboxes(
-          saveArray,
-          savingThrows,
-          null,
-          filteredLevel,
-          attributeValue,
-          modMath
-        )}
-      </div>
-    </div>
-  );
+    return (
+        <div className="skills-save-container">
+            <div className="save-container">
+                <h2>Saving Throws</h2>
+                <ul>
+                    {Object.keys(attributeValue)
+                        .sort(sortFunction)
+                        .map((save, i) => {
+                            return (
+                                <div key={save}>
+                                    <label >{save}</label>
+                                    <li>{modMath(attributeValue[save])}</li>
+                                </div>
+                            );
+                        })}
+                </ul>
+            </div>
+        </div>
+    );
 }

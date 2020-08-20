@@ -3,7 +3,7 @@ import AllEquipment from "./AllEquipment";
 import SelectCharacter from "../Characters/SelectCharacter";
 import CharacterShoppingCart from "./CharacterShoppingCart";
 import SpecificEquipment from "./SpecificEquipment";
-import Modal from "../Modal/Modal";
+import Modal from "../Utilities/Modal/Modal"
 import { Context } from "../../context/Context";
 
 import "./equipment.scss";

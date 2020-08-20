@@ -3,7 +3,7 @@ import { ResourceContext } from "../../context/ResourceContext";
 import { Context } from "../../context/Context";
 import { fetchAllSpecificSpellData } from "../../api/SpellAPI";
 import bookloading from "./bookloading.gif";
-import RenderTable from "../Table/RenderTable";
+import RenderTable from "../Utilities/Table/RenderTable";
 
 export default function AllSpells({ setShowModal }) {
   const [loading, setLoading] = useState(true);

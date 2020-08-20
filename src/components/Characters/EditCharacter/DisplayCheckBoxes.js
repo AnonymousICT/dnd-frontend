@@ -3,17 +3,12 @@ export default function displayCheckboxes(
   initArray,
   valuesArray,
   modifiers,
-  filteredLevel,
   attributeValue,
-  modMath
+  modMath,
+  profBonus
 ) {
   const getValue = (modifiers, item) =>
     attributeValue[modifiers ? modifiers[item] : item];
-
-  const profBonus = (levels) => {
-    return (levels.find((item) => item.prof_bonus) || { prof_bonus: 0 })
-      .prof_bonus;
-  };
 
   return initArray.map((label, i) => {
     if (valuesArray.filter((item) => label === item).length === 0) {
@@ -37,7 +32,7 @@ export default function displayCheckboxes(
           <label className="checked">
             {label}{" "}
             <span>
-              {modMath(getValue(modifiers, label)) + profBonus(filteredLevel)}
+              {modMath(getValue(modifiers, label)) + profBonus}
             </span>
           </label>
         </div>

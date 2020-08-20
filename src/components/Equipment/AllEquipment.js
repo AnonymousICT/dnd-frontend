@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ResourceContext } from "../../context/ResourceContext";
-import RenderTable from "../Table/RenderTable";
+import RenderTable from "../Utilities/Table/RenderTable";
 
 export default function AllEquipment({ setShowModal }) {
   const {

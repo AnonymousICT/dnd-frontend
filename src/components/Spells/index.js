@@ -4,7 +4,7 @@ import AllSpells from "./AllSpells";
 import SpecificSpell from "./SpecificSpell";
 import AddToSpellbook from "./AddToSpellbook";
 import SelectSpellcaster from "./SelectSpellcaster";
-import Modal from "../Modal/Modal";
+import Modal from "../Utilities/Modal/Modal";
 import "./spells.scss";
 
 export default function Spells() {
