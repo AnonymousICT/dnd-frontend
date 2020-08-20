@@ -49,9 +49,7 @@ export default function EditCharacter() {
         currentCharacter,
         setCurrentCharacter,
         nonSpellCaster,
-	} = useContext(Context);
-	
-	console.log(currentCharacter)
+    } = useContext(Context);
 
     const [attributeValue, setAttributeValue] = useState({});
     const [pager, setPager] = useState(0);

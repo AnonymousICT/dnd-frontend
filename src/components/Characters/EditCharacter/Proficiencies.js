@@ -8,6 +8,15 @@ export default function Proficiencies({ currentCharacter }) {
                 character.classData.proficiencies) || [{ name: "potato" }]
         );
     };
+    const getRaceProficiencies = (character) => {
+        return (
+            (character &&
+                character.classData &&
+                character.raceData.starting_proficiencies) || [
+                { name: "potato weapon" },
+            ]
+        );
+    };
 
     const characterProficiences = () => {
         return getClassProficiencies(currentCharacter).map((prof) => (
@@ -47,6 +56,9 @@ export default function Proficiencies({ currentCharacter }) {
             <h3>Character Proficiencies</h3>
             <ul>
                 {characterProficiences()}
+                {getRaceProficiencies(currentCharacter).map(prof=> {
+                    return <li key={prof.name}>{prof.name.replace("Skill: ", "")}</li>
+                })}
                 {currentCharacter.raceProfChoice !== "" ? (
                     <li>{currentCharacter.raceProfChoice}</li>
                 ) : null}
