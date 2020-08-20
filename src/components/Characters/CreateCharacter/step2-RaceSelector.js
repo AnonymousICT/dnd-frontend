@@ -109,7 +109,7 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                         </p>
                         <h3>Starting Proficiencies</h3>
                         {starting_proficiencies.map((item, i) => (
-                            <p key={i}>{item.name}</p>
+                            <p key={i}>{item.name.replace("Skill: ", "")}</p>
                         ))}
                         {!starting_proficiency_options ? null : (
                             <div className="proficiency-options">
