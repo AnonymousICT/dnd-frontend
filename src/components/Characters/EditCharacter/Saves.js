@@ -5,7 +5,6 @@ export default function Saves({
     currentCharacter,
     attributeValue,
     setAttributeValue,
-    getAttributeValue,
     profBonus,
 }) {
     const [proficientSavingThrows, setProficientSavingThrows] = useState({});
@@ -31,13 +30,22 @@ export default function Saves({
     }, [currentCharacter, profBonus]);
 
     const displaySaves = (name) => {
-        return (
-            <li key={name}>
-                {name}:{" "}
-                {(proficientSavingThrows[name] || 0) +
-                    modMath(attributeValue[name])}
-            </li>
-        );
+        if(proficientSavingThrows[name]) {
+            return (
+                <li className="isProficient" key={name}>
+                    {name}:{" "}
+                    {(proficientSavingThrows[name] || 0) +
+                        modMath(attributeValue[name])}
+                </li>
+            );
+        } else {
+            return (
+                <li key={name}>
+                    {name}:{" "}
+                        {modMath(attributeValue[name])}
+                </li>
+            )
+        }
     };
     useEffect(() => {
         setAttributeValue({

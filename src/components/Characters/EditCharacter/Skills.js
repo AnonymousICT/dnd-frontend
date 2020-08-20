@@ -29,6 +29,20 @@ export default function Skills({
     setAttributeValue,
     profBonus,
 }) {
+    const getRacialProficiencies = (character) => {
+        return (
+            (character &&
+                character.raceData &&
+                character.raceData.starting_proficiencies) || [
+                { name: "Potato" },
+            ]
+        );
+    };
+    const profChoiceArr = currentCharacter.profChoice
+    const raceProf = skillArray.filter(skill => skill === getRacialProficiencies(currentCharacter)[0].name.replace("Skill: ", ""))
+    const completeProfArr = [...profChoiceArr, ...raceProf]
+
+
     useEffect(() => {
         setAttributeValue({
             STR: currentCharacter.strength,
@@ -66,7 +80,14 @@ export default function Skills({
             <div className="skills-container">
                 <h2>Skills</h2>
                 <div className="skill-columns">
-                    {displayCheckboxes(skillArray, currentCharacter.profChoice, skillModifiers, attributeValue, modMath, profBonus())}
+                    {displayCheckboxes(
+                        skillArray,
+                        completeProfArr,
+                        skillModifiers,
+                        attributeValue,
+                        modMath,
+                        profBonus()
+                    )}
                 </div>
             </div>
         </div>

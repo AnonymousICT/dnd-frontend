@@ -47,6 +47,9 @@ export default function Proficiencies({ currentCharacter }) {
             <h3>Character Proficiencies</h3>
             <ul>
                 {characterProficiences()}
+                {currentCharacter.raceProfChoice !== "" ? (
+                    <li>{currentCharacter.raceProfChoice}</li>
+                ) : null}
                 {characterLanguages()}
                 {currentCharacter.languageChoice !== "" ? (
                     <li>{currentCharacter.languageChoice}</li>
