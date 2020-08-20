@@ -27,10 +27,8 @@ export default function Skills({
     currentCharacter,
     attributeValue,
     setAttributeValue,
-    getAttributeValue,
     profBonus,
 }) {
-
     useEffect(() => {
         setAttributeValue({
             STR: currentCharacter.strength,
@@ -67,7 +65,9 @@ export default function Skills({
         <div className="skills-save-container">
             <div className="skills-container">
                 <h2>Skills</h2>
-                
+                <div className="skill-columns">
+                    {displayCheckboxes(skillArray, currentCharacter.profChoice, skillModifiers, attributeValue, modMath, profBonus())}
+                </div>
             </div>
         </div>
     );

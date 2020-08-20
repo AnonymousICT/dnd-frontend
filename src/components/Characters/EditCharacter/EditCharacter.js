@@ -8,16 +8,40 @@ import Attributes from "./Attributes";
 import Saves from "./Saves";
 import Skills from "./Skills";
 import Proficiencies from "./Proficiencies";
-// import AllItems from "./AllItems";
-// import Spellbook from "./Spellbook";
+import AllItems from "./AllItems";
+import Spellbook from "./Spellbook";
 
 const pageButtons = [
-    { name: "character", title: "Character Summary", icon: "👤" },
-    { name: "attributes", title: "Attributes and Saving Throws", icon: "💪" },
-    { name: "skills", title: "Skills", icon: "🎭" },
-    { name: "proficiencies", title: "Proficiencies", icon: "🗣️" },
-    { name: "equipment", title: "Equipment", icon: "⚔️" },
-    { name: "spells", title: "Spells", icon: "🔮" },
+    {
+        name: "character",
+        title: "Character Summary",
+        icon: <i className="fas fa-dice-d20"></i>,
+    },
+    {
+        name: "attributes",
+        title: "Attributes and Saving Throws",
+        icon: <i className="fas fa-fist-raised"></i>,
+    },
+    {
+        name: "skills",
+        title: "Skills",
+        icon: <i className="fas fa-running"></i>,
+    },
+    {
+        name: "proficiencies",
+        title: "Proficiencies",
+        icon: <i className="fas fa-scroll"></i>,
+    },
+    {
+        name: "equipment",
+        title: "Equipment",
+        icon: <i className="fas fa-ring"></i>,
+    },
+    {
+        name: "spells",
+        title: "Spells",
+        icon: <i className="fas fa-hat-wizard"></i>,
+    },
 ];
 
 export default function EditCharacter() {
@@ -28,8 +52,8 @@ export default function EditCharacter() {
     } = useContext(Context);
 
     const [attributeValue, setAttributeValue] = useState({});
-    const getAttributeValue = (attributeName) => attributeValue[attributeName];
     const [pager, setPager] = useState(0);
+    const getAttributeValue = (attributeName) => attributeValue[attributeName];
     const characterId =
         window.location.href.split("/").pop() ||
         window.location.href.split("/").pop().pop();
@@ -42,16 +66,16 @@ export default function EditCharacter() {
                 { level: 0, prof_bonus: 2 },
             ]
         );
-	};
+    };
 
-	const profBonus = () => {
-		return getClassLevels(currentCharacter)
-			.filter(
-				(cl) =>
-					cl.level <= (currentCharacter.level || 1) && cl.prof_bonus
-			)
-			.reverse()[0].prof_bonus;
-	};
+    const profBonus = () => {
+        return getClassLevels(currentCharacter)
+            .filter(
+                (cl) =>
+                    cl.level <= (currentCharacter.level || 1) && cl.prof_bonus
+            )
+            .reverse()[0].prof_bonus;
+    };
 
     useEffect(() => {
         const fetchCharacter = async () => {
@@ -186,12 +210,15 @@ export default function EditCharacter() {
                     profBonus={profBonus}
                 />
                 <Proficiencies currentCharacter={currentCharacter} />
-                {/* <AllItems /> */}
-                {/* {!nonSpellCaster.includes(currentCharacter.job) ? (
-          <Spellbook />
-        ) : (
-          <h2 className="hidden">No Spells Dummy</h2>
-        )} */}
+                <AllItems
+                    currentCharacter={currentCharacter}
+                    setCurrentCharacter={setCurrentCharacter}
+                />
+                {!nonSpellCaster.includes(currentCharacter.job) ? (
+                    <Spellbook currentCharacter={currentCharacter} />
+                ) : (
+                    <h2 className="hidden">No Spells Dummy</h2>
+                )}
             </div>
             <button
                 className="nav previous"

@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Context } from "../../../context/Context";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function AllItems() {
+export default function AllItems({currentCharacter, setCurrentCharacter}) {
     const [isEquipmentChecked, setIsEquipmentChecked] = useState({});
-    const { currentCharacter, setCurrentCharacter } = useContext(Context);
 
     useEffect(() => {
         if (currentCharacter.items.length > 0) {
@@ -53,7 +51,8 @@ export default function AllItems() {
             let characterItems = currentCharacter.items.map((equipment) =>
                 equipment.uid === item.uid ? item : equipment
             );
-            setCurrentCharacter({ ...currentCharacter, items: characterItems });
+
+            setCurrentCharacter({ ...currentCharacter, items: {...currentCharacter.items, ...characterItems} });
 
             submitToDb(characterItems);
         } else {

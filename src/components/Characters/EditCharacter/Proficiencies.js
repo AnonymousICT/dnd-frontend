@@ -26,7 +26,7 @@ export default function Proficiencies({ currentCharacter }) {
         return (
             (character &&
                 character.raceData &&
-                character.raceData.languages) || [{ name: "potato cant" }]
+                character.raceData.languages) || [{ name: "speak to potatoes" }]
         );
     };
 

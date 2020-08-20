@@ -32,7 +32,7 @@ export default function displayCheckboxes(
           <label className="checked">
             {label}{" "}
             <span>
-              {modMath(getValue(modifiers, label)) + profBonus}
+              {(modMath(getValue(modifiers, label)) || 0) + profBonus}
             </span>
           </label>
         </div>

@@ -45,7 +45,7 @@ export default function SelectCharacterClass({
             return {
                 ...previousState,
                 job: classData.name,
-                classData: {...classData, classlevels: classLevels },
+                classData: { ...classData, classlevels: classLevels },
                 profChoice: Object.keys(isChecked).map((propName) =>
                     isChecked[propName].key.replace("Skill: ", "")
                 ),

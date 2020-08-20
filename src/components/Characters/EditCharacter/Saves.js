@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { modMath, attributeSort } from "../../Utilities/AttributeUtilities";
 
 export default function Saves({
@@ -8,6 +8,37 @@ export default function Saves({
     getAttributeValue,
     profBonus,
 }) {
+    const [proficientSavingThrows, setProficientSavingThrows] = useState({});
+    const getClassSavingThrows = (character) => {
+        return (
+            (character &&
+                character.classData &&
+                character.classData.saving_throws) || [{ name: "potato save" }]
+        );
+    };
+
+    useEffect(() => {
+        const characterProficientSaves = () => {
+            const saves = getClassSavingThrows(currentCharacter).reduce(
+                (obj, save) => {
+                    return { ...obj, [save.name]: profBonus() };
+                },
+                {}
+            );
+            setProficientSavingThrows(saves);
+        };
+        characterProficientSaves();
+    }, [currentCharacter, profBonus]);
+
+    const displaySaves = (name) => {
+        return (
+            <li key={name}>
+                {name}:{" "}
+                {(proficientSavingThrows[name] || 0) +
+                    modMath(attributeValue[name])}
+            </li>
+        );
+    };
     useEffect(() => {
         setAttributeValue({
             STR: currentCharacter.strength,
@@ -22,9 +53,6 @@ export default function Saves({
     const sortFunction = (a, b) =>
         attributeSort[a].sortOrder - attributeSort[b].sortOrder;
 
-    console.log(Object.keys(attributeValue).sort(sortFunction));
-    console.log(attributeValue);
-
     return (
         <div className="skills-save-container">
             <div className="save-container">
@@ -32,13 +60,8 @@ export default function Saves({
                 <ul>
                     {Object.keys(attributeValue)
                         .sort(sortFunction)
-                        .map((save, i) => {
-                            return (
-                                <div key={save}>
-                                    <label >{save}</label>
-                                    <li>{modMath(attributeValue[save])}</li>
-                                </div>
-                            );
+                        .map((save) => {
+                            return displaySaves(save);
                         })}
                 </ul>
             </div>
