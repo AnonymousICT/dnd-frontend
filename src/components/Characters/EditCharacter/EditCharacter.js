@@ -225,7 +225,7 @@ export default function EditCharacter() {
                 disabled={pager === 0}
                 onClick={() => handleSlideMove("previous")}
             >
-                ➤
+                <i class="fas fa-arrow-right"></i>
             </button>
             <button
                 className="nav next"
@@ -235,7 +235,7 @@ export default function EditCharacter() {
                 }
                 onClick={() => handleSlideMove("next")}
             >
-                ➤
+                <i class="fas fa-arrow-right"></i>
             </button>
             <div className="page-buttons">
                 {pageButtons.map((page, i) =>
