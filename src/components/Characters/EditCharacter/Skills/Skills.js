@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { modMath } from "../../Utilities/AttributeUtilities";
+import { modMath } from "../../../Utilities/AttributeUtilities";
 import displayCheckboxes from "./DisplayCheckBoxes";
 
 const skillArray = [

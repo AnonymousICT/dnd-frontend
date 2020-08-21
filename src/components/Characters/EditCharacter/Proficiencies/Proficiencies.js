@@ -1,6 +1,7 @@
 import React from "react";
-
-export default function Proficiencies({ currentCharacter }) {
+import DisplayCharProf from "./DisplayCharProf";
+import DisplayCharTraits from "./DisplayCharTraits";
+export default function Proficiencies({ currentCharacter, getClassLevels }) {
     const getClassProficiencies = (character) => {
         return (
             (character &&
@@ -50,30 +51,22 @@ export default function Proficiencies({ currentCharacter }) {
             <li key={language.name}>{language.name}</li>
         ));
     };
-
+    
     return (
         <div>
             <h3>Character Proficiencies</h3>
-            <ul>
-                {characterProficiences()}
-                {getRaceProficiencies(currentCharacter).map(prof=> {
-                    return <li key={prof.name}>{prof.name.replace("Skill: ", "")}</li>
-                })}
-                {currentCharacter.raceProfChoice !== "" ? (
-                    <li>{currentCharacter.raceProfChoice}</li>
-                ) : null}
-                {characterLanguages()}
-                {currentCharacter.languageChoice !== "" ? (
-                    <li>{currentCharacter.languageChoice}</li>
-                ) : null}
-            </ul>
+            <DisplayCharProf
+                currentCharacter={currentCharacter}
+                characterProficiences={characterProficiences}
+                getRaceProficiencies={getRaceProficiencies}
+                characterLanguages={characterLanguages}
+            />
             <h3>Character Traits</h3>
-            <ul>
-                {characterTraits()}
-                {currentCharacter.traitChoice !== "" ? (
-                    <li>{currentCharacter.traitChoice}</li>
-                ) : null}
-            </ul>
+            <DisplayCharTraits
+                currentCharacter={currentCharacter}
+                characterTraits={characterTraits}
+            />
+            <h3>Class Features</h3>
         </div>
     );
 }

@@ -6,8 +6,8 @@ import BasicInfo from "./BasicInfo";
 import BattleStats from "./BattleStats";
 import Attributes from "./Attributes";
 import Saves from "./Saves";
-import Skills from "./Skills";
-import Proficiencies from "./Proficiencies";
+import Skills from "./Skills/Skills";
+import Proficiencies from "./Proficiencies/Proficiencies";
 import AllItems from "./AllItems";
 import Spellbook from "./Spellbook";
 
@@ -180,7 +180,7 @@ export default function EditCharacter() {
                 onScroll={handleScroll}
             >
                 <div>
-                    <BasicInfo />
+                    <BasicInfo currentCharacter={currentCharacter} />
                     <BattleStats
                         currentCharacter={currentCharacter}
                         setCurrentCharacter={setCurrentCharacter}
@@ -225,7 +225,7 @@ export default function EditCharacter() {
                 disabled={pager === 0}
                 onClick={() => handleSlideMove("previous")}
             >
-                <i class="fas fa-arrow-right"></i>
+                <i className="fas fa-arrow-right"></i>
             </button>
             <button
                 className="nav next"
@@ -235,7 +235,7 @@ export default function EditCharacter() {
                 }
                 onClick={() => handleSlideMove("next")}
             >
-                <i class="fas fa-arrow-right"></i>
+                <i className="fas fa-arrow-right"></i>
             </button>
             <div className="page-buttons">
                 {pageButtons.map((page, i) =>
