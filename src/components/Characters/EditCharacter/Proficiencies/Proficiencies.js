@@ -51,7 +51,14 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
             <li key={language.name}>{language.name}</li>
         ));
     };
-    
+
+    const characterLevels = getClassLevels(currentCharacter)
+        .filter((classLevel) => classLevel.level <= currentCharacter.level)
+        .map((level) => level.features)
+        .reduce(function (accumulator, currentValue) {
+            return [...accumulator, ...currentValue];
+        });
+        
     return (
         <div>
             <h3>Character Proficiencies</h3>
@@ -67,6 +74,10 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
                 characterTraits={characterTraits}
             />
             <h3>Class Features</h3>
+            <ul>
+                {(characterLevels || []).map(item => {return <li key={item.name}>{item.name}</li>})}
+            </ul>
         </div>
     );
 }
+

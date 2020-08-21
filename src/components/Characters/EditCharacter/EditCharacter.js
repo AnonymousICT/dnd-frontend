@@ -209,7 +209,10 @@ export default function EditCharacter() {
                     getAttributeValue={getAttributeValue}
                     profBonus={profBonus}
                 />
-                <Proficiencies currentCharacter={currentCharacter} />
+                <Proficiencies
+                    currentCharacter={currentCharacter}
+                    getClassLevels={getClassLevels}
+                />
                 <AllItems
                     currentCharacter={currentCharacter}
                     setCurrentCharacter={setCurrentCharacter}
