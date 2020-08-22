@@ -33,13 +33,15 @@ export default function Skills({
         return (
             (character &&
                 character.raceData &&
-                character.raceData.starting_proficiencies) || [
-                { name: "Potato" },
-            ]
+                character.raceData.starting_proficiencies &&
+                character.raceData.starting_proficiencies[0]) || 
+                { name: "Potato" }
+            
         );
     };
+
     const profChoiceArr = currentCharacter.profChoice
-    const raceProf = skillArray.filter(skill => skill === getRacialProficiencies(currentCharacter)[0].name.replace("Skill: ", ""))
+    const raceProf = skillArray.filter(skill => skill === getRacialProficiencies(currentCharacter).name.replace("Skill: ", ""))
     const completeProfArr = [...profChoiceArr, ...raceProf]
 
 

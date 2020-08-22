@@ -63,7 +63,7 @@ export default function EditCharacter() {
             (character &&
                 character.classData &&
                 character.classData.classlevels) || [
-                { level: 0, prof_bonus: 2 },
+                { level: 0, prof_bonus: 2, features: [] },
             ]
         );
     };

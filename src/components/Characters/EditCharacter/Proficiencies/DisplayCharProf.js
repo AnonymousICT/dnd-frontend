@@ -1,13 +1,14 @@
 import React from "react";
 
-export default function DisplayCharProf({
+export default function displayCharProf({
     currentCharacter,
     characterProficiences,
     getRaceProficiencies,
     characterLanguages,
 }) {
     return (
-        <div>
+        <div className="char-prof">
+            <h3>Character Proficiencies</h3>
             <ul>
                 {characterProficiences()}
                 {getRaceProficiencies(currentCharacter).map((prof) => {

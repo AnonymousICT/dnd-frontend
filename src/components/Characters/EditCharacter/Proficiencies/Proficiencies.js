@@ -1,6 +1,8 @@
 import React from "react";
 import DisplayCharProf from "./DisplayCharProf";
 import DisplayCharTraits from "./DisplayCharTraits";
+import DisplayCharFeatures from "./DisplayCharFeatures";
+
 export default function Proficiencies({ currentCharacter, getClassLevels }) {
     const getClassProficiencies = (character) => {
         return (
@@ -53,31 +55,34 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
     };
 
     const characterLevels = getClassLevels(currentCharacter)
-        .filter((classLevel) => classLevel.level <= currentCharacter.level)
-        .map((level) => level.features)
+        .filter((item) => item.level <= currentCharacter.level)
         .reduce(function (accumulator, currentValue) {
-            return [...accumulator, ...currentValue];
-        });
-        
+            return [...accumulator, ...currentValue.features];
+        }, []);
+
+    console.log(currentCharacter)
+    console.log(
+        (
+            getClassLevels(currentCharacter).filter(
+                (item) => item.level === currentCharacter.level
+            )[0] || []
+        ).class_specific
+    );
+
     return (
-        <div>
-            <h3>Character Proficiencies</h3>
+        <div className="prof-container">
             <DisplayCharProf
                 currentCharacter={currentCharacter}
                 characterProficiences={characterProficiences}
                 getRaceProficiencies={getRaceProficiencies}
                 characterLanguages={characterLanguages}
             />
-            <h3>Character Traits</h3>
             <DisplayCharTraits
                 currentCharacter={currentCharacter}
                 characterTraits={characterTraits}
             />
-            <h3>Class Features</h3>
-            <ul>
-                {(characterLevels || []).map(item => {return <li key={item.name}>{item.name}</li>})}
-            </ul>
+            <DisplayCharFeatures characterLevels={characterLevels} />
+
         </div>
     );
 }
-
