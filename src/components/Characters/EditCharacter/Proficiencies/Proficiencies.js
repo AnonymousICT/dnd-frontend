@@ -2,6 +2,7 @@ import React from "react";
 import DisplayCharProf from "./DisplayCharProf";
 import DisplayCharTraits from "./DisplayCharTraits";
 import DisplayCharFeatures from "./DisplayCharFeatures";
+import DisplayClassSpecific from './DisplayClassSpecific';
 
 export default function Proficiencies({ currentCharacter, getClassLevels }) {
     const getClassProficiencies = (character) => {
@@ -60,14 +61,11 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
             return [...accumulator, ...currentValue.features];
         }, []);
 
-    console.log(currentCharacter)
-    console.log(
-        (
-            getClassLevels(currentCharacter).filter(
-                (item) => item.level === currentCharacter.level
-            )[0] || []
-        ).class_specific
-    );
+    console.log(currentCharacter);
+
+    const getClassSpecific = (
+        getClassLevels(currentCharacter)
+        .filter((item) => item.level === currentCharacter.level)[0] || []).class_specific;
 
     return (
         <div className="prof-container">
@@ -82,7 +80,7 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
                 characterTraits={characterTraits}
             />
             <DisplayCharFeatures characterLevels={characterLevels} />
-
+            <DisplayClassSpecific getClassSpecific={getClassSpecific}/>
         </div>
     );
 }
