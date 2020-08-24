@@ -61,8 +61,6 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
             return [...accumulator, ...currentValue.features];
         }, []);
 
-    console.log(currentCharacter);
-
     const getClassSpecific = (
         getClassLevels(currentCharacter)
         .filter((item) => item.level === currentCharacter.level)[0] || []).class_specific;
@@ -80,7 +78,7 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
                 characterTraits={characterTraits}
             />
             <DisplayCharFeatures characterLevels={characterLevels} />
-            <DisplayClassSpecific getClassSpecific={getClassSpecific}/>
+            <DisplayClassSpecific currentCharacter={currentCharacter} getClassSpecific={getClassSpecific}/>
         </div>
     );
 }

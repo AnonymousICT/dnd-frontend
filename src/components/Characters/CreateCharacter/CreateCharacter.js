@@ -38,7 +38,6 @@ export default function CreateCharacter() {
         [setValidForm, formPage]
     );
 
-	console.log(newCharacter)
     const handleCharacterSubmit = async (e) => {
         try {
             await axios.post(
