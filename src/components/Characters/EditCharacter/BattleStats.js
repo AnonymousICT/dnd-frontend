@@ -22,7 +22,6 @@ export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
                 return modMath(dexterity) + 10;
         }
     };
-
     const calculateEquippedAC = (character) => {
         let equippedArmor = character.items.filter((item) => item.isEquipped);
 

@@ -30,21 +30,22 @@ export default function Saves({
     }, [currentCharacter, profBonus]);
 
     const displaySaves = (name) => {
-        if(proficientSavingThrows[name]) {
+        if (proficientSavingThrows[name]) {
             return (
-                <li className="isProficient" key={name}>
+                <li key={name}>
                     {name}:{" "}
-                    {(proficientSavingThrows[name] || 0) +
-                        modMath(attributeValue[name])}
+                    <span className="isProficient">
+                        {(proficientSavingThrows[name] || 0) +
+                            modMath(attributeValue[name])}
+                    </span>
                 </li>
             );
         } else {
             return (
                 <li key={name}>
-                    {name}:{" "}
-                        {modMath(attributeValue[name])}
+                    {name}: {modMath(attributeValue[name])}
                 </li>
-            )
+            );
         }
     };
     useEffect(() => {

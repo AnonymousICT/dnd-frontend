@@ -79,8 +79,8 @@ export default function Skills({
 
     return (
         <div className="skills-save-container">
-            <div className="skills-container">
                 <h2>Skills</h2>
+            <div className="skills-container">
                 <div className="skill-columns">
                     {displayCheckboxes(
                         skillArray,

@@ -29,7 +29,7 @@ export const classLabels = {
     extra_attacks: "Extra Attacks",
     sneak_attack: "Sneak Attack",
     ki_points: "Ki Points",
-    unarmored_movement: "Unarmored Movement bonus speed",
+    unarmored_movement: "Unarmored Movement Bonus Speed",
     aura_range: "Aura Range (ft)",
     favored_enemies: "Favored Enemies",
     favored_terrain: "Favored Terrain",

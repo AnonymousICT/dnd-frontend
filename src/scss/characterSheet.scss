@@ -1,194 +1,212 @@
 @import "./colors.scss";
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .characters {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .slider-container {
-  position: relative;
+    position: relative;
 
-  .page-buttons {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    .page-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
 
-    .active {
-      background-color: $secondary;
-      border-radius: 0.3em;
-      border-width: 1px;
-    }
-  }
-
-  .nav {
-    position: absolute;
-    top: 50%;
-    &.previous {
-      transform: scaleX(-1);
-      left: 0;
-    }
-    &.next {
-      right: 0;
+        .active {
+            background-color: $secondary;
+            border-radius: 0.3em;
+            border-width: 1px;
+        }
     }
 
-    span {
-      display: contents;
-    }
-  }
+    .nav {
+        position: absolute;
+        top: 50%;
+        &.previous {
+            transform: scaleX(-1);
+            left: 0;
+        }
+        &.next {
+            right: 0;
+        }
 
-  .character-container {
-    overflow-x: auto;
-    display: grid;
-    grid-template-columns: repeat(7, 100%);
-    will-change: transform;
-    align-content: center;
-    scroll-snap-coordinate: 0 0;
-    scroll-snap-points-x: repeat(100%);
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    & > * {
-      scroll-snap-align: start;
-    }
-
-    .basic-info {
-      h2 {
-        font-size: 20px;
         span {
-          color: $accent;
+            display: contents;
         }
-      }
     }
 
-    .attribute-container {
-      padding-top: 1em;
-      .prof-bonus {
-        margin-bottom: 1rem;
-        span {
-          border: 1px solid black;
-          padding: 1px 8px;
-        }
-      }
-      .attribute {
-        label:first-child {
-          display: inline-block;
-          width: 50px;
-        }
-        input {
-          text-align: center;
-          margin: 5px;
-        }
-      }
-    }
+    .character-container {
+		text-align: center;
+        overflow-x: auto;
+        display: grid;
+        grid-template-columns: repeat(7, 100%);
+        will-change: transform;
+        align-content: center;
+        scroll-snap-coordinate: 0 0;
+        scroll-snap-points-x: repeat(100%);
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
 
-    .skills-save-container {
-      display: flex;
-      flex-direction: column;
-      .save-container,
-      .skills-container {
-        div {
-          margin-bottom: 8px;
-          input {
+        &::-webkit-scrollbar {
             display: none;
-          }
         }
-        .checked {
-          span {
-            color: $accent;
-            font-weight: 600;
-          }
+
+        &:focus {
+            outline: none;
         }
-      }
-    }
 
-    .battle-stats-container {
-      margin: 1em;
-      border: 1px solid;
-      .first-row {
-        display: flex;
-        justify-content: space-around;
-        .battle-stat {
-          margin: 0 10px;
-          vertical-align: center;
-          width: 0;
-          flex: 1 1 0;
+        & > * {
+            scroll-snap-align: start;
+        }
 
-          p:first-child {
-            border: 1px solid;
-            padding: 1rem 1.2rem;
-            flex: 1;
+        .basic-info {
+            h2 {
+                font-size: 20px;
+                span {
+                    color: $accent;
+                }
+            }
+        }
+
+        .attribute-container {
+            padding-top: 1em;
+            .prof-bonus {
+                margin-bottom: 1rem;
+                span {
+                    border: 1px solid black;
+                    padding: 1px 8px;
+                }
+            }
+            .attribute {
+                label:first-child {
+                    display: inline-block;
+                    width: 50px;
+                }
+                input {
+                    text-align: center;
+                    margin: 5px;
+                }
+            }
+        }
+
+        .skills-save-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-
-          p:last-child {
-            font-size: 14px;
-            margin-top: -14px;
-          }
-
-          &:nth-child(2) {
-            p:first-child {
-              padding: 1rem 1.5rem;
+			flex-direction: column;
+			.skills-container {
+				column-count: 2;
+			}
+            .save-container,
+            .skills-container {
+				.isProficient {
+					color: $accent;
+					font-weight: 600;
+				}
+                div {
+                    margin-bottom: 8px;
+                    input {
+                        display: none;
+                    }
+                }
+                .checked {
+                    span {
+                        color: $accent;
+                        font-weight: 600;
+                    }
+                }
             }
-          }
-          &:nth-child(3) {
-            p:first-child {
-              padding: 1rem 1.3rem;
-            }
-          }
         }
-      }
-      .second-row {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        h4 {
-          width: 100%;
-          margin: 0em;
-        }
-        .hit-points {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-        }
-        p {
-          span {
-            border: 1px solid $text;
-            padding: 7px;
-            color: $accent;
-          }
-        }
-        Input {
-          width: 40px;
-          padding: 10px;
-        }
-      }
-      .third-row {
-        display: flex;
-      }
-    }
 
-    .spells-container {
-      column-count: 2;
-      padding: 10px;
-      label {
-        font-weight: 600;
-        color: $accent;
-      }
+        .battle-stats-container {
+            margin: 1em;
+            border: 1px solid;
+            .first-row {
+                display: flex;
+                justify-content: space-around;
+                .battle-stat {
+                    margin: 0 10px;
+                    vertical-align: center;
+                    width: 0;
+                    flex: 1 1 0;
+
+                    p:first-child {
+                        border: 1px solid;
+                        padding: 1rem 1.2rem;
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    p:last-child {
+                        font-size: 14px;
+                        margin-top: -14px;
+                    }
+
+                    &:nth-child(2) {
+                        p:first-child {
+                            padding: 1rem 1.5rem;
+                        }
+                    }
+                    &:nth-child(3) {
+                        p:first-child {
+                            padding: 1rem 1.3rem;
+                        }
+                    }
+                }
+            }
+            .second-row {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                h4 {
+                    width: 100%;
+                    margin: 0em;
+                }
+                .hit-points {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                }
+                p {
+                    span {
+                        border: 1px solid $text;
+                        padding: 7px;
+                        color: $accent;
+                    }
+                }
+                Input {
+                    width: 40px;
+                    padding: 10px;
+                }
+            }
+            .third-row {
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
+
+        .prof-container {
+			column-count: 2;
+			h3{
+				margin: 0;
+			}
+			ul{
+				margin: 1rem 0;
+			}
+        }
+        .spells-container {
+            column-count: 2;
+            padding: 10px;
+            label {
+                font-weight: 600;
+                color: $accent;
+            }
+        }
     }
-  }
 }

@@ -39,7 +39,7 @@ export default function DisplayClassSpecific({
             <h3>Class Specific Info</h3>
             <ul>
                 {Object.entries(getClassSpecific || {}).map(([key, value]) => (
-                    <li key={value + "key"}>
+                    <li key={key+value + "key"}>
                         {classLabels[key] || key}:{" "}
                         {typeof value === "object"
                             ? hasOverrideFunction(key)

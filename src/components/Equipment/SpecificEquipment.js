@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import { ResourceContext } from "../../context/ResourceContext";
 import { Context } from "../../context/Context";
 import uuid from "react-uuid";
 
-export default function SpecificEquipment({ closeModal }) {
-  const { specificEquipment } = useContext(ResourceContext);
+export default function SpecificEquipment({ closeModal, specificEquipment }) {
+  
   const { characterItems, setCharacterItems, currentCharacter } = useContext(
     Context
   );

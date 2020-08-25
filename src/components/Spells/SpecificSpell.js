@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import { ResourceContext } from "../../context/ResourceContext";
 import { Context } from "../../context/Context";
 
-export default function SpecificSpell() {
+export default function SpecificSpell({closeModal, specificSpell}) {
   const {
     selectCharacter,
     characterSpells,
     setCharacterSpells,
     currentCharacter,
   } = useContext(Context);
-  const { specificSpell } = useContext(ResourceContext);
+
 
   const {
     _id,
@@ -30,6 +29,7 @@ export default function SpecificSpell() {
 
   const addToCharacter = () => {
     setCharacterSpells([...characterSpells, { ...specificSpell }]);
+    closeModal();
   };
 
   const renderButton = () => {

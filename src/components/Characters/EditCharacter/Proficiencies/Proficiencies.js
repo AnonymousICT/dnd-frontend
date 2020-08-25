@@ -2,7 +2,7 @@ import React from "react";
 import DisplayCharProf from "./DisplayCharProf";
 import DisplayCharTraits from "./DisplayCharTraits";
 import DisplayCharFeatures from "./DisplayCharFeatures";
-import DisplayClassSpecific from './DisplayClassSpecific';
+import DisplayClassSpecific from "./DisplayClassSpecific";
 
 export default function Proficiencies({ currentCharacter, getClassLevels }) {
     const getClassProficiencies = (character) => {
@@ -54,6 +54,7 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
             <li key={language.name}>{language.name}</li>
         ));
     };
+    console.log(currentCharacter);
 
     const characterLevels = getClassLevels(currentCharacter)
         .filter((item) => item.level <= currentCharacter.level)
@@ -62,23 +63,31 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
         }, []);
 
     const getClassSpecific = (
-        getClassLevels(currentCharacter)
-        .filter((item) => item.level === currentCharacter.level)[0] || []).class_specific;
+        getClassLevels(currentCharacter).filter(
+            (item) => item.level === currentCharacter.level
+        )[0] || []
+    ).class_specific;
 
     return (
-        <div className="prof-container">
-            <DisplayCharProf
-                currentCharacter={currentCharacter}
-                characterProficiences={characterProficiences}
-                getRaceProficiencies={getRaceProficiencies}
-                characterLanguages={characterLanguages}
-            />
-            <DisplayCharTraits
-                currentCharacter={currentCharacter}
-                characterTraits={characterTraits}
-            />
-            <DisplayCharFeatures characterLevels={characterLevels} />
-            <DisplayClassSpecific currentCharacter={currentCharacter} getClassSpecific={getClassSpecific}/>
+        <div className='prof-wrapper'>
+        <h2>Proficiencies</h2>
+            <div className="prof-container">
+                <DisplayCharProf
+                    currentCharacter={currentCharacter}
+                    characterProficiences={characterProficiences}
+                    getRaceProficiencies={getRaceProficiencies}
+                    characterLanguages={characterLanguages}
+                />
+                <DisplayCharTraits
+                    currentCharacter={currentCharacter}
+                    characterTraits={characterTraits}
+                />
+                <DisplayCharFeatures characterLevels={characterLevels} />
+                <DisplayClassSpecific
+                    currentCharacter={currentCharacter}
+                    getClassSpecific={getClassSpecific}
+                />
+            </div>
         </div>
     );
 }
