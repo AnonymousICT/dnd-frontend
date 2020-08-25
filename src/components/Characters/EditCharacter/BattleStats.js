@@ -22,8 +22,8 @@ export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
                 return modMath(dexterity) + 10;
         }
     };
+
     const calculateEquippedAC = (character) => {
-        console.log("character", character)
         let equippedArmor = character.items.filter((item) => item.isEquipped);
 
         let armorStats = (equippedArmor[0] || { armor_class: null })

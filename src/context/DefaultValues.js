@@ -1,7 +1,7 @@
 export const defaultValues = {
     currentCharacter: {
         name: "",
-        level: "",
+        level: "0",
         race: "",
         job: "",
         strength: 10,

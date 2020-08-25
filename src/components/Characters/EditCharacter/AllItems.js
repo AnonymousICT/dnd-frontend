@@ -109,7 +109,6 @@ export default function AllItems({currentCharacter, setCurrentCharacter}) {
                 </ul>
             ) : (
                 <ul>
-                    {console.log("currentCharacter", currentCharacter)}
                     {currentCharacter.items.map((item, i) =>
                         renderEquipped(item, i)
                     )}

@@ -180,7 +180,7 @@ export default function EditCharacter() {
                 onScroll={handleScroll}
             >
                 <div>
-                    <BasicInfo currentCharacter={currentCharacter} />
+                    <BasicInfo currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} />
                     <BattleStats
                         currentCharacter={currentCharacter}
                         setCurrentCharacter={setCurrentCharacter}
@@ -189,6 +189,7 @@ export default function EditCharacter() {
                 <div>
                     <Attributes
                         currentCharacter={currentCharacter}
+                        setCurrentCharacter={setCurrentCharacter}
                         attributeValue={attributeValue}
                         setAttributeValue={setAttributeValue}
                         getAttributeValue={getAttributeValue}
