@@ -54,7 +54,6 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
             <li key={language.name}>{language.name}</li>
         ));
     };
-    console.log(currentCharacter);
 
     const characterLevels = getClassLevels(currentCharacter)
         .filter((item) => item.level <= currentCharacter.level)

@@ -118,10 +118,8 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                         return (
                                             <div key={proficiencyIndex}>
                                                 <label
-                                                    key={
-                                                        proficiencyIndex +
-                                                        "-label"
-                                                    }
+                                                    className="radio-label"
+                                                    key={proficiencyIndex +"-label"}
                                                 >
                                                     {option.name}
                                                 </label>

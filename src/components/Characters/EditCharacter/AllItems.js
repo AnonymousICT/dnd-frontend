@@ -52,7 +52,7 @@ export default function AllItems({currentCharacter, setCurrentCharacter}) {
                 equipment.uid === item.uid ? item : equipment
             );
 
-            setCurrentCharacter({ ...currentCharacter, items: {...currentCharacter.items, ...characterItems} });
+            setCurrentCharacter({ ...currentCharacter, items: characterItems });
 
             submitToDb(characterItems);
         } else {
@@ -109,6 +109,7 @@ export default function AllItems({currentCharacter, setCurrentCharacter}) {
                 </ul>
             ) : (
                 <ul>
+                    {console.log("currentCharacter", currentCharacter)}
                     {currentCharacter.items.map((item, i) =>
                         renderEquipped(item, i)
                     )}
