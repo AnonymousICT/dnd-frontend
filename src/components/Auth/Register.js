@@ -35,6 +35,7 @@ export default function Register() {
 
   return (
     <div className="auth-form-container">
+      <h3>Account Registration</h3>
       <form className="registration form" onSubmit={handleUserRegistration}>
         <input
           type="email"

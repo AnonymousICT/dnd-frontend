@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect} from "react";
 import AllEquipment from "./AllEquipment";
 import SelectCharacter from "../Characters/SelectCharacter";
 import CharacterShoppingCart from "./CharacterShoppingCart";
 import SpecificEquipment from "./SpecificEquipment";
 import Modal from "../Utilities/Modal/Modal";
-import { Context } from "../../context/Context";
 import { defaultValues } from "../../context/DefaultValues";
 import {
     fetchEquipmentData,
@@ -16,7 +15,6 @@ import {
 import "./equipment.scss";
 
 export default function Equipment() {
-    const { currentCharacter } = useContext(Context);
     const [equipmentSelection, setEquipmentSelection] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [allEquipment, setAllEquipment] = useState([]);
@@ -65,14 +63,19 @@ export default function Equipment() {
         fetchedSpecificEquipment(specificEquipmentSelection);
     }, [specificEquipmentSelection]);
 
+    const auth = localStorage.getItem("x-auth-token");
+
+
     return (
         <div>
+            {!auth ? null : 
             <div className="cart">
                 <div>
                     <SelectCharacter />
-                    {currentCharacter ? <CharacterShoppingCart /> : null}
+                    <CharacterShoppingCart />
                 </div>
             </div>
+            }
             <AllEquipment
                 setShowModal={setShowModal}
                 allEquipment={allEquipment}

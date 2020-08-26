@@ -15,13 +15,15 @@ export default function Spells() {
     const closeModal = () => {
         setShowModal(false);
     };
-
+    const auth = localStorage.getItem("x-auth-token");
     return (
         <div className="spells">
-            <div className="cart">
-                <SelectSpellcaster />
-                <AddToSpellbook />
-            </div>
+            {!auth ? null : (
+                <div className="cart">
+                    <SelectSpellcaster />
+                    <AddToSpellbook />
+                </div>
+            )}
             <AllSpells
                 setShowModal={setShowModal}
                 setSpecificSpell={setSpecificSpell}

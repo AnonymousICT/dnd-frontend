@@ -36,6 +36,7 @@ export default function Login() {
 
   return (
     <div className="auth-form-container">
+      <h3>Account Login</h3>
       {isRegistered && (
         <p className="account-created-message">Your account has been created</p>
       )}
