@@ -5,28 +5,25 @@ export default function BasicInfo({ currentCharacter, setCurrentCharacter }) {
     const { name, race, level, job, _id } = currentCharacter;
 
     const [newLevel, setNewLevel] = useState(+level);
-    // console.log("current Char", currentCharacter)
-    // console.log("current level", level);
-    // console.log("useState new level", newLevel)
 
     const incrementLevel = () => {
-        if(level < 20) {
+        if (level < 20) {
             setNewLevel(level + 1);
         }
     };
 
     const decrementLevel = () => {
-        if(level > 1) {
+        if (level > 1) {
             setNewLevel(level - 1);
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         setNewLevel(level);
-    },[level])
+    }, [level]);
 
     useEffect(() => {
-        if(newLevel && newLevel > 0) {
+        if (newLevel && newLevel > 0) {
             const submitNewLevelToDb = async () => {
                 try {
                     const updateCharacterLevel = {
@@ -37,7 +34,9 @@ export default function BasicInfo({ currentCharacter, setCurrentCharacter }) {
                         updateCharacterLevel,
                         {
                             headers: {
-                                "x-auth-token": localStorage.getItem("x-auth-token"),
+                                "x-auth-token": localStorage.getItem(
+                                    "x-auth-token"
+                                ),
                             },
                         }
                     );
@@ -50,8 +49,7 @@ export default function BasicInfo({ currentCharacter, setCurrentCharacter }) {
             };
             submitNewLevelToDb();
         }
-    }, [_id, newLevel, setCurrentCharacter])
-
+    }, [_id, newLevel, setCurrentCharacter]);
 
     return (
         <div className="basic-info">
@@ -59,9 +57,13 @@ export default function BasicInfo({ currentCharacter, setCurrentCharacter }) {
             <h2>
                 Level {level} <span>{race} </span> {job}
             </h2>
-            <button onClick={(e) => decrementLevel()}><i className="fas fa-arrow-down"></i></button>
+            <button onClick={(e) => decrementLevel()}>
+                <i className="fas fa-arrow-down"></i>
+            </button>
             <span>Manage Character Level</span>
-            <button onClick={(e) => incrementLevel()}><i className="fas fa-arrow-up"></i></button>
+            <button onClick={(e) => incrementLevel()}>
+                <i className="fas fa-arrow-up"></i>
+            </button>
         </div>
     );
 }

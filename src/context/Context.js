@@ -22,8 +22,6 @@ function ContextProvider({ children }) {
   //for equipment
   const [selectCharacter, setSelectCharacter] = useState("");
   const [characterItems, setCharacterItems] = useState([]);
-  //for spells
-  const [characterSpells, setCharacterSpells] = useState([]);
 
   //TODO Move this out of context and
   const nonSpellCaster = ["Barbarian", "Fighter", "Monk", "Rogue"];
@@ -83,8 +81,6 @@ function ContextProvider({ children }) {
         setCharacterItems,
         currentCharacter,
         setCurrentCharacter,
-        characterSpells,
-        setCharacterSpells,
         nonSpellCaster,
         modalOpen,
         setModalOpen,

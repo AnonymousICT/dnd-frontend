@@ -1,27 +1,47 @@
 @import "../../scss/colors.scss";
 
 .spells {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  .tbl-row:hover {
-    background-color: $secondary;
-  }
-
-  .character-spellbook {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    margin-bottom: 1em;
-  }
 
-  .specific-spell-container {
-    width: 100%;
-    section {
-      background-color: #fefefe;
-      border: 1px solid #888;
-      width: 100%;
-      padding: 0 1em 1em;
+    .cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-  }
+
+    .tbl-row:hover {
+        background-color: $secondary;
+    }
+
+    .character-spellbook {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
+        .spell-in-cart {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            button {
+                border: none;
+                background-color: transparent;
+            }
+            button:hover {
+                background-color: $secondary;
+                color: $main-background;
+            }
+        }
+    }
+
+    .specific-spell-container {
+        width: 100%;
+        section {
+            background-color: #fefefe;
+            border: 1px solid #888;
+            width: 100%;
+            padding: 0 1em 1em;
+        }
+    }
 }

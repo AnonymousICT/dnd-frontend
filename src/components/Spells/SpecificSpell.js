@@ -1,16 +1,20 @@
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
+import Button from "@material-ui/core/Button";
 
-export default function SpecificSpell({ closeModal, specificSpell }) {
+export default function SpecificSpell({
+    closeModal,
+    specificSpell,
+    spellCart,
+    setSpellCart,
+}) {
     const {
         selectCharacter,
-        characterSpells,
-        setCharacterSpells,
         currentCharacter,
     } = useContext(Context);
 
     const {
-        _id,
+        index,
         name,
         level,
         range,
@@ -26,22 +30,28 @@ export default function SpecificSpell({ closeModal, specificSpell }) {
         casting_time,
     } = specificSpell;
 
-    const addToCharacter = () => {
-        setCharacterSpells([...characterSpells, { ...specificSpell }]);
+    const addToCart = () => {
+        setSpellCart((previousCart) => {
+            return [...previousCart, specificSpell];
+        });
         closeModal();
     };
 
     const renderButton = () => {
-        return !selectCharacter ? null : (
+        return spellCart.find((spell) => spell.index === index) ? (
+            <Button variant="container" color="disabled">
+                Spell Already in Cart
+            </Button>
+        ) : !selectCharacter ? null : (
               currentCharacter || { spells: [] }
-          ).spells.find((spell) => spell._id === _id) ? (
-            <button disabled={true} onClick={addToCharacter}>
+          ).spells.find((spell) => spell.index === index) ? (
+            <Button variant="container" color="disabled">
                 Spell Already Known
-            </button>
+            </Button>
         ) : (
-            <button disabled={false} onClick={addToCharacter}>
+            <Button variant="contained" color="secondary" onClick={addToCart}>
                 Add to Character
-            </button>
+            </Button>
         );
     };
 

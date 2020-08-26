@@ -1,5 +1,5 @@
 import React from "react";
-
+import { InvalidEquipmentCategories, SortedEquipment } from "./InvalidEquipmentCategories";
 import RenderTable from "../Utilities/Table/RenderTable";
 
 export default function AllEquipment({
@@ -24,16 +24,22 @@ export default function AllEquipment({
                 {!equipmentCategories ? (
                     <h1>Loading...</h1>
                 ) : (
-                    equipmentCategories.map((category) => (
-                        <button
-                            onClick={(e) =>
-                                setEquipmentSelection(e.target.value)
-                            }
-                            value={category[1]}
-                            key={category[0]}
-                            className={`zaho ${category[2]}`}
-                        />
-                    ))
+                    equipmentCategories
+                        .filter(
+                            (item) =>
+                                !InvalidEquipmentCategories.includes(item[2])
+                        )
+                        .sort((a,b) => SortedEquipment[a[2]] - SortedEquipment[b[2]])
+                        .map((category) => (
+                            <button
+                                onClick={(e) =>
+                                    setEquipmentSelection(e.target.value)
+                                }
+                                value={category[1]}
+                                key={category[0]}
+                                className={`zaho ${category[2]}`}
+                            />
+                        ))
                 )}
             </div>
             <div className="table-container">

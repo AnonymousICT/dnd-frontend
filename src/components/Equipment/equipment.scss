@@ -1,5 +1,15 @@
 @import "../../scss/colors.scss";
 
+.equipment {
+  .cart{
+    text-align: center;
+    .equipment-in-cart{
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+}
+
 .equipment-container {
   display: flex;
   flex-direction: column;

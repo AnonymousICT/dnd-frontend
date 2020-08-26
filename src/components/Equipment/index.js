@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import AllEquipment from "./AllEquipment";
 import SelectCharacter from "../Characters/SelectCharacter";
 import CharacterShoppingCart from "./CharacterShoppingCart";
@@ -19,7 +19,10 @@ export default function Equipment() {
     const [showModal, setShowModal] = useState(false);
     const [allEquipment, setAllEquipment] = useState([]);
     const [equipmentCategories, setEquipmentCategories] = useState([]);
-    const [specificEquipmentSelection,setSpecificEquipmentSelection] = useState("");
+    const [
+        specificEquipmentSelection,
+        setSpecificEquipmentSelection,
+    ] = useState("");
     const [equipmentCategory, setEquipmentCategory] = useState(
         defaultValues.equipmentCategory
     );
@@ -65,17 +68,14 @@ export default function Equipment() {
 
     const auth = localStorage.getItem("x-auth-token");
 
-
     return (
-        <div>
-            {!auth ? null : 
-            <div className="cart">
-                <div>
+        <div className="equipment">
+            {!auth ? null : (
+                <div className="cart">
                     <SelectCharacter />
                     <CharacterShoppingCart />
                 </div>
-            </div>
-            }
+            )}
             <AllEquipment
                 setShowModal={setShowModal}
                 allEquipment={allEquipment}

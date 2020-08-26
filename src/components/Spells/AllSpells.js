@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Context } from "../../context/Context";
+import React, { useState, useEffect } from "react";
 import { fetchAllSpecificSpellData, fetchSpecificSpell } from "../../api/SpellAPI";
 
 import bookloading from "./bookloading.gif";
 import RenderTable from "../Utilities/Table/RenderTable";
 
-export default function AllSpells({ setShowModal, setSpecificSpell }) {
+export default function AllSpells({ setShowModal, setSpecificSpell, selectCharacter, allCharacters }) {
   
     const [loading, setLoading] = useState(true);
     const [allSpellModels, setAllSpellModels] = useState([]);
     const [spellMasterList, setSpellMasterList] = useState([]);
-    const { selectCharacter, allCharacters } = useContext(Context);
     const [spellSelection, setSpellSelection] = useState("");
 
     useEffect(() => {
