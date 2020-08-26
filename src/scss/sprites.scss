@@ -30,6 +30,7 @@ $magic-item-row-shift: 75.2px;
     padding: 0;            
     background: url('/assets/icons/weapons-and-armor.jpg') no-repeat;
     background-size: 565px;
+    cursor: pointer;
     &.ammunition {
         background-position-x: $column10;
         background-position-y: $row2;
