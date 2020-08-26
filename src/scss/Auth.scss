@@ -3,18 +3,12 @@
 .auth-form-container {
   margin-top: 1em;
   display: flex;
-  // height: 33vh;
   border: 1px solid black;
   box-shadow: 0px 0px 10px gray;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: $secondary;
-  background: radial-gradient(
-    farthest-side at 0px 30px,
-    $secondary 40%,
-    $secondary-gradient 120%
-  );
+  // background: $secondary;
 
   form {
     padding: 1em;
@@ -32,7 +26,6 @@
     a {
       padding-top: 2em;
       color: $text;
-      mix-blend-mode: difference;
     }
   }
 }

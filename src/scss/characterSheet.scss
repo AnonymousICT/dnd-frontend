@@ -7,6 +7,9 @@
 .characters {
     display: flex;
     flex-direction: column;
+    a {
+        margin-bottom: 1rem;
+    }
 }
 .slider-container {
     position: relative;
@@ -14,8 +17,12 @@
     .page-buttons {
         display: flex;
         flex-wrap: nowrap;
-        justify-content: space-between;
-
+        justify-content: space-around;
+        button {
+            width: 2.5rem;
+            font-size: 14pt;
+            padding: .3rem;
+        }
         .active {
             background-color: $secondary;
             border-radius: 0.3em;
@@ -40,7 +47,7 @@
     }
 
     .character-container {
-		text-align: center;
+        text-align: center;
         overflow-x: auto;
         display: grid;
         grid-template-columns: repeat(7, 100%);
@@ -70,6 +77,9 @@
                     color: $accent;
                 }
             }
+            button{
+                margin: 0 10px;
+            }
         }
 
         .attribute-container {
@@ -95,16 +105,16 @@
 
         .skills-save-container {
             display: flex;
-			flex-direction: column;
-			.skills-container {
-				column-count: 2;
-			}
+            flex-direction: column;
+            .skills-container {
+                column-count: 2;
+            }
             .save-container,
             .skills-container {
-				.isProficient {
-					color: $accent;
-					font-weight: 600;
-				}
+                .isProficient {
+                    color: $accent;
+                    font-weight: 600;
+                }
                 div {
                     margin-bottom: 8px;
                     input {
@@ -192,13 +202,13 @@
         }
 
         .prof-container {
-			column-count: 2;
-			h3{
-				margin: 0;
-			}
-			ul{
-				margin: 1rem 0;
-			}
+            column-count: 2;
+            h3 {
+                margin: 0;
+            }
+            ul {
+                margin: 1rem 0;
+            }
         }
         .spells-container {
             column-count: 2;

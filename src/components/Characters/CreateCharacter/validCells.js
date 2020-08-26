@@ -4,5 +4,4 @@ export const validCells = [
     {key: "features", displayText: "Features"},
     {key: "feature_choices", displayText: "Feature Choices"},
     {key: "class_specific", displayText: "Class Specific"},
-    {key: "subclass", displayText: "Subclass"},
 ];

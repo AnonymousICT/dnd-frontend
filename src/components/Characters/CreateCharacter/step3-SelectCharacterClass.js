@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { renderClassLevel } from "./renderClassLevels";
-import { validCells } from "./validCells";
+// import { renderClassLevel } from "./renderClassLevels";
+// import { validCells } from "./validCells";
 import { defaultValues } from "../../../context/DefaultValues";
 import {
     fetchClassData,
@@ -102,7 +102,7 @@ export default function SelectCharacterClass({
         }
     };
 
-    let headers = validCells;
+    // let headers = validCells;
 
     return (
         <div className="select-class-container">
@@ -184,7 +184,7 @@ export default function SelectCharacterClass({
                                                           "label"
                                                       }
                                                   >
-                                                      {skill.name}
+                                                      {skill.name.replace("Skill: ", "")}
                                                   </label>
                                                   <input
                                                       type="checkbox"
@@ -237,7 +237,7 @@ export default function SelectCharacterClass({
                     )}
                 </div>
 
-                {!classLevels ? null : (
+                {/* {!classLevels ? null : (
                     <div className="class-levels-container">
                         <table>
                             <thead>
@@ -285,7 +285,7 @@ export default function SelectCharacterClass({
                             </tbody>
                         </table>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     );
