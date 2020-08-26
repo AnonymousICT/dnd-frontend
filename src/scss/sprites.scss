@@ -30,7 +30,10 @@ $magic-item-row-shift: 75.2px;
     padding: 0;            
     background: url('/assets/icons/weapons-and-armor.jpg') no-repeat;
     background-size: 565px;
-
+    &.ammunition {
+        background-position-x: $column10;
+        background-position-y: $row2;
+    }
     &.adventuring-gear{
         background: url('/assets/icons/tools.jpg') no-repeat;
         background-size: 565px;
@@ -38,12 +41,12 @@ $magic-item-row-shift: 75.2px;
         background-position-y: calc(#{$row10} - #{$tools-row-shift});
     }
     &.arcane-foci{
-        background-position-x: $column4;
-        background-position-y: $row6;
+        background-position-x: $column6;
+        background-position-y: $row7;
     }
     &.armor{
-        background-position-x: $column7;
-        background-position-y: $row3;
+        background-position-x: $column4;
+        background-position-y: $row5;
     }
     &.artisans-tools{
         background: url('/assets/icons/tools.jpg') no-repeat;
@@ -56,8 +59,8 @@ $magic-item-row-shift: 75.2px;
         background: url('/assets/icons/magic-items.jpg') no-repeat;
         background-size: 565px;
 
-        background-position-x: $column3;
-        background-position-y: calc(#{$row5} - #{$magic-item-row-shift});
+        background-position-x: $column7;
+        background-position-y: calc(#{$row10} - #{$magic-item-row-shift});
     }
     &.equipment-packs{
         background: url('/assets/icons/tools.jpg') no-repeat;
@@ -78,24 +81,33 @@ $magic-item-row-shift: 75.2px;
         background-position-y: $row5;
     }
     &.holy-symbols{
-        background-position-x: $column1;
-        background-position-y: $row1;
+        background: url('/assets/icons/magic-items.jpg') no-repeat;
+        background-size: 565px;
+    
+        background-position-x: $column8;
+        background-position-y: calc(#{$row5} - #{$magic-item-row-shift});
     }
     &.kits{
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        
         background-position-x: $column1;
-        background-position-y: $row1;
+        background-position-y: calc(#{$row10} - #{$tools-row-shift});
     }
     &.land-vehicles{
-        background-position-x: $column1;
-        background-position-y: $row1;
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        
+        background-position-x: $column7;
+        background-position-y: calc(#{$row2} - #{$tools-row-shift});
     }
     &.light-armor{
-        background-position-x: $column2;
+        background-position-x: $column7;
         background-position-y: $row5;
     }
     &.martial-melee-weapons{
         background-position-x: $column1;
-        background-position-y: $row1;
+        background-position-y: $row2;
     }
     &.martial-ranged-weapons{
         background-position-x: $column10;
@@ -106,7 +118,7 @@ $magic-item-row-shift: 75.2px;
         background-position-y: $row2;
     }
     &.medium-armor{
-        background-position-x: $column7;
+        background-position-x: $column9;
         background-position-y: $row5;
     }
     &.mounts-and-other-animals{
@@ -114,16 +126,25 @@ $magic-item-row-shift: 75.2px;
         background-position-y: $row1;
     }
     &.mounts-and-vehicles{
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        
         background-position-x: $column1;
-        background-position-y: $row1;
+        background-position-y: calc(#{$row1} - #{$tools-row-shift});
     }
     &.musical-instruments{
-        background-position-x: $column1;
-        background-position-y: $row1;
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        
+        background-position-x: $column10;
+        background-position-y: calc(#{$row10} - #{$tools-row-shift});
     }
     &.other-tools{
-        background-position-x: $column1;
-        background-position-y: $row1;
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        
+        background-position-x: $column9;
+        background-position-y: calc(#{$row1} - #{$tools-row-shift});
     }
     &.shields{
         background-position-x: $column8;
@@ -142,8 +163,11 @@ $magic-item-row-shift: 75.2px;
         background-position-y: $row1;
     }
     &.standard-gear{
-        background-position-x: $column1;
-        background-position-y: $row1;
+        background: url('/assets/icons/tools.jpg') no-repeat;
+        background-size: 565px;
+        
+        background-position-x: $column8;
+        background-position-y: calc(#{$row10} - #{$tools-row-shift});
     }
     &.tack-harness-and-drawn-vehicles{
         background-position-x: $column1;
@@ -154,8 +178,11 @@ $magic-item-row-shift: 75.2px;
         background-position-y: $row3;
     }
     &.waterborne-vehicles{
-        background-position-x: $column1;
-        background-position-y: $row1;
+        background: url('/assets/icons/magic-items.jpg') no-repeat;
+        background-size: 565px;
+    
+        background-position-x: $column4;
+        background-position-y: calc(#{$row4} - #{$magic-item-row-shift});
     }
     &.weapon{
         background-position-x: $column1;
