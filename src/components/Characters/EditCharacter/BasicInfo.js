@@ -59,9 +59,9 @@ export default function BasicInfo({ currentCharacter, setCurrentCharacter }) {
             <h2>
                 Level {level} <span>{race} </span> {job}
             </h2>
-            <button onClick={(e) => decrementLevel()}><i class="fas fa-arrow-down"></i></button>
+            <button onClick={(e) => decrementLevel()}><i className="fas fa-arrow-down"></i></button>
             <span>Manage Character Level</span>
-            <button onClick={(e) => incrementLevel()}><i class="fas fa-arrow-up"></i></button>
+            <button onClick={(e) => incrementLevel()}><i className="fas fa-arrow-up"></i></button>
         </div>
     );
 }

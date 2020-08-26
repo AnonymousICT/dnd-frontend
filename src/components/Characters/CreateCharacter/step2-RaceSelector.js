@@ -117,12 +117,6 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                     (option, proficiencyIndex) => {
                                         return (
                                             <div key={proficiencyIndex}>
-                                                <label
-                                                    className="radio-label"
-                                                    key={proficiencyIndex +"-label"}
-                                                >
-                                                    {option.name}
-                                                </label>
                                                 <input
                                                     type="radio"
                                                     className="radio-choice"
@@ -135,6 +129,12 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                                     value={option.name}
                                                     key={proficiencyIndex}
                                                 />
+                                                <label
+                                                    className="radio-label"
+                                                    key={proficiencyIndex +"-label"}
+                                                >
+                                                    {option.name}
+                                                </label>
                                             </div>
                                         );
                                     }
@@ -151,13 +151,6 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                     (option, languageIndex) => {
                                         return (
                                             <div key={languageIndex}>
-                                                <label
-                                                    key={
-                                                        languageIndex + "-label"
-                                                    }
-                                                >
-                                                    {option.name}
-                                                </label>
                                                 <input
                                                     type="radio"
                                                     className="radio-choice"
@@ -170,6 +163,13 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                                     value={option.name}
                                                     key={languageIndex}
                                                 />
+                                                <label
+                                                    key={
+                                                        languageIndex + "-label"
+                                                    }
+                                                >
+                                                    {option.name}
+                                                </label>
                                             </div>
                                         );
                                     }
@@ -187,11 +187,6 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                     (option, traitIndex) => {
                                         return (
                                             <div key={traitIndex}>
-                                                <label
-                                                    key={traitIndex + "-label"}
-                                                >
-                                                    {option.name}
-                                                </label>
                                                 <input
                                                     type="radio"
                                                     className="radio-choice"
@@ -204,6 +199,11 @@ export default function RaceSelector({ setNewCharacter, setValid }) {
                                                     value={option.name}
                                                     key={traitIndex}
                                                 />
+                                                <label
+                                                    key={traitIndex + "-label"}
+                                                >
+                                                    {option.name}
+                                                </label>
                                             </div>
                                         );
                                     }

@@ -176,52 +176,21 @@ export default function SelectCharacterClass({
                                       {choiceObj.from.map((skill, i) => {
                                           return (
                                               <div key={i}>
-                                                  <label
-                                                      key={
-                                                          choiceIndex +
-                                                          "-" +
-                                                          i +
-                                                          "label"
-                                                      }
-                                                  >
-                                                      {skill.name.replace("Skill: ", "")}
-                                                  </label>
-                                                  <input
-                                                      type="checkbox"
-                                                      className="prof-choice"
-                                                      onChange={handleChecks}
-                                                      name={
-                                                          "proficiencies" +
-                                                          choiceIndex +
-                                                          "-" +
-                                                          i
-                                                      }
-                                                      data-count={
-                                                          choiceObj.choose
-                                                      }
-                                                      data-group={
-                                                          "group" + choiceIndex
-                                                      }
-                                                      checked={
-                                                          isChecked[
-                                                              "proficiencies" +
-                                                                  choiceIndex +
-                                                                  "-" +
-                                                                  i
-                                                          ]
-                                                              ? isChecked[
-                                                                    "proficiencies" +
-                                                                        choiceIndex +
-                                                                        "-" +
-                                                                        i
-                                                                ].checked
-                                                              : false
-                                                      }
-                                                      value={skill.name}
-                                                      key={
-                                                          choiceIndex + "-" + i
-                                                      }
-                                                  />
+                                                    <input
+                                                        type="checkbox"
+                                                        className="prof-choice"
+                                                        onChange={handleChecks}
+                                                        name={"proficiencies" + choiceIndex + "-" +i}
+                                                        data-count={choiceObj.choose}
+                                                        data-group={"group" + choiceIndex}
+                                                        checked={isChecked["proficiencies" +choiceIndex +"-" + i] ? 
+                                                            isChecked["proficiencies" + choiceIndex +"-" +i].checked: false}
+                                                        value={skill.name}
+                                                        key={choiceIndex + "-" + i}
+                                                    />
+                                                    <label key={choiceIndex + "-" + i +"label"}>
+                                                        {skill.name.replace("Skill: ", "")}
+                                                    </label>
                                               </div>
                                           );
                                       })}
