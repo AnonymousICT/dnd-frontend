@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { modMath } from "../../Utilities/AttributeUtilities";
 import axios from "axios";
 import DebounceInput from "react-debounce-input";
+import { Checkbox } from "@material-ui/core";
 
 export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
     const [currentHitPoints, setCurrentHitPoints] = useState(0);
@@ -138,7 +139,7 @@ export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
                         />
                     </div>
                     <p title="Initial Hit points are calculated by adding your Constitution Modifier and the average hit die value multiplied by your character's level or (HP = Level * (Hit Die average + CON modifier))">
-                        Max: <span>{calculateMaxHP()}</span>
+                        Max <span>{calculateMaxHP()}</span>
                     </p>
                 </div>
             </div>
@@ -150,17 +151,17 @@ export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
                         Successful Death Saves
                     </label>
                     <div>
-                        <input type="checkbox" />
-                        <input type="checkbox" />
-                        <input type="checkbox" />
+                        <Checkbox />
+                        <Checkbox />
+                        <Checkbox />
                     </div>
                     <label title="If you're character's hit poitns are reduced to 0 roll a d20. If you roll 10 or below you have failed 1 death save. If you roll a natural 1 you have failed two death saves">
                         Failed Death Saves
                     </label>
                     <div>
-                        <input type="checkbox" />
-                        <input type="checkbox" />
-                        <input type="checkbox" />
+                        <Checkbox color="primary"/>
+                        <Checkbox color="primary"/>
+                        <Checkbox color="primary"/>
                     </div>
                 </div>
             </div>

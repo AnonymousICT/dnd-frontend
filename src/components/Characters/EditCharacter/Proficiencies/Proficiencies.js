@@ -60,7 +60,7 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
         .reduce(function (accumulator, currentValue) {
             return [...accumulator, ...currentValue.features];
         }, []);
-
+    
     const getClassSpecific = (
         getClassLevels(currentCharacter).filter(
             (item) => item.level === currentCharacter.level

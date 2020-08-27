@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Checkbox, IconButton, FormLabel } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export default function AllItems({ currentCharacter, setCurrentCharacter }) {
     const [isEquipmentChecked, setIsEquipmentChecked] = useState({});
@@ -93,17 +95,17 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
         if (item.equipment_category.name === "Armor") {
             return (
                 <li key={key} title="check to equip">
-                    <button
+                    <IconButton
+                        aria-label="delete"
                         value={item.uid}
                         onClick={(e) =>
                             removeItem(e.target.getAttribute("value"))
                         }
                     >
-                        X
-                    </button>
-                    <label>{item.name}</label>
-                    <input
-                        type="checkbox"
+                        <DeleteIcon />
+                    </IconButton>
+                    <FormLabel>{item.name}</FormLabel>
+                    <Checkbox
                         value={item.name}
                         checked={isEquipmentChecked[item.uid] || false}
                         onChange={(e) => handleEquipped(e, item)}
@@ -113,15 +115,16 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
         } else {
             return (
                 <li key={key}>
-                    <button
+                    <IconButton
+                        aria-label="delete"
                         value={item.uid}
                         onClick={(e) =>
                             removeItem(e.target.getAttribute("value"))
                         }
                     >
-                        X
-                    </button>
-                    {item.name}
+                        <DeleteIcon />
+                    </IconButton>
+                    <FormLabel>{item.name}</FormLabel>
                 </li>
             );
         }

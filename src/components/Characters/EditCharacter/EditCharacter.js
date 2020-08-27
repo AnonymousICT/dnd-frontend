@@ -67,6 +67,18 @@ export default function EditCharacter() {
             ]
         );
     };
+    // console.log(
+    //     getClassLevels(currentCharacter).reduce((obj, item) => {
+    //         return item.level !== obj.length
+    //             ? [
+    //                   ...obj,
+    //                   getClassLevels(currentCharacter).filter(
+    //                       (cl) => cl.level === item.level
+    //                   ),
+    //               ]
+    //             : obj;
+    //     }, [])
+    // );
 
     const profBonus = () => {
         return getClassLevels(currentCharacter)
@@ -180,7 +192,10 @@ export default function EditCharacter() {
                 onScroll={handleScroll}
             >
                 <div>
-                    <BasicInfo currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} />
+                    <BasicInfo
+                        currentCharacter={currentCharacter}
+                        setCurrentCharacter={setCurrentCharacter}
+                    />
                     <BattleStats
                         currentCharacter={currentCharacter}
                         setCurrentCharacter={setCurrentCharacter}
