@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function AllItems({currentCharacter, setCurrentCharacter}) {
+export default function AllItems({ currentCharacter, setCurrentCharacter }) {
     const [isEquipmentChecked, setIsEquipmentChecked] = useState({});
-
     useEffect(() => {
         if (currentCharacter.items.length > 0) {
             const checkboxes = currentCharacter.items.reduce((obj, item) => {
@@ -79,6 +78,14 @@ export default function AllItems({currentCharacter, setCurrentCharacter}) {
         }
     };
 
+    const removeItem = (e) => {
+        const updatedItems = currentCharacter.items.filter(
+            (item) => item.uid !== e
+        );
+        submitToDb(updatedItems);
+        window.location.reload(true)
+    };
+
     const renderEquipped = (item, key) => {
         if (!item) {
             return <li>Missing Item</li>;
@@ -93,22 +100,42 @@ export default function AllItems({currentCharacter, setCurrentCharacter}) {
                         onChange={(e) => handleEquipped(e, item)}
                     />
                     <label>{item.name}</label>
+                    <button
+                        value={item.uid}
+                        onClick={(e) =>
+                            removeItem(e.target.getAttribute("value"))
+                        }
+                    >
+                        X
+                    </button>
                 </li>
             );
         } else {
-            return <li key={key}>{item.name}</li>;
+            return (
+                <li key={key}>
+                    {item.name}
+                    <button
+                        value={item.uid}
+                        onClick={(e) =>
+                            removeItem(e.target.getAttribute("value"))
+                        }
+                    >
+                        X
+                    </button>
+                </li>
+            );
         }
     };
 
     return (
-        <div>
+        <div className="equipment-wrapper">
             <h2>Equipment</h2>
             {!currentCharacter.items ? (
                 <ul>
                     <li>Loading...</li>
                 </ul>
             ) : (
-                <ul>
+                <ul className="equipment list">
                     {currentCharacter.items.map((item, i) =>
                         renderEquipped(item, i)
                     )}

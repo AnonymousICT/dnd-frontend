@@ -58,7 +58,7 @@ export default function CharacterShoppingCart() {
                 type="submit"
                 color="secondary"
             >
-                Add to spellbook
+                Add Items To Character
             </Button>
         </div>
     );
