@@ -83,7 +83,7 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
             (item) => item.uid !== e
         );
         submitToDb(updatedItems);
-        window.location.reload(true)
+        window.location.reload(true);
     };
 
     const renderEquipped = (item, key) => {
@@ -93,27 +93,26 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
         if (item.equipment_category.name === "Armor") {
             return (
                 <li key={key} title="check to equip">
+                    <button
+                        value={item.uid}
+                        onClick={(e) =>
+                            removeItem(e.target.getAttribute("value"))
+                        }
+                    >
+                        X
+                    </button>
+                    <label>{item.name}</label>
                     <input
                         type="checkbox"
                         value={item.name}
                         checked={isEquipmentChecked[item.uid] || false}
                         onChange={(e) => handleEquipped(e, item)}
                     />
-                    <label>{item.name}</label>
-                    <button
-                        value={item.uid}
-                        onClick={(e) =>
-                            removeItem(e.target.getAttribute("value"))
-                        }
-                    >
-                        X
-                    </button>
                 </li>
             );
         } else {
             return (
                 <li key={key}>
-                    {item.name}
                     <button
                         value={item.uid}
                         onClick={(e) =>
@@ -122,6 +121,7 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
                     >
                         X
                     </button>
+                    {item.name}
                 </li>
             );
         }
