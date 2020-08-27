@@ -129,7 +129,7 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
 
     return (
         <div className="equipment-wrapper">
-            <h2>Equipment</h2>
+            <h2>Inventory & Equipment</h2>
             {!currentCharacter.items ? (
                 <ul>
                     <li>Loading...</li>
