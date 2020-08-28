@@ -26,5 +26,4 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
 //routes
 app.use('/users', require('./routes/userRoutes'))
 app.use('/characters', require('./routes/characterRoutes'))
-app.use('/api', require('./routes/apiRoute'))
 app.use('*', require('./routes/app'))
