@@ -12,6 +12,7 @@ import Register from "./components/Auth/Register";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
 import "./App.scss";
+import User from "./components/User/User";
 
 const theme = createMuiTheme({
   palette: {
@@ -61,6 +62,9 @@ export default function App() {
           </Route>
           <Route path="/character/edit">
             <EditCharacter />
+          </Route>
+          <Route path="/user">
+            <User />
           </Route>
         </Switch>
       </main>

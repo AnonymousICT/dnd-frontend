@@ -35,6 +35,9 @@ export default function Navbar() {
             <Link to="/characters">Characters</Link>
           </li>
           <li className="navigation-item">
+            <Link to="/user">User</Link>
+          </li>
+          <li className="navigation-item">
             <Link to="/" onClick={logout}>
               Logout
             </Link>
