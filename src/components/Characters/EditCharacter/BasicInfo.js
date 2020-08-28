@@ -30,7 +30,7 @@ export default function BasicInfo({ currentCharacter, setCurrentCharacter }) {
                         level: newLevel,
                     };
                     await axios.put(
-                        `https://dnd-backend-node.herokuapp.com/characters/${_id}`,
+                        `/characters/${_id}`,
                         updateCharacterLevel,
                         {
                             headers: {

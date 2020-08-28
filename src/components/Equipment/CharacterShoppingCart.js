@@ -23,7 +23,7 @@ export default function CharacterShoppingCart() {
                 items: [...currentCharacter.items, ...characterItems],
             };
             await axios.put(
-                `https://dnd-backend-node.herokuapp.com/characters/${selectCharacter}`,
+                `/characters/${selectCharacter}`,
                 updateCharacterItem,
                 {
                     headers: {

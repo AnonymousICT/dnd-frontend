@@ -41,7 +41,7 @@ export default function CreateCharacter() {
     const handleCharacterSubmit = async (e) => {
         try {
             await axios.post(
-                `https://dnd-backend-node.herokuapp.com/characters/new`,
+                `/characters/new`,
                 newCharacter
             );
             history.push("/characters?created");

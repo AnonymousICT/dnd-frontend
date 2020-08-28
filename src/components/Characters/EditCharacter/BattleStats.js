@@ -78,7 +78,7 @@ export default function BattleStats({ currentCharacter, setCurrentCharacter }) {
                 currentHP: hp,
             };
             await axios.put(
-                `https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}`,
+                `/characters/${currentCharacter._id}`,
                 updateCharacterCurrentHP,
                 {
                     headers: {

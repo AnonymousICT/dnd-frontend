@@ -24,7 +24,7 @@ export default function AddToSpellbook({spellCart, setSpellCart}) {
                 spells: [...currentCharacter.spells, ...spellCart],
             };
             await axios.put(
-                `https://dnd-backend-node.herokuapp.com/characters/${selectCharacter}`,
+                `/characters/${selectCharacter}`,
                 updateSpellCart,
                 {
                     headers: {

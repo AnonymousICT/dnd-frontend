@@ -24,7 +24,7 @@ export default function Register() {
         displayName,
       };
       await axios.post(
-        "https://dnd-backend-node.herokuapp.com/users/register",
+        "/users/register",
         registerUser
       );
       history.push("/login?registered");

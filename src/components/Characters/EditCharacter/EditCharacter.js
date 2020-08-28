@@ -67,6 +67,7 @@ export default function EditCharacter() {
             ]
         );
     };
+
     // console.log(
     //     getClassLevels(currentCharacter).reduce((obj, item) => {
     //         return item.level !== obj.length
@@ -92,7 +93,7 @@ export default function EditCharacter() {
     useEffect(() => {
         const fetchCharacter = async () => {
             const { data } = await Axios.get(
-                `https://dnd-backend-node.herokuapp.com/characters/${characterId}`,
+                `/characters/${characterId}`,
                 {
                     headers: {
                         "x-auth-token": localStorage.getItem("x-auth-token"),

@@ -67,7 +67,7 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
                 items: items,
             };
             await axios.put(
-                `https://dnd-backend-node.herokuapp.com/characters/${currentCharacter._id}`,
+                `/characters/${currentCharacter._id}`,
                 updateCharacterItem,
                 {
                     headers: {
