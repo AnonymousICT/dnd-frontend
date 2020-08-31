@@ -18,11 +18,7 @@ export default function DisplayCharFeatures({ characterLevels }) {
                         ||
                         item.name === "Wild Shape (CR 1/2 or below, no flying speed)"
                         ||
-                        item.name === "Wild Shape (CR 1 or below)"||
-                        item.name === "Draconic Resilience"||
-                        item.name === "Elemental Affinity" ||
-                        item.name === "Dragon Wings"||
-                        item.name === "Draconic Presence"
+                        item.name === "Wild Shape (CR 1 or below)"
                     ) {
                         return null;
                     } else return <li key={i}>{item.name}</li>;

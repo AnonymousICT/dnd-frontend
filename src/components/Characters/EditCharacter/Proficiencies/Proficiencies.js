@@ -55,21 +55,21 @@ export default function Proficiencies({ currentCharacter, getClassLevels }) {
         ));
     };
 
-    const characterLevels = getClassLevels(currentCharacter)
+    const characterLevels = getClassLevels
         .filter((item) => item.level <= currentCharacter.level)
         .reduce(function (accumulator, currentValue) {
             return [...accumulator, ...currentValue.features];
         }, []);
-    
+
     const getClassSpecific = (
-        getClassLevels(currentCharacter).filter(
+        getClassLevels.filter(
             (item) => item.level === currentCharacter.level
         )[0] || []
     ).class_specific;
 
     return (
-        <div className='prof-wrapper'>
-        <h2>Proficiencies</h2>
+        <div className="prof-wrapper">
+            <h2>Proficiencies</h2>
             <div className="prof-container">
                 <DisplayCharProf
                     currentCharacter={currentCharacter}

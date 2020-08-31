@@ -7,13 +7,14 @@
 .characters {
     display: flex;
     flex-direction: column;
+    margin: auto 1em;
     a {
         margin-bottom: 1rem;
     }
 }
 .slider-container {
     position: relative;
-
+    margin: auto 1rem;
     .page-buttons {
         display: flex;
         flex-wrap: nowrap;
@@ -35,10 +36,10 @@
         top: 50%;
         &.previous {
             transform: scaleX(-1);
-            left: 0;
+            left: -1em;
         }
         &.next {
-            right: 0;
+            right: -1em;
         }
 
         span {
@@ -83,7 +84,6 @@
         }
 
         .attribute-container {
-            padding-top: 1em;
             .prof-bonus {
                 margin-bottom: 1rem;
                 span {
@@ -123,11 +123,7 @@
             display: flex;
             flex-direction: column;
             .skills-container {
-                margin-top: 6em;
                 column-count: 2;
-            }
-            .save-container {
-                margin-top: 3em;
             }
             .save-container,
             .skills-container {
@@ -226,7 +222,6 @@
         }
 
         .prof-container {
-            column-count: 2;
             h3 {
                 margin: 0;
             }

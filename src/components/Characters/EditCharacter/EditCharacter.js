@@ -68,18 +68,9 @@ export default function EditCharacter() {
         );
     };
 
-    // console.log(
-    //     getClassLevels(currentCharacter).reduce((obj, item) => {
-    //         return item.level !== obj.length
-    //             ? [
-    //                   ...obj,
-    //                   getClassLevels(currentCharacter).filter(
-    //                       (cl) => cl.level === item.level
-    //                   ),
-    //               ]
-    //             : obj;
-    //     }, [])
-    // );
+    const filterClassLevels = getClassLevels(currentCharacter).filter((cl) =>
+        cl.hasOwnProperty("class_specific")
+    );
 
     const profBonus = () => {
         return getClassLevels(currentCharacter)
@@ -92,14 +83,11 @@ export default function EditCharacter() {
 
     useEffect(() => {
         const fetchCharacter = async () => {
-            const { data } = await Axios.get(
-                `/characters/${characterId}`,
-                {
-                    headers: {
-                        "x-auth-token": localStorage.getItem("x-auth-token"),
-                    },
-                }
-            );
+            const { data } = await Axios.get(`/characters/${characterId}`, {
+                headers: {
+                    "x-auth-token": localStorage.getItem("x-auth-token"),
+                },
+            });
             setCurrentCharacter(data);
         };
         fetchCharacter();
@@ -228,7 +216,7 @@ export default function EditCharacter() {
                 />
                 <Proficiencies
                     currentCharacter={currentCharacter}
-                    getClassLevels={getClassLevels}
+                    getClassLevels={filterClassLevels}
                 />
                 <AllItems
                     currentCharacter={currentCharacter}

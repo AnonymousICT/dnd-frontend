@@ -1,8 +1,5 @@
-import React, { useContext } from "react";
-import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import { Context } from "../../context/Context";
-import Button from "@material-ui/core/Button";
+import React from "react";
+
 
 export default function User() {
     return (

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { modMath, attributeSort } from "../../Utilities/AttributeUtilities";
 
-
 export default function Attributes({
     currentCharacter,
     attributeValue,
@@ -71,6 +70,7 @@ export default function Attributes({
 
     return (
         <div className="attribute-container">
+            <h2>Attributes</h2>
             <div className="prof-bonus">
                 Proficiency Bonus: <span>{profBonus()}</span>
             </div>

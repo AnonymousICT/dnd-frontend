@@ -54,9 +54,3 @@ export default function DisplayClassSpecific({
         </div>
     );
 }
-// value.map((conversionObj) =>
-//                                       Object.entries(conversionObj).map(
-//                                           ([objKey, objVal]) =>
-//                                               `${classLabels[objKey] || objKey}: ${objVal}`
-//                                       )
-//                                   )
