@@ -49,49 +49,49 @@
 
 .monk::before {
   @extend .character-icon;
-  background: url("/assets/icons/monk.png") no-repeat center center;
+  background: url("/assets/icons/MONK.png") no-repeat center center;
   background-size: contain;
   background-position: 200px;
 }
 
 .paladin::before {
   @extend .character-icon;
-  background: url("/assets/icons/Paladin.png") no-repeat center center;
+  background: url("/assets/icons/PALADIN.png") no-repeat center center;
   background-size: contain;
   background-position: 200px;
 }
 
 .ranger::before {
   @extend .character-icon;
-  background: url("/assets/icons/Ranger.png") no-repeat center center;
+  background: url("/assets/icons/RANGER.png") no-repeat center center;
   background-size: contain;
   background-position: 200px;
 }
 
 .rogue::before {
   @extend .character-icon;
-  background: url("/assets/icons/Rogue.png") no-repeat center center;
+  background: url("/assets/icons/ROGUE.png") no-repeat center center;
   background-size: contain;
   background-position: 200px;
 }
 
 .sorcerer::before {
   @extend .character-icon;
-  background: url("/assets/icons/sorcerer.png") no-repeat center center;
+  background: url("/assets/icons/SORCERER.png") no-repeat center center;
   background-size: contain;
   background-position: 200px;
 }
 
 .warlock::before {
   @extend .character-icon;
-  background: url("/assets/icons/warlock.png") no-repeat center center;
+  background: url("/assets/icons/WARLOCK.png") no-repeat center center;
   background-size: contain;
   background-position: 200px;
 }
 
 .wizard::before {
   @extend .character-icon;
-  background: url("/assets/icons/wizard.png") no-repeat center center;
+  background: url("/assets/icons/WIZARD.png") no-repeat center center;
   background-size: auto;
   background-position: 180px;
 }
