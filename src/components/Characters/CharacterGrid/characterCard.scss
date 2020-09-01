@@ -1,22 +1,29 @@
 @import "../../../scss/colors.scss";
+@import "../../../scss/mediaQuery.scss";
 
 $border: 1px solid $text;
 
 .character-card {
-  border: $border;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1;
-  margin-bottom: 1em;
-  padding: 10px;
-  color: black;
-  box-shadow: 0 0 3px;
-  .race {
-    color: $accent;
-    font-weight: 600;
-  }
-  .class {
-    font-weight: 600;
-  }
+    border: $border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    margin-bottom: 1em;
+    padding: 10px;
+    color: black;
+    box-shadow: 0 0 3px;
+    .race {
+        color: $accent;
+        font-weight: 600;
+    }
+    .class {
+        font-weight: 600;
+    }
+}
+
+@media (min-width: 1024px) {
+	.character-card{
+		box-shadow: 1px 2px 3px;
+	}
 }

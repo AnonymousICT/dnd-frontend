@@ -190,7 +190,7 @@ export default function EditCharacter() {
                         setCurrentCharacter={setCurrentCharacter}
                     />
                 </div>
-                <div>
+                <div className="attributes-saves-container">
                     <Attributes
                         currentCharacter={currentCharacter}
                         setCurrentCharacter={setCurrentCharacter}

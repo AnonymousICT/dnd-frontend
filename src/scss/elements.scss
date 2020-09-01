@@ -1,7 +1,7 @@
 @import "./colors.scss";
+@import "./mediaQuery.scss";
 
 body {
-  margin: 0;
   padding: 0;
   background: $main-background;
   color: $text;
@@ -54,4 +54,14 @@ footer {
 
 .home {
   margin: auto 1em;
+}
+
+@media (min-width: 768px) {
+  body {
+    max-width: 75%;
+  }
+}
+
+@media (min-width: 1024px) {
+  
 }

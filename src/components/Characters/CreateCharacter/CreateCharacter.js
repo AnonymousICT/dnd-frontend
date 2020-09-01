@@ -7,6 +7,7 @@ import SelectCharacterClass from "./step3-SelectCharacterClass";
 import AttributeEntry from "./step4-AttributeEntry";
 import Confirm from "./step5-Confirm";
 import { Context } from "../../../context/Context";
+import Button from "@material-ui/core/Button";
 
 export default function CreateCharacter() {
     const [formPage, setFormPage] = useState(1);
@@ -40,10 +41,7 @@ export default function CreateCharacter() {
 
     const handleCharacterSubmit = async (e) => {
         try {
-            await axios.post(
-                `/characters/new`,
-                newCharacter
-            );
+            await axios.post(`/characters/new`, newCharacter);
             history.push("/characters?created");
             updateAllCharacters();
         } catch (err) {
@@ -104,13 +102,31 @@ export default function CreateCharacter() {
             {renderPage()}
             <div className="form-page-buttons">
                 {formPage !== 1 ? (
-                    <button onClick={prevStep}>Go Back</button>
+                    <Button
+                        onClick={prevStep}
+                        variant="contained"
+                        color="primary"
+                    >
+                        Go Back
+                    </Button>
                 ) : null}
                 {formPage !== 5 && validForm[formPage] ? (
-                    <button onClick={nextStep}>Next</button>
+                    <Button
+                        onClick={nextStep}
+                        variant="contained"
+                        color="secondary"
+                    >
+                        Next
+                    </Button>
                 ) : null}
                 {formPage === 5 && validForm[formPage] ? (
-                    <button onClick={handleCharacterSubmit}>Submit</button>
+                    <Button
+                        onClick={handleCharacterSubmit}
+                        variant="contained"
+                        color="secondary"
+                    >
+                        Submit
+                    </Button>
                 ) : null}
             </div>
         </div>

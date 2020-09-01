@@ -22,7 +22,7 @@
         button {
             width: 2.5rem;
             font-size: 14pt;
-            padding: .3rem;
+            padding: 0.3rem;
         }
         .active {
             background-color: $secondary;
@@ -78,7 +78,7 @@
                     color: $accent;
                 }
             }
-            button{
+            button {
                 margin: 0 10px;
             }
         }
@@ -103,15 +103,15 @@
             }
         }
 
-        .equipment-wrapper{
-            ul{
+        .equipment-wrapper {
+            ul {
                 margin: 0 1.5rem;
                 text-align: left;
-                li{
-                    button{
+                li {
+                    button {
                         border: none;
                         background: transparent;
-                        &:hover{
+                        &:hover {
                             background: lightgrey;
                         }
                     }
@@ -237,5 +237,31 @@
                 color: $accent;
             }
         }
+    }
+}
+@media (min-width: 768px) {
+    .characters {
+        margin: auto 8em;
+    }
+    .battle-stats-container {
+        margin: 1em 2em;
+    }
+    .slider-container,
+    .attributes-saves-container,
+    .skills-save-container,
+    .prof-wrapper {
+        max-height: 500px;
+    }
+    .prof-container, .equipment-list{
+        column-count: 2;
+    }
+}
+
+@media (min-width: 1024px) {
+	.character-grid{
+		column-count: 2;
+    }
+    .battle-stats-container {
+        margin: 1em 10em !important;
     }
 }

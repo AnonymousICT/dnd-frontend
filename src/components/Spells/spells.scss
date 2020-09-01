@@ -1,4 +1,5 @@
 @import "../../scss/colors.scss";
+@import "../../scss/mediaQuery.scss";
 
 .spells {
     display: flex;
@@ -44,4 +45,8 @@
             padding: 0 1em 1em;
         }
     }
+}
+
+@media (min-width: 768px) {
+    
 }

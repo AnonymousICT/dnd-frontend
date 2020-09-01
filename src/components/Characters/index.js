@@ -6,8 +6,9 @@ import {Context} from '../../context/Context'
 export default function Characters() {
   const {userData} = useContext(Context)
   const history = useHistory();
+  const authToken = localStorage.getItem('x-auth-token')
 
-  if ((!userData.user || {auth: null}).auth) {
+  if ((!userData.user || !authToken || {auth: null}).auth) {
     history.push("/login");
     return null;
   }

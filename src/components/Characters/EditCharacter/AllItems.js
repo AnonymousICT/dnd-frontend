@@ -138,7 +138,7 @@ export default function AllItems({ currentCharacter, setCurrentCharacter }) {
                     <li>Loading...</li>
                 </ul>
             ) : (
-                <ul className="equipment list">
+                <ul className="equipment-list">
                     {currentCharacter.items.map((item, i) =>
                         renderEquipped(item, i)
                     )}
