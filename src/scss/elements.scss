@@ -4,6 +4,9 @@
 body {
   padding: 0;
   background: $main-background;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("/assets/dnd_website.png");
   color: $text;
   font-family: Roboto;
   padding-bottom: 3.2em;
