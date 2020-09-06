@@ -13,6 +13,7 @@
     }
 }
 .slider-container {
+    background-color: $main-background;
     position: relative;
     margin: auto 1rem;
     .page-buttons {
@@ -246,12 +247,12 @@
     .battle-stats-container {
         margin: 1em 2em;
     }
-    .slider-container,
-    .attributes-saves-container,
-    .skills-save-container,
-    .prof-wrapper {
-        max-height: 500px;
-    }
+    // .slider-container,
+    // .attributes-saves-container,
+    // .skills-save-container,
+    // .prof-wrapper {
+    //     max-height: 500px;
+    // }
     .prof-container, .equipment-list{
         column-count: 2;
     }

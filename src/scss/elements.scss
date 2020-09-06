@@ -2,69 +2,84 @@
 @import "./mediaQuery.scss";
 
 body {
-  padding: 0;
-  background: $main-background;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("/assets/dnd_website.png");
-  color: $text;
-  font-family: Roboto;
-  padding-bottom: 3.2em;
-  max-width: 400px;
-  margin: auto;
-  
-  header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  }
+    padding: 0;
+    background: $main-background;
+    color: $text;
+    font-family: Roboto;
+    padding-bottom: 3.2em;
+    max-width: 400px;
+    margin: auto;
+
+}
+
+.Hero {
+	position: relative;
+    height: 100vh;
+    width: 100%;
+    &::before {
+		content: "";
+        background-image: url("/assets/dnd_website.png");
+        background-size: cover;
+		position: absolute;
+		background-position: center;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+		opacity: 0.75;
+		z-index: -1;
+    }
+	header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 ul {
-  list-style: none;
-  text-decoration: none;
-  padding-inline-start: 0;
-
-  li {
-    a {
-      text-decoration: none;
+	list-style: none;
+    text-decoration: none;
+    padding-inline-start: 0;
+	
+    li {
+		a {
+            text-decoration: none;
+        }
     }
-  }
 }
-
 
 h1,
 h2,
 h3 {
-  font-family: Lato;
+    font-family: Lato;
 }
 
 a {
-  color: $accent;
-  :active {
     color: $accent;
-  }
+    :active {
+        color: $accent;
+    }
 }
 
 footer {
-  left: 0;
-  text-align: center;
-  align-items: center;
-  position: fixed;
-  bottom: -7px;
-  background-color: $main-background;
-  width: 100%;
+    left: 0;
+    text-align: center;
+    align-items: center;
+    position: fixed;
+    bottom: -7px;
+    background-color: $main-background;
+    width: 100%;
 }
 
 .home {
-  margin: auto 1em;
+    margin: auto 1em;
 }
 
 @media (min-width: 768px) {
-  body {
-    max-width: 75%;
-  }
+    body {
+        max-width: 75%;
+    }
 }
 
 @media (min-width: 1024px) {
-  
 }

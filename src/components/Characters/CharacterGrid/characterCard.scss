@@ -4,6 +4,7 @@
 $border: 1px solid $text;
 
 .character-card {
+    background-color: $main-background;
     border: $border;
     display: flex;
     flex-direction: column;
