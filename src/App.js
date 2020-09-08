@@ -68,7 +68,7 @@ export default function App() {
                             </Route>
                         </Switch>
                     </main>
-                    <footer>
+                    {/* <footer>
                         <p>
                             Art assets are courtesy of{" "}
                             <a
@@ -78,7 +78,7 @@ export default function App() {
                                 Melissa Palacios
                             </a>
                         </p>
-                    </footer>
+                    </footer> */}
                 </div>
             </div>
         </ThemeProvider>

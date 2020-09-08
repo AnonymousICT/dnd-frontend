@@ -12,11 +12,18 @@
         margin-bottom: 1rem;
     }
 }
+    .slider-container,
+    .attributes-saves-container,
+    .skills-save-container,
+    .prof-wrapper {
+        max-height: 500px;
+    }
+
 .slider-container {
     background-color: $main-background;
     position: relative;
-    margin: auto 1rem;
     .page-buttons {
+        margin-bottom: 1em;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-around;
@@ -37,10 +44,10 @@
         top: 50%;
         &.previous {
             transform: scaleX(-1);
-            left: -1em;
+            left: 0;
         }
         &.next {
-            right: -1em;
+            right: 0;
         }
 
         span {
@@ -119,7 +126,7 @@
                 }
             }
         }
-
+        
         .skills-save-container {
             display: flex;
             flex-direction: column;

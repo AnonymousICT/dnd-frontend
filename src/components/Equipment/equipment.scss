@@ -1,50 +1,54 @@
 @import "../../scss/colors.scss";
 
 .equipment {
-  .cart{
-    text-align: center;
-    .equipment-in-cart{
-      display: flex;
-      justify-content: space-evenly;
+    .cart {
+        text-align: center;
+        .equipment-in-cart {
+			margin: auto 1em;
+            display: flex;
+            justify-content: space-between;
+        }
     }
-  }
 }
 
 .equipment-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .equipment-filters {
-  display: flex;
-  flex-wrap: wrap;
-  width: 80%;
-  justify-content: center;
-  gap: 2px;
+	margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: center;
+    gap: 2px;
 }
 
 .tbl-row:hover {
-  background-color: $secondary;
+    background-color: $secondary;
 }
 
 .table-container {
-  display: flex;
-  .MuiTypography-body2, .MuiTablePagination-root {
-    font-size: 12px;
-  }
-  .MuiTablePagination-selectRoot {
-    margin-right: 1em;
-  }
+    display: flex;
+    background-color: white;
+    .MuiTypography-body2,
+    .MuiTablePagination-root {
+        font-size: 12px;
+    }
+    .MuiTablePagination-selectRoot {
+        margin-right: 1em;
+    }
 }
 
 .specific-equipment {
-  background-color: #fefefe;
-  border: 1px solid #888;
-  width: 100%;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    width: 100%;
 
-  & > div {
-    padding: 1em;
-  }
+    & > div {
+        padding: 1em;
+    }
 }
-

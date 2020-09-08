@@ -73,6 +73,8 @@ footer {
 
 .home {
     margin: auto 1em;
+    background-color: $main-background;
+    padding: 1em;
 }
 
 @media (min-width: 768px) {
