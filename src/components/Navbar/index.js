@@ -32,7 +32,7 @@ export default function Navbar() {
                 {loggedIn ? (
                     <>
                         <li className="navigation-item">
-                            <Link to="/characters">Characters</Link>
+                            <Link to="/user/characters">Characters</Link>
                         </li>
                         {/* <li className="navigation-item">
                             <Link to="/user">User</Link>

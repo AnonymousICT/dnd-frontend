@@ -5,8 +5,8 @@ export const fetchUsersCharacters = async (user) => {
     try {
         const { data } = await axios.get(url, {
             headers: {
-                "x-auth-token": user.auth,
-                "x-auth-user": user.id,
+                "x-auth-token": user.auth || localStorage.getItem("x-auth-token"),
+                "x-auth-user": user.id || "bad-user-id",
             },
         });
 

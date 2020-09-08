@@ -56,6 +56,8 @@
     }
 
     .character-container {
+        max-width: 1140px;
+        margin: auto;
         text-align: center;
         overflow-x: auto;
         display: grid;
@@ -254,12 +256,6 @@
     .battle-stats-container {
         margin: 1em 2em;
     }
-    // .slider-container,
-    // .attributes-saves-container,
-    // .skills-save-container,
-    // .prof-wrapper {
-    //     max-height: 500px;
-    // }
     .prof-container, .equipment-list{
         column-count: 2;
     }

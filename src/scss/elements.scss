@@ -9,40 +9,39 @@ body {
     padding-bottom: 3.2em;
     max-width: 400px;
     margin: auto;
-
 }
 
 .Hero {
-	position: relative;
+    position: relative;
     height: 100vh;
     width: 100%;
     &::before {
-		content: "";
+        content: "";
         background-image: url("/assets/dnd_website.png");
         background-size: cover;
-		position: absolute;
-		background-position: center;
+        position: fixed;
+        background-position: center;
         top: 0px;
         right: 0px;
         bottom: 0px;
         left: 0px;
-		opacity: 0.75;
-		z-index: -1;
+        opacity: 0.75;
+        z-index: -1;
     }
-	header {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 ul {
-	list-style: none;
+    list-style: none;
     text-decoration: none;
     padding-inline-start: 0;
-	
+
     li {
-		a {
+        a {
             text-decoration: none;
         }
     }
@@ -84,4 +83,7 @@ footer {
 }
 
 @media (min-width: 1024px) {
+    .home {
+        margin: auto 13em;
+    }
 }

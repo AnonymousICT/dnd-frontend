@@ -28,8 +28,9 @@ export default function Login() {
       localStorage.setItem("x-auth-token", loginRes.data.token);
       localStorage.setItem("userId", loginRes.data.user.id);
       localStorage.setItem("displayName", loginRes.data.user.displayName);
-      history.push("/");
+      history.push("/user/characters");
     } catch (err) {
+      alert("User credentials does not match. Please check that you have entered the correct email and password." , err)
       console.error(err);
     }
   };

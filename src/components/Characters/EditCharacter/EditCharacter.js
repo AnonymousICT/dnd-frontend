@@ -106,31 +106,9 @@ export default function EditCharacter() {
         moveSlider(name);
     };
 
-    const handleKeyDown = (e) => {
-        if (e.key === "ArrowLeft") {
-            if (pager !== 0) {
-                moveSlider("nav previous");
-            } else {
-                e.preventDefault();
-            }
-        } else if (e.key === "ArrowRight") {
-            if (
-                pager !==
-                (nonSpellCaster.includes(currentCharacter.job) ? 4 : 5)
-            ) {
-                moveSlider("nav next");
-            } else {
-                e.preventDefault();
-            }
-        }
-    };
-
     const moveSlider = (className) => {
         let scrollValue = 0;
         const element = document.querySelector(".character-container");
-        if (pager * element.offsetWidth !== element.scrollLeft) {
-            return false;
-        }
 
         switch (className) {
             case "previous":
@@ -162,6 +140,7 @@ export default function EditCharacter() {
             left: scrollValue,
             behavior: "smooth",
         });
+
         focusSlideCarousel();
     };
 
@@ -176,7 +155,6 @@ export default function EditCharacter() {
             <div
                 tabIndex="0"
                 className="character-container"
-                onKeyDown={handleKeyDown}
                 onKeyUp={(e) => e.preventDefault()}
                 onScroll={handleScroll}
             >

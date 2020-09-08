@@ -9,7 +9,7 @@ export default function CharacterCard({ character }) {
 
   const handleRedirect = (char) => {
     setCurrentCharacter(char);
-    history.push(`character/edit/${char._id}`);
+    history.push(`/character/edit/${char._id}`);
   };
 
   return (

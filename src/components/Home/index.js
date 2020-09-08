@@ -4,19 +4,25 @@ export default function Home() {
     return (
         <div className="home">
             <p>
-                Dungeons and Dragons is one of my favorite games in my life. But
-                it's not beginner friendly... at all.
+                Dungeons and Dragons is a fantasy tabletop role-playing game
+                that's been around since 1974. It's one of my all-time favorite
+                games. I love gathering a group of friends and create this
+                amazing imaginary adventure together.
             </p>
             <p>
-                To lower the barrier of entry to this game, I made this app with
-                the intention for newer players to get into the storytelling
-                aspect faster
+                Many people get discouraged at the idea of playing this
+                fantastic game because it honestly has one of the steepest
+                learning curves with just creating a character. You have to use
+                math and there's a extensive time commitment to learning the
+                rules.
             </p>
             <p>
-                This web app is designed to streamline the most difficult part
-                of Dungeons and Dragons for new and experienced players
+                With all that in mind, I made this this web-app to streamline
+                the most difficult part of Dungeons and Dragons for newer players.
+                And I love this game with all my heart. 
             </p>
             <p>
+                This version uses the 5th edition SRD.
                 This current version does not have multi-classing as an option.
             </p>
 

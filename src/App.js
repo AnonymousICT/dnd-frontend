@@ -48,7 +48,7 @@ export default function App() {
                             <Route path="/equipment">
                                 <Equipment />
                             </Route>
-                            <Route path="/characters">
+                            <Route path="/user/characters">
                                 <Characters />
                             </Route>
                             <Route path="/login">
@@ -68,17 +68,6 @@ export default function App() {
                             </Route>
                         </Switch>
                     </main>
-                    {/* <footer>
-                        <p>
-                            Art assets are courtesy of{" "}
-                            <a
-                                href="https://www.melissapalacios.com/"
-                                target="blank"
-                            >
-                                Melissa Palacios
-                            </a>
-                        </p>
-                    </footer> */}
                 </div>
             </div>
         </ThemeProvider>

@@ -13,8 +13,7 @@ router.post("/new", async (req, res) => {
             raceData,
             job,
             classData,
-            raceProfChoice:
-            languageChoice,
+            raceProfChoice: languageChoice,
             traitChoice,
             profChoice,
             speed,
@@ -37,8 +36,7 @@ router.post("/new", async (req, res) => {
             raceData,
             job,
             classData,
-            raceProfChoice:
-            languageChoice,
+            raceProfChoice: languageChoice,
             traitChoice,
             profChoice,
             speed,
@@ -88,7 +86,7 @@ router.get("/:id", auth, async (req, res) => {
                 res.status(200).json(char);
             } else {
                 res.status(404).json({
-                    msg: `no document found with id ${req.params.id} for user ${user.displayName}`,
+                    msg: `no document found with id ${req.params.id} for user ${req.user.displayName}`,
                 });
             }
         }
