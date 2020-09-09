@@ -5,11 +5,15 @@
 }
 
 .characters {
-    display: flex;
-    flex-direction: column;
     margin: auto 1em;
     a {
         margin-bottom: 1rem;
+    }
+
+    .character-grid {
+        display: flex;
+        gap: 1em;
+        flex-flow: row wrap;
     }
 }
     .slider-container,

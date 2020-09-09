@@ -6,13 +6,10 @@ $border: 1px solid $text;
     height: 131px;
 }
 .character-card {
+    width: calc(100% - 2em);
     background-color: $main-background;
     border: $border;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     line-height: 1;
-    margin-bottom: 1em;
     padding: 10px;
     color: black;
     box-shadow: 0 0 3px;
@@ -25,8 +22,16 @@ $border: 1px solid $text;
     }
 }
 
+@media (min-width: 768px) {
+	.character-card{
+        width: calc(50% - 2em);
+		box-shadow: 1px 2px 3px;
+	}
+}
+
 @media (min-width: 1024px) {
 	.character-card{
+        width: calc(33% - 2em);
 		box-shadow: 1px 2px 3px;
 	}
 }
