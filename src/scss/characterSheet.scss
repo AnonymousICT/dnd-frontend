@@ -259,13 +259,14 @@
     .prof-container, .equipment-list{
         column-count: 2;
     }
+    .character-grid{
+		column-count: auto;
+    }
 }
 
 @media (min-width: 1024px) {
-	.character-grid{
-		column-count: 2;
-    }
     .battle-stats-container {
         margin: 1em 10em !important;
     }
 }
+

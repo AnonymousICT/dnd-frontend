@@ -42,7 +42,7 @@ export default function CreateCharacter() {
     const handleCharacterSubmit = async (e) => {
         try {
             await axios.post(`/characters/new`, newCharacter);
-            history.push("/characters?created");
+            history.push("/user/characters?created");
             updateAllCharacters();
         } catch (err) {
             console.error(err);

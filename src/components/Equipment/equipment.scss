@@ -4,9 +4,17 @@
     .cart {
         text-align: center;
         .equipment-in-cart {
-			margin: auto 1em;
+            margin: auto 1em;
             display: flex;
             justify-content: space-between;
+            button {
+                background: inherit;
+                border: none;
+                &:hover {
+                    color: white;
+                    background: $secondary;
+                }
+            }
         }
     }
 }
@@ -19,7 +27,7 @@
 }
 
 .equipment-filters {
-	margin-top: 1em;
+    margin-top: 1em;
     display: flex;
     flex-wrap: wrap;
     width: 80%;
@@ -51,4 +59,30 @@
     & > div {
         padding: 1em;
     }
+}
+
+@media (min-width: 1024px) {
+    .character-cart {
+        margin: auto 10em;
+    }
+
+    .equipment-filters {
+        max-width: 670px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .character-cart {
+        margin: auto 15em;
+    }
+
+  
+}
+
+@media (min-width: 2560px) {
+    .character-cart {
+        margin: auto 40em;
+    }
+
+    
 }
