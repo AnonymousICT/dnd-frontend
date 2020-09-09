@@ -6,7 +6,6 @@ body {
     background: $main-background;
     color: $text;
     font-family: Roboto;
-    padding-bottom: 3.2em;
     max-width: 400px;
     margin: auto;
 }
@@ -32,6 +31,8 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        background-color: rgba(255,255, 255,0.7);
+        padding-bottom: 1em;
     }
 }
 
@@ -71,14 +72,18 @@ footer {
 }
 
 .home {
-    margin: auto 1em;
+    margin: auto;
     background-color: $main-background;
-    padding: 1em;
+    padding: 1em 1em 3em 1em;
+
 }
 
 @media (min-width: 768px) {
     body {
         max-width: 75%;
+    }
+    header {
+        border-radius: 15px;
     }
 }
 

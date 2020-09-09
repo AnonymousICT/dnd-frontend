@@ -14,60 +14,60 @@
 
 .barbarian::before {
   @extend .character-icon;
-  background: url("/assets/icons/BARBARIAN.png") center/cover no-repeat ;
+  background: url("/assets/icons/BARBARIAN.png") center/contain no-repeat ;
 }
 
 .bard::before {
   @extend .character-icon;
-  background: url("/assets/icons/BARD.png") center/cover no-repeat ;
+  background: url("/assets/icons/BARD.png") center/contain no-repeat ;
 }
 
 .cleric::before {
   @extend .character-icon;
-  background: url("/assets/icons/CLERIC.png") center/cover no-repeat ;
+  background: url("/assets/icons/CLERIC.png") center/contain no-repeat ;
 }
 
 .druid::before {
   @extend .character-icon;
-  background: url("/assets/icons/DRUID.png") center/cover no-repeat ;
+  background: url("/assets/icons/DRUID.png") center/contain no-repeat ;
 }
 
 .fighter::before {
   @extend .character-icon;
-  background: url("/assets/icons/FIGHTER.png") center/cover no-repeat ;
+  background: url("/assets/icons/FIGHTER.png") center/contain no-repeat ;
 }
 
 .monk::before {
   @extend .character-icon;
-  background: url("/assets/icons/MONK.png") center/cover no-repeat ;
+  background: url("/assets/icons/MONK.png") center/contain no-repeat ;
 }
 
 .paladin::before {
   @extend .character-icon;
-  background: url("/assets/icons/PALADIN.png") center/cover no-repeat ;
+  background: url("/assets/icons/PALADIN.png") center/contain no-repeat ;
 }
 
 .ranger::before {
   @extend .character-icon;
-  background: url("/assets/icons/RANGER.png") center/cover no-repeat ;
+  background: url("/assets/icons/RANGER.png") center/contain no-repeat ;
 }
 
 .rogue::before {
   @extend .character-icon;
-  background: url("/assets/icons/ROGUE.png") center/cover no-repeat ;
+  background: url("/assets/icons/ROGUE.png") center/contain no-repeat ;
 }
 
 .sorcerer::before {
   @extend .character-icon;
-  background: url("/assets/icons/SORCERER.png") center/cover no-repeat ;
+  background: url("/assets/icons/SORCERER.png") center/contain no-repeat ;
 }
 
 .warlock::before {
   @extend .character-icon;
-  background: url("/assets/icons/WARLOCK.png") center/cover no-repeat ;
+  background: url("/assets/icons/WARLOCK.png") center/contain no-repeat ;
 }
 
 .wizard::before {
   @extend .character-icon;
-  background: url("/assets/icons/WIZARD.png") center/cover no-repeat ;
+  background: url("/assets/icons/WIZARD.png") center/contain no-repeat ;
 }

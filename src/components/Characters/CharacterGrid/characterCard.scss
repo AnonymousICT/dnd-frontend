@@ -22,14 +22,14 @@ $border: 1px solid $text;
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
 	.character-card{
         width: calc(50% - 2em);
 		box-shadow: 1px 2px 3px;
 	}
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1240px) {
 	.character-card{
         width: calc(33% - 2em);
 		box-shadow: 1px 2px 3px;

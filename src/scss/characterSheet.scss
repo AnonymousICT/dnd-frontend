@@ -5,29 +5,32 @@
 }
 
 .characters {
+    text-align: center;
+    padding-top: 1em;
     margin: auto 1em;
-    a {
+    .newCharacter-btn {
         margin-bottom: 1rem;
     }
 
     .character-grid {
+        justify-content: center;
+        padding-bottom: 1em;
         display: flex;
         gap: 1em;
         flex-flow: row wrap;
     }
 }
-    .slider-container,
-    .attributes-saves-container,
-    .skills-save-container,
-    .prof-wrapper {
-        max-height: 500px;
-    }
 
 .slider-container {
     background-color: $main-background;
-    position: relative;
+    padding-bottom: 3.5em;
     .page-buttons {
-        margin-bottom: 1em;
+        position: fixed;
+        background-color: white;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1em 0;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-around;
@@ -132,7 +135,7 @@
                 }
             }
         }
-        
+
         .skills-save-container {
             display: flex;
             flex-direction: column;
@@ -260,11 +263,21 @@
     .battle-stats-container {
         margin: 1em 2em;
     }
-    .prof-container, .equipment-list{
+    .prof-container,
+    .equipment-list {
         column-count: 2;
     }
-    .character-grid{
-		column-count: auto;
+    .character-grid {
+        column-count: auto;
+    }
+    .slider-container {
+        padding-bottom: unset;
+        position: relative;
+
+        .page-buttons {
+            position: unset;
+            background-color: unset;
+        }
     }
 }
 
@@ -272,5 +285,5 @@
     .battle-stats-container {
         margin: 1em 10em !important;
     }
+    
 }
-

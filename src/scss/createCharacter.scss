@@ -1,63 +1,170 @@
 @import "../scss/colors.scss";
 
 .character-create-form {
-    background-color: white;
-    margin: 0 1rem;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 2rem;
+	background-color: white;
+	margin: 0 1rem;
+	border: 1px solid black;
+	padding-bottom: 2rem;
+	margin: 1em auto;
+	text-align: center;
 
-    .character-name {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        label {
-            margin: 0.5rem 0;
+	.character-name {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		label {
+			margin: 0.5rem 0;
+		}
+	}
+	.form-page-buttons {
+		margin-top: 1rem;
+		justify-content: space-evenly;
+		display: flex;
+		width: 100%;
+	}
+	.select-race-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		select {
+			margin-bottom: 1em;
+		}
+	}
+	.race-info {
+		border: 1px solid black;
+		background-color: white;
+		box-shadow: 0 0 5px;
+		padding: 0.7em;
+		margin: 1em;
+	}
+
+	.select-class-container {
+		.class-info-wrapper {
+			.class-info-container {
+				display: flex;
+				flex-direction: column;
+				flex-wrap: wrap;
+                align-items: center;
+                
+                & > * {
+                    max-width: fit-content;
+                }
+            }
+
+		}
+	}
+	.attribute-entry {
+		.attribute {
+			label:first-child {
+				font-weight: 700;
+				padding-right: 1rem;
+			}
+			input {
+				margin: 0 10px;
+            }
+            table {
+                margin: auto;
+            }
+		}
+	}
+}
+
+
+@media (min-width: 900px) {
+    .character-create-form {
+	    .select-class-container {
+		    .class-info-wrapper {
+			    .class-info-container {
+                    &.barbarian {
+                        height: 47vh;
+                    }
+                    &.bard {
+                        height: 54vh;   
+                    }
+                    &.cleric{
+                        height: 45vh;
+                    }
+                    &.druid {
+                        height: 41vh;   
+                    }
+                    &.fighter{
+                        height: 45vh;
+                    }
+                    &.monk{
+                        height: 70vh;
+                    }                    
+                    &.paladin {
+                        height: 37vh;
+                    }
+                    &.ranger {
+                        height: 47vh;   
+                    }
+                    &.rogue {
+                        height: 51vh;
+                    }
+                    &.sorcerer {
+                        height: 45vh;   
+                    }
+                    &.warlock{
+                        height: 45vh;
+                    }
+                    &.wizard{
+                        height: 45vh;
+                    }
+                }
+            }
         }
     }
-    .form-page-buttons {
-        margin-top: 1rem;
-        justify-content: space-evenly;
-        display: flex;
-        width: 100%;
-    }
-    .select-race-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        select {
-            margin-bottom: 1em;
+}
+
+@media (min-width: 1440px) {
+    .character-create-form {
+	    .select-class-container {
+		    .class-info-wrapper {
+			    .class-info-container {
+                    &.barbarian {
+                        height: 28vh;
+                    }
+                    &.bard {
+                        height: 54vh;   
+                    }
+                    // taller
+                    &.cleric{
+                        height: 29vh;
+                    }
+                    // taller
+                    &.druid {
+                        height: 41vh;   
+                    }
+                    &.fighter{
+                        height: 32vh;
+                    }
+                    // taller
+                    &.monk{
+                        height: 54vh;
+                    }                    
+                    &.paladin {
+                        height: 27vh;
+                    }
+                    &.ranger {
+                        height: 28vh;   
+                    }
+                    &.rogue {
+                        height: 36vh;
+                    }
+                    &.sorcerer {
+                        height: 27vh;   
+                    }
+                    &.warlock{
+                        height: 27vh;
+                    }
+                    &.wizard{
+                        height: 27vh;
+                    }
+                }
+            }
         }
-    }
-    .race-info {
-        border: 1px solid black;
-        background-color: white;
-        box-shadow: 0 0 5px;
-        padding: 0.7em;
-        margin: 1em;
     }
 
-    .select-class-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .class-info-wrapper {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-        }
-    }
-    .attribute-entry {
-        .attribute {
-            label:first-child {
-                font-weight: 700;
-                padding-right: 1rem;
-            }
-            input {
-                margin: 0 10px;
-            }
-        }
-    }
 }
