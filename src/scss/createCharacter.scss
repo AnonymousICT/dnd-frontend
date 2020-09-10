@@ -45,13 +45,20 @@
 				display: flex;
 				flex-direction: column;
 				flex-wrap: wrap;
-                align-items: center;
-                
-                & > * {
-                    max-width: fit-content;
-                }
-            }
+				align-items: center;
+				position: relative;
 
+				& > * {
+					max-width: fit-content;
+				}
+
+				&::before {
+					height: 100px;
+					bottom: unset;
+					top: -87px;
+					right: 4%;
+				}
+			}
 		}
 	}
 	.attribute-entry {
@@ -62,109 +69,78 @@
 			}
 			input {
 				margin: 0 10px;
-            }
-            table {
-                margin: auto;
-            }
+			}
+		}
+
+		table {
+			margin: auto;
 		}
 	}
 }
 
-
 @media (min-width: 900px) {
-    .character-create-form {
-	    .select-class-container {
-		    .class-info-wrapper {
-			    .class-info-container {
-                    &.barbarian {
-                        height: 47vh;
-                    }
-                    &.bard {
-                        height: 54vh;   
-                    }
-                    &.cleric{
-                        height: 45vh;
-                    }
-                    &.druid {
-                        height: 41vh;   
-                    }
-                    &.fighter{
-                        height: 45vh;
-                    }
-                    &.monk{
-                        height: 70vh;
-                    }                    
-                    &.paladin {
-                        height: 37vh;
-                    }
-                    &.ranger {
-                        height: 47vh;   
-                    }
-                    &.rogue {
-                        height: 51vh;
-                    }
-                    &.sorcerer {
-                        height: 45vh;   
-                    }
-                    &.warlock{
-                        height: 45vh;
-                    }
-                    &.wizard{
-                        height: 45vh;
-                    }
-                }
-            }
-        }
-    }
+	.character-create-form {
+		.select-class-container {
+			.class-info-wrapper {
+				.class-info-container {
+					&.barbarian,
+					&.cleric,
+					&.fighter,
+					&.paladin,
+					&.sorcerer,
+					&.warlock,
+					&.wizard {
+						height: 384px;
+					}
+					&.bard {
+						height: 444px;
+					}
+					&.druid {
+						height: 332px;
+					}
+					&.monk {
+						height: 564px;
+					}
+					&.ranger {
+						height: 386px;
+					}
+					&.rogue {
+						height: 420px;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media (min-width: 1440px) {
-    .character-create-form {
-	    .select-class-container {
-		    .class-info-wrapper {
-			    .class-info-container {
-                    &.barbarian {
-                        height: 28vh;
-                    }
-                    &.bard {
-                        height: 54vh;   
-                    }
-                    // taller
-                    &.cleric{
-                        height: 29vh;
-                    }
-                    // taller
-                    &.druid {
-                        height: 41vh;   
-                    }
-                    &.fighter{
-                        height: 32vh;
-                    }
-                    // taller
-                    &.monk{
-                        height: 54vh;
-                    }                    
-                    &.paladin {
-                        height: 27vh;
-                    }
-                    &.ranger {
-                        height: 28vh;   
-                    }
-                    &.rogue {
-                        height: 36vh;
-                    }
-                    &.sorcerer {
-                        height: 27vh;   
-                    }
-                    &.warlock{
-                        height: 27vh;
-                    }
-                    &.wizard{
-                        height: 27vh;
-                    }
-                }
-            }
-        }
-    }
-
+	.character-create-form {
+		.select-class-container {
+			.class-info-wrapper {
+				.class-info-container {
+					&.barbarian,
+					&.cleric,
+					&.fighter,
+					&.paladin,
+					&.sorcerer,
+					&.warlock,
+					&.wizard {
+						height: 222px;
+					}
+					&.bard, &.monk {
+						height: 432px;
+					}
+					&.druid {
+						height: 328px;
+					}
+					&.ranger {
+						height: 230px;
+					}
+					&.rogue {
+						height: 296px;
+					}
+				}
+			}
+		}
+	}
 }

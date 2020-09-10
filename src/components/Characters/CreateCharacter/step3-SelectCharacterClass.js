@@ -171,7 +171,6 @@ export default function SelectCharacterClass({
 											Choose {choiceObj.choose} from the
 											list
 										</h3>
-										<br />
 										{choiceObj.from.map((skill, i) => {
 											return (
 												<div key={i}>
