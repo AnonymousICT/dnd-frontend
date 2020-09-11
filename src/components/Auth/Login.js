@@ -9,6 +9,7 @@ export default function Login() {
   const isRegistered = queryStrings.has("registered");
   const {
     setUserData,
+    setUserId,
     email,
     setEmail,
     password,
@@ -25,6 +26,7 @@ export default function Login() {
         loginUser
       );
       setUserData({ user: {...loginRes.data.user, auth: loginRes.data.token} });
+      setUserId(loginRes.data.user.id);
       localStorage.setItem("x-auth-token", loginRes.data.token);
       localStorage.setItem("userId", loginRes.data.user.id);
       localStorage.setItem("displayName", loginRes.data.user.displayName);

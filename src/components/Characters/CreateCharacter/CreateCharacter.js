@@ -47,6 +47,7 @@ export default function CreateCharacter() {
             await axios.post(`/characters/new`, newCharacter);
             history.push("/user/characters?created");
             updateAllCharacters();
+
         } catch (err) {
             console.error(err);
         }
