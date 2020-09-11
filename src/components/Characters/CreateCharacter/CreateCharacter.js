@@ -29,7 +29,7 @@ export default function CreateCharacter() {
 
     useEffect(() => {
         setNewCharacter((previousState) => {
-            return { ...previousState, userId: userData.id };
+            return { ...previousState, userId: userData.user.id };
         });
     }, [userData]);
 
