@@ -53,8 +53,6 @@ function ContextProvider({ children }) {
 
     const updateAllCharacters = () => setFetchNewData(!fetchNewData);
 
-    console.log(userData)
-
     return (
         <Context.Provider
             value={{
