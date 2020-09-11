@@ -16,6 +16,9 @@ export default function CreateCharacter() {
     const { updateAllCharacters, userId } = useContext(Context);
     const history = useHistory();
 
+    console.log(userId)
+    console.log(newCharacter)
+
     const nextStep = () => {
         setFormPage(formPage + 1);
     };
