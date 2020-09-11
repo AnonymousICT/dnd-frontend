@@ -13,10 +13,10 @@ export default function CreateCharacter() {
     const [formPage, setFormPage] = useState(1);
     const [newCharacter, setNewCharacter] = useState({});
     const [validForm, setValidForm] = useState({});
-    const { updateAllCharacters, userId } = useContext(Context);
+    const { updateAllCharacters, userData } = useContext(Context);
     const history = useHistory();
 
-    console.log(userId)
+    console.log(userData)
     console.log(newCharacter)
 
     const nextStep = () => {
@@ -29,9 +29,9 @@ export default function CreateCharacter() {
 
     useEffect(() => {
         setNewCharacter((previousState) => {
-            return { ...previousState, userId: userId };
+            return { ...previousState, userId: userData.id };
         });
-    }, [userId]);
+    }, [userData]);
 
     const setValid = useCallback(
         (valid) => {

@@ -8,7 +8,6 @@ function ContextProvider({ children }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userData, setUserData] = useState({});
-    const [userId, setUserId] = useState("");
     const [fetchNewData, setFetchNewData] = useState(false);
 
     // user's choice state
@@ -52,9 +51,6 @@ function ContextProvider({ children }) {
         setUserData({ user: { auth, displayName, id } });
     }, []);
 
-    useEffect(() => {
-        setUserId(localStorage.getItem("userId"));
-    }, []);
     const updateAllCharacters = () => setFetchNewData(!fetchNewData);
 
     console.log(userData)
@@ -68,8 +64,6 @@ function ContextProvider({ children }) {
                 setPassword,
                 userData,
                 setUserData,
-                userId,
-                setUserId,
                 AttributeData,
                 setAttributeData,
                 characterId,
