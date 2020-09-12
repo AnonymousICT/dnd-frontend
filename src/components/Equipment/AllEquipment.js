@@ -32,6 +32,7 @@ export default function AllEquipment({
                         .sort((a,b) => SortedEquipment[a[2]] - SortedEquipment[b[2]])
                         .map((category) => (
                             <button
+                                title={`${category[2]}`}
                                 onClick={(e) =>
                                     setEquipmentSelection(e.target.value)
                                 }
